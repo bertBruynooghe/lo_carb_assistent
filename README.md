@@ -13,6 +13,7 @@ As to the initial versions, the app will have to run on the following platforms:
 
 Not willing to pay the developper fee for all these platforms, the app will be distributes as webpage on all platforms,
 and it will be ready to be deployed as a phonegap app too as offline pages are not something the windows phone platform supports.
+In the beginning, the index will simply be hosted on github as explained in http://stackoverflow.com/questions/6551446/can-i-run-html-files-directly-from-github-instead-of-just-viewing-their-source
 
 As for the data of the program, there will be two ways of filling in the data which will be stored in the local database as well:
 * manual entry
