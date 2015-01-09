@@ -17,11 +17,15 @@ In the beginning, the index will simply be hosted on github as http://rawgit.com
 As for the data of the program, there will be two ways of filling in the data which will be stored in the local database as well:
 * manual entry
 * suggestions taken from http://ndb.nal.usda.gov/ndb/doc/index
-* 
 
 In the mean time, the minimal viable product strategy changed.
-This are the steps
-1. develop as a straight Rails application using scaffolding
+This are the steps:
+
+1. develop as a straight Rails application using scaffolding. Model structure as follows:
+    * account has many meals
+    * meal(date) has many dosed_ingredients
+    * dosed_ingredient(quantity) has one ingredient
+    * ingredient(name, calories, carbs, proteins, fat)
 2. authn and accounts
 3. versioned API
 4. single page app using backbone
