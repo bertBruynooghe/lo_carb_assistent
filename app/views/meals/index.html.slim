@@ -4,6 +4,10 @@ table
   thead
     tr
       th Creation time
+      th Carbs
+      th Proteins
+      th Fat
+      th Calories
       th
       th
       th
@@ -11,7 +15,11 @@ table
   tbody
     - @meals.each do |meal|
       tr
-        td = meal.created_at
+        td = time_ago_in_words(meal.created_at)
+        td = meal.carbs
+        td = meal.proteins
+        td = meal.fat
+        td = meal.calories
         td = link_to 'Show', meal
         td = link_to 'Edit', edit_meal_path(meal)
         td = link_to 'Destroy', meal, data: {:confirm => 'Are you sure?'}, :method => :delete

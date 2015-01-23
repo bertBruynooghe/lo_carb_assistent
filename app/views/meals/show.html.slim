@@ -2,7 +2,18 @@ p#notice = notice
 
 p
   strong Creation time:
-  = @meal.creation_time
+  = time_ago_in_words(@meal.created_at)
+
+dl
+  dt carbs
+  dd = @meal.carbs
+  dt proteins
+  dd = @meal.proteins
+  dt fat
+  dd = @meal.fat
+  dt calories
+  dd = @meal.calories
+
 
 table
   tbody
