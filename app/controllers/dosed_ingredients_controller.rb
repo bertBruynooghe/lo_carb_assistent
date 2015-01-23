@@ -58,7 +58,7 @@ class DosedIngredientsController < ApplicationController
   def destroy
     @dosed_ingredient.destroy
     respond_to do |format|
-      format.html { redirect_to dosed_ingredients_url, notice: 'Dosed ingredient was successfully destroyed.' }
+      format.html { redirect_to @dosed_ingredient.meal, notice: 'Dosed ingredient was successfully destroyed.' }
       format.json { head :no_content }
     end
   end

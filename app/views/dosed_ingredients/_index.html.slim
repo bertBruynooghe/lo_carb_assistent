@@ -21,7 +21,7 @@ table
         td = dosed_ingredient.proteins
         td = dosed_ingredient.fat
         / td = link_to 'Edit', edit_meal_dosed_ingredient_path(dosed_ingredient)
-        / td = link_to 'Destroy', dosed_ingredient, data: {:confirm => 'Are you sure?'}, :method => :delete
+        td = link_to 'Destroy', [@meal, dosed_ingredient], data: {:confirm => 'Are you sure?'}, :method => :delete
 
 br
 
