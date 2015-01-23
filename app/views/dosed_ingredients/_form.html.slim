@@ -1,0 +1,27 @@
+= form_for [@meal, @dosed_ingredient] do |f|
+  - if @dosed_ingredient.errors.any?
+    #error_explanation
+      h2 = "#{pluralize(@dosed_ingredient.errors.count, "error")} prohibited this dosed_ingredient from being saved:"
+      ul
+        - @dosed_ingredient.errors.full_messages.each do |message|
+          li = message
+  = f.hidden_field :meal_id, value: @meal.id
+  .field
+    = f.label :quantity
+    = f.text_field :quantity
+  .field
+    = f.label :name
+    = f.text_area :name
+  .field
+    = f.label :calories
+    = f.text_field :calories
+  .field
+    = f.label :carbs
+    = f.text_field :carbs
+  .field
+    = f.label :proteins
+    = f.text_field :proteins
+  .field
+    = f.label :fat
+    = f.text_field :fat
+  .actions = f.submit 'Save'

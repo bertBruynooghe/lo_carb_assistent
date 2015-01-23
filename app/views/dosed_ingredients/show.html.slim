@@ -1,0 +1,24 @@
+p#notice = notice
+
+p
+  strong Quantity:
+  = @dosed_ingredient.quantity
+p
+  strong Name:
+  = @dosed_ingredient.name
+p
+  strong Calories:
+  = @dosed_ingredient.calories
+p
+  strong Carbs:
+  = @dosed_ingredient.carbs
+p
+  strong Proteins:
+  = @dosed_ingredient.proteins
+p
+  strong Fat:
+  = @dosed_ingredient.fat
+
+= link_to 'Edit', edit_dosed_ingredient_path(@dosed_ingredient)
+'|
+= link_to 'Back', meal_path(@dosed_ingredient.meal)

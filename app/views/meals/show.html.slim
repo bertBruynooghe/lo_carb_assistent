@@ -1,0 +1,18 @@
+p#notice = notice
+
+p
+  strong Creation time:
+  = @meal.creation_time
+
+table
+  tbody
+    - @meal.dosed_ingredients do |dosed_ingredient|
+      tr
+        td = dosed_ingredient.quantity
+        td = dosed_ingredient.name
+
+= render 'dosed_ingredients/index'
+
+
+'|
+= link_to 'Back', meals_path

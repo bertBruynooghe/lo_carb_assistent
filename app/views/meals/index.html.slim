@@ -1,0 +1,21 @@
+h1 Listing meals
+
+table
+  thead
+    tr
+      th Creation time
+      th
+      th
+      th
+
+  tbody
+    - @meals.each do |meal|
+      tr
+        td = meal.created_at
+        td = link_to 'Show', meal
+        td = link_to 'Edit', edit_meal_path(meal)
+        td = link_to 'Destroy', meal, data: {:confirm => 'Are you sure?'}, :method => :delete
+
+br
+
+= link_to 'New Meal', new_meal_path

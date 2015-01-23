@@ -1,0 +1,28 @@
+table
+  thead
+    tr
+      th Quantity
+      th Name
+      th Calories
+      th Carbs
+      th Proteins
+      th Fat
+      th
+      th
+      th
+
+  tbody
+    - @meal.dosed_ingredients.each do |dosed_ingredient|
+      tr
+        td = dosed_ingredient.quantity
+        td = dosed_ingredient.name
+        td = dosed_ingredient.calories
+        td = dosed_ingredient.carbs
+        td = dosed_ingredient.proteins
+        td = dosed_ingredient.fat
+        / td = link_to 'Edit', edit_meal_dosed_ingredient_path(dosed_ingredient)
+        / td = link_to 'Destroy', dosed_ingredient, data: {:confirm => 'Are you sure?'}, :method => :delete
+
+br
+
+= link_to 'New Dosed ingredient', new_meal_dosed_ingredient_path(@meal)

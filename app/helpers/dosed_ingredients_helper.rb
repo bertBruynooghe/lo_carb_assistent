@@ -1,0 +1,2 @@
+module DosedIngredientsHelper
+end
