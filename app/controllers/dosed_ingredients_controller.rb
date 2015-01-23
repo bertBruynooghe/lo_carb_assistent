@@ -20,6 +20,7 @@ class DosedIngredientsController < ApplicationController
 
   # GET /dosed_ingredients/1/edit
   def edit
+    @meal = @dosed_ingredient.meal
   end
 
   # POST /dosed_ingredients
@@ -27,7 +28,6 @@ class DosedIngredientsController < ApplicationController
   def create
     @dosed_ingredient = DosedIngredient.new(dosed_ingredient_params)
 
-    puts "**** dosed_ingredient : #{dosed_ingredient_params}"
     respond_to do |format|
       if @dosed_ingredient.save
         format.html { redirect_to @dosed_ingredient.meal, notice: 'Dosed ingredient was successfully created.' }
@@ -44,7 +44,7 @@ class DosedIngredientsController < ApplicationController
   def update
     respond_to do |format|
       if @dosed_ingredient.update(dosed_ingredient_params)
-        format.html { redirect_to @dosed_ingredient, notice: 'Dosed ingredient was successfully updated.' }
+        format.html { redirect_to @dosed_ingredient.meal, notice: 'Dosed ingredient was successfully updated.' }
         format.json { render :show, status: :ok, location: @dosed_ingredient }
       else
         format.html { render :edit }
