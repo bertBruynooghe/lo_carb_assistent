@@ -3,8 +3,10 @@
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
 $(document).on 'ready page:load', ->
+  window.last_ingedients = []
   findMatches = (q, cb) ->
     success = (ingredients) ->
+      window.last_ingedients = ingredients
       cb ({value: ingredient['name']} for ingredient in ingredients)
     $.ajax({
       url: "/ingredients?q[name_cont]=#{q}",
@@ -23,3 +25,13 @@ $(document).on 'ready page:load', ->
       displayKey: 'value',
       source: findMatches
     });
+
+  $('input#dosed_ingredient_name').on 'change', ->
+    stored_ingredient = ingredient for ingredient in window.last_ingedients when ingredient['name'] == $(this).val()
+    if stored_ingredient
+      unless $('input#dosed_ingredient_carbs').val() || $('input#dosed_ingredient_proteins').val() || $('input#dosed_ingredient_fat').val() || $('input#dosed_ingredient_calories').val()
+        $('input#dosed_ingredient_carbs').val(stored_ingredient['carbs'])
+        $('input#dosed_ingredient_proteins').val(stored_ingredient['proteins'])
+        $('input#dosed_ingredient_fat').val(stored_ingredient['fat'])
+        $('input#dosed_ingredient_calories').val(stored_ingredient['calories'])
+    false
