@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  root to: 'meals#index'
+
   resources :meals do
     resources :dosed_ingredients
   end

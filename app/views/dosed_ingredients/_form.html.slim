@@ -6,22 +6,29 @@
         - @dosed_ingredient.errors.full_messages.each do |message|
           li = message
   = f.hidden_field :meal_id, value: @meal.id
+
   .field
     = f.label :quantity
     = f.text_field :quantity
-  .field
-    = f.label :name
-    = f.text_area :name
-  .field
-    = f.label :calories
-    = f.text_field :calories
-  .field
-    = f.label :carbs
-    = f.text_field :carbs
-  .field
-    = f.label :proteins
-    = f.text_field :proteins
-  .field
-    = f.label :fat
-    = f.text_field :fat
+  fieldset
+    legend test
+    / if name matches existing ingredient, auto-fill next fields
+    / otherwise display 'lookup' button
+
+    .field
+      = f.label :name
+      = f.text_area :name
+    .field
+      = f.label :calories
+      = f.text_field :calories
+    .field
+      = f.label :carbs
+      = f.text_field :carbs
+    .field
+      = f.label :proteins
+      = f.text_field :proteins
+    .field
+      = f.label :fat
+      = f.text_field :fat
+    button export
   .actions = f.submit 'Save'
