@@ -1,22 +1,31 @@
 p#notice = notice
 
 p
-  strong Creation time:
-  = time_ago_in_words(@meal.created_at)
+  | Created&nbsp;
+  strong = time_ago_in_words(@meal.created_at)
+  | &nbsp;ago
 
-table
-  thead
-    tr
-      th Carbs
-      th Proteins
-      th Fat
-      th Calories
-  tbody
-    tr
-      td = @meal.carbs
-      td = @meal.proteins
-      td = @meal.fat
-      td = @meal.calories
+ul
+  li
+    = @meal.carbs
+    | g&nbsp;
+    strong Carbs
+  li
+    = @meal.proteins
+    | g&nbsp;
+    strong Proteins
+  li
+    = @meal.fat
+    | g&nbsp;
+    strong Fat
+  li
+    = @meal.calories
+    | &nbsp;kCal
+  li
+    = @meal.glucoseEquivalent
+    | g&nbsp;
+    strong Glucose equivalent
+
 
 = render 'dosed_ingredients/index'
 

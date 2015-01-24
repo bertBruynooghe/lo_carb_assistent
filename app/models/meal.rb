@@ -16,6 +16,10 @@ class Meal < ActiveRecord::Base
     sum(:fat)
   end
 
+  def glucoseEquivalent
+    carbs + proteins / 5.0
+  end
+
   private
 
   def sum(attr_name)
