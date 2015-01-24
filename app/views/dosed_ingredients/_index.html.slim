@@ -3,7 +3,7 @@
     - @meal.dosed_ingredients.each do |dosed_ingredient|
       li
         = dosed_ingredient.quantity
-        | gr &nbsp;
+        | g &nbsp;
         strong = dosed_ingredient.name
         | &nbsp;
         = link_to 'Edit', edit_meal_dosed_ingredient_path(@meal, dosed_ingredient)
