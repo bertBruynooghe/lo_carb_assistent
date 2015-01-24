@@ -16,6 +16,15 @@ class MealsController < ApplicationController
   # GET /meals/new
   def new
     @meal = Meal.new
+    respond_to do |format|
+      if @meal.save
+        format.html { redirect_to @meal, notice: 'Meal was successfully created.' }
+        format.json { render :show, status: :created, location: @meal }
+      else
+        format.html { render :new }
+        format.json { render json: @meal.errors, status: :unprocessable_entity }
+      end
+    end
   end
 
   # GET /meals/1/edit

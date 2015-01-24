@@ -4,23 +4,19 @@ p
   strong Creation time:
   = time_ago_in_words(@meal.created_at)
 
-dl
-  dt carbs
-  dd = @meal.carbs
-  dt proteins
-  dd = @meal.proteins
-  dt fat
-  dd = @meal.fat
-  dt calories
-  dd = @meal.calories
-
-
 table
+  thead
+    tr
+      th Carbs
+      th Proteins
+      th Fat
+      th Calories
   tbody
-    - @meal.dosed_ingredients do |dosed_ingredient|
-      tr
-        td = dosed_ingredient.quantity
-        td = dosed_ingredient.name
+    tr
+      td = @meal.carbs
+      td = @meal.proteins
+      td = @meal.fat
+      td = @meal.calories
 
 = render 'dosed_ingredients/index'
 
