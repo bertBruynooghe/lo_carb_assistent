@@ -4,6 +4,7 @@
 
 $(document).on 'ready page:load', ->
   window.last_ingedients = []
+  $('input#dosed_ingredient_quantity').focus().select()
   findMatches = (q, cb) ->
     success = (ingredients) ->
       window.last_ingedients = ingredients
@@ -35,3 +36,9 @@ $(document).on 'ready page:load', ->
         $('input#dosed_ingredient_fat').val(stored_ingredient['fat'])
         $('input#dosed_ingredient_calories').val(stored_ingredient['calories'])
     false
+
+  $('form input').on('keydown', (event) ->
+    if (event.which == 13)
+      currIndex = parseInt($(this).attr('tabindex'))
+      $("*[tabindex='#{currIndex+1}']").focus().select()
+  );

@@ -9,26 +9,32 @@
 
   .field
     = f.label :quantity
-    = f.text_field :quantity
+    = f.number_field :quantity, tabindex: 10
+    |g
   fieldset
-    legend test
     / if name matches existing ingredient, auto-fill next fields
     / otherwise display 'lookup' button
 
     .field
       = f.label :name
-      = f.text_field :name
-    .field
-      = f.label :calories
-      = f.text_field :calories
+      = f.text_field :name, tabindex: 11
     .field
       = f.label :carbs
-      = f.text_field :carbs
+      = f.number_field :carbs, tabindex: 12
+      | g / 100g
     .field
       = f.label :proteins
-      = f.text_field :proteins
+      = f.number_field :proteins, tabindex: 13
+      | g / 100g
     .field
       = f.label :fat
-      = f.text_field :fat
-    / button export
-  .actions = f.submit 'Save'
+      = f.number_field :fat, tabindex: 14
+      |g / 100g
+    .field
+      = f.label :calories
+      = f.number_field :calories, tabindex: 15
+      |kCal / 100g
+
+  / button export
+  .actions
+    input(type="button" onclick="submit();" tabindex="16" value="Save")
