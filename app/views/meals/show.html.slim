@@ -28,7 +28,7 @@ ul
 
 
 = render 'dosed_ingredients/index'
-
-
+'&nbsp|
+= link_to 'Destroy', @meal, data: {:confirm => 'Are you sure?'}, :method => :delete
 '&nbsp|
 = link_to 'Back', meals_path

@@ -13,7 +13,7 @@ h1 Listing meals
         th Creation time
         th
         th
-        th
+
 
     tbody
       - @meals.each do |meal|
@@ -31,10 +31,9 @@ h1 Listing meals
             = meal.calories
             | &nbsp;kCal
           td
-            = time_ago_in_words(meal.created_at)
+            = link_to time_ago_in_words(meal.created_at), meal
             | &nbsp; ago
-          td = link_to 'Show', meal
-          td = link_to 'Destroy', meal, data: {:confirm => 'Are you sure?'}, :method => :delete
+
 
 br
 
