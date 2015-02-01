@@ -34,8 +34,7 @@
       = f.number_field :calories, tabindex: 15
       |kCal / 100g
     .field
-      = f.check_box :save
-      = f.label :save
+      input(type="checkbox" name="dosed_ingredient[save]" value="1") Add to Favorites
 
   / button export
   .actions
