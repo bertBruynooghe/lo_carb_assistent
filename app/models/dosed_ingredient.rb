@@ -7,15 +7,11 @@ class DosedIngredient < ActiveRecord::Base
     end
 
     if new_attributes.delete(:save)
-      existing = Ingredient.find_by(name: new_attributes[:name])
-      stored_ingredient_attributes = new_attributes.dup.delete_if do |k, _|
-        ['meal_id', 'quantity'].include?(k).tap{|r| puts "delete: #{r}"}
+      favorite_ingredient = Ingredient.find_or_initialize_by(name: new_attributes[:name])
+      new_attributes.each do |k,v|
+        favorite_ingredient.send("#{k}=", v) unless %w(meal_id quantity).include?(k)
       end
-      if existing
-        existing.update_attributes(stored_ingredient_attributes)
-      else
-        Ingredient.create(stored_ingredient_attributes)
-      end
+      favorite_ingredient.save
     end
     super
   end
