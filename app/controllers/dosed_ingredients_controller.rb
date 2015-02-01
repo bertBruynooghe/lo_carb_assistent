@@ -71,6 +71,6 @@ class DosedIngredientsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def dosed_ingredient_params
-      params.require(:dosed_ingredient).permit(:quantity, :name, :calories, :carbs, :proteins, :fat, :meal_id)
+      params.require(:dosed_ingredient).permit(:quantity, :name, :calories, :carbs, :proteins, :fat, :meal_id, :save)
     end
 end
