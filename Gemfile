@@ -18,6 +18,8 @@ gem 'coffee-rails', '~> 4.0.0'
 # gem 'therubyracer',  platforms: :ruby
 gem 'slim-rails'
 gem 'rails_layout'
+gem 'rails-i18n'
+gem 'http_accept_language'
 gem 'ransack'
 gem 'quiet_assets', group: :development
 
