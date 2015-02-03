@@ -27,7 +27,7 @@ $(document).on 'ready page:load', ->
       source: findMatches
     });
 
-  $('input#dosed_ingredient_name').on 'change', ->
+  $('input#dosed_ingredient_name').on 'blur', ->
     stored_ingredient = ingredient for ingredient in window.last_ingedients when ingredient['name'] == $(this).val()
     if stored_ingredient
       unless $('input#dosed_ingredient_carbs').val() || $('input#dosed_ingredient_proteins').val() || $('input#dosed_ingredient_fat').val() || $('input#dosed_ingredient_calories').val()
