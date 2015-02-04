@@ -36,10 +36,8 @@
     .field
       input(type="checkbox" name="dosed_ingredient[save]" value="1") Add to Favorites
 
-  / button export
   .actions
-    input(type="button" onclick="submit();" tabindex="16" value="Save")
-    button(id="save") Test
+    button(id="save") Save
 
 coffee:
   $form = ->
@@ -54,10 +52,17 @@ coffee:
     $("#save").on 'click', ->
       action = $form().attr('action')
       authenticity_token = $form().find("input[name='authenticity_token']").val()
-      name = findInput("name").val()
-      carbs = getNumberValue("carbs")
-      proteins = getNumberValue("proteins")
-      fat = getNumberValue("fat")
-      calories = getNumberValue("calories")
-      alert carbs
+      data =
+        name: indInput("name").val()
+        carbs: getNumberValue("carbs")
+        proteins: getNumberValue("proteins")
+        fat: getNumberValue("fat")
+        calories: getNumberValue("calories")
+        calories: getNumberValue("quantity")
+      data['save'] = true if findInput("save").is(":checked")
+      $.post
+        url: action
+        data: data
+        success: -> alert('success')
+        error: -> alert('error')
       false
