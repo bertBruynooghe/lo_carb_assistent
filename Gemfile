@@ -20,6 +20,7 @@ gem 'slim-rails'
 gem 'rails_layout'
 gem 'rails-i18n'
 gem 'http_accept_language'
+gem 'globalize'
 gem 'ransack'
 gem 'quiet_assets', group: :development
 

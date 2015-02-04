@@ -7,11 +7,15 @@
   <title>Intake</title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%# TODO: load this through bower instead %>
+  <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/globalize/0.1.1/globalize.min.js"></script>
   <%= csrf_meta_tags %>
 </head>
 <body>
 
 <%= yield %>
-
+<script>
+  Globalize.culture( "<%= I18n.locale %>" );
+</script>
 </body>
 </html>

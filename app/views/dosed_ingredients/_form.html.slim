@@ -39,3 +39,20 @@
   / button export
   .actions
     input(type="button" onclick="submit();" tabindex="16" value="Save")
+    button(id="save") Test
+
+coffee:
+  $form = ->
+    $("form[class$='dosed_ingredient']")
+  findInput = (attr_name) ->
+    $form().find("input[name='dosed_ingredient\[#{attr_name}\]']")
+  getNumberValue = (attr_name) ->
+    Globalize.format( findInput(attr_name).get(0).valueAsNumber, "n" )
+  $(document).on 'ready page:load', ->
+    $("#save").on 'click', ->
+      action = $form().attr('action')
+      authenticity_token = $form().find("input[name='authenticity_token']").val()
+      name = findInput("name").val()
+      carbs = getNumberValue("carbs")
+      alert carbs
+      false
