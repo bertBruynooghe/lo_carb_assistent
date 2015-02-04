@@ -9,7 +9,7 @@
 
   .field
     = f.label :quantity
-    = f.number_field :quantity, tabindex: 10
+    = f.number_field :quantity, tabindex: 10, step: 0.1
     |g
   fieldset
     / if name matches existing ingredient, auto-fill next fields
@@ -23,15 +23,15 @@
       | g / 100g
     .field
       = f.label :proteins
-      = f.number_field :proteins, tabindex: 13
+      = f.number_field :proteins, tabindex: 13, step: 0.1
       | g / 100g
     .field
       = f.label :fat
-      = f.number_field :fat, tabindex: 14
+      = f.number_field :fat, tabindex: 14, step: 0.1
       |g / 100g
     .field
       = f.label :calories
-      = f.number_field :calories, tabindex: 15
+      = f.number_field :calories, tabindex: 15, step: 0.1
       |kCal / 100g
     .field
       input(type="checkbox" name="dosed_ingredient[save]" value="1") Add to Favorites
@@ -47,12 +47,17 @@ coffee:
   findInput = (attr_name) ->
     $form().find("input[name='dosed_ingredient\[#{attr_name}\]']")
   getNumberValue = (attr_name) ->
-    findInput(attr_name).get(0).valueAsNumber
+    value = findInput(attr_name).get(0).valueAsNumber
+    value = parseFloat(findInput(attr_name).val().replace(',', '.')) if isNaN(value)
+    Globalize.format( value )
   $(document).on 'ready page:load', ->
     $("#save").on 'click', ->
       action = $form().attr('action')
       authenticity_token = $form().find("input[name='authenticity_token']").val()
       name = findInput("name").val()
       carbs = getNumberValue("carbs")
+      proteins = getNumberValue("proteins")
+      fat = getNumberValue("fat")
+      calories = getNumberValue("calories")
       alert carbs
       false
