@@ -47,7 +47,7 @@ coffee:
   findInput = (attr_name) ->
     $form().find("input[name='dosed_ingredient\[#{attr_name}\]']")
   getNumberValue = (attr_name) ->
-    Globalize.format( findInput(attr_name).get(0).valueAsNumber, "n" )
+    findInput(attr_name).get(0).valueAsNumber
   $(document).on 'ready page:load', ->
     $("#save").on 'click', ->
       action = $form().attr('action')
