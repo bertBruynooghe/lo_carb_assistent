@@ -46,8 +46,7 @@ coffee:
     $form().find("input[name='dosed_ingredient\[#{attr_name}\]']")
   getNumberValue = (attr_name) ->
     value = findInput(attr_name).get(0).valueAsNumber
-    value = parseFloat(findInput(attr_name).val().replace(',', '.')) if isNaN(value)
-    Globalize.format( value )
+    if isNaN(value) then parseFloat(findInput(attr_name).val().replace(',', '.')) else value
   $(document).on 'ready page:load', ->
     $("#save").on 'click', ->
       action = $form().attr('action')
@@ -63,6 +62,4 @@ coffee:
       $.post
         url: action
         data: data
-        success: -> alert('success')
-        error: -> alert('error')
       false
