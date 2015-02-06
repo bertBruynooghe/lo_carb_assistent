@@ -21,11 +21,15 @@ As for the data of the program, there will be two ways of filling in the data wh
 In the mean time, the minimal viable product strategy changed.
 This are the steps:
 
-1. develop as a straight Rails application using scaffolding. Model structure as follows:
+* develop as a straight Rails application using scaffolding. Model structure as follows:
     * account has many meals
     * meal(date) has many dosed_ingredients
-    * dosed_ingredient(quantity) has one ingredient
+    * dosed_ingredient(quantity)
     * ingredient(name, calories, carbs, proteins, fat)
+* heroku backup
+* product lookup
+* product image bing 5000 free transactions per month, matches ndb quite well
+* product translation bing
 2. authn and accounts
 3. versioned API
 4. single page app using backbone
