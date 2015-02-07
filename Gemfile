@@ -23,6 +23,7 @@ gem 'http_accept_language'
 gem 'globalize'
 gem 'ransack'
 gem 'quiet_assets', group: :development
+gem 'devise'
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'

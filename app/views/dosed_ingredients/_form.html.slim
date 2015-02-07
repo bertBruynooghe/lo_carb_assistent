@@ -52,7 +52,7 @@ coffee:
       action = $form().attr('action')
       authenticity_token = $form().find("input[name='authenticity_token']").val()
       data =
-        name: indInput("name").val()
+        name: findInput("name").val()
         carbs: getNumberValue("carbs")
         proteins: getNumberValue("proteins")
         fat: getNumberValue("fat")
