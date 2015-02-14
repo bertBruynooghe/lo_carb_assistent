@@ -49,6 +49,7 @@ coffee:
     if isNaN(value) then parseFloat(findInput(attr_name).val().replace(',', '.')) else value
   $(document).on 'ready page:load', ->
     $("#save").on 'click', ->
+      alert 'clicked'
       action = $form().attr('action')
       authenticity_token = $form().find("input[name='authenticity_token']").val()
       data =
