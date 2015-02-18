@@ -5,8 +5,6 @@
       ul
         - @dosed_ingredient.errors.full_messages.each do |message|
           li = message
-  = f.hidden_field :meal_id, value: @meal.id
-
   .field
     = f.label :quantity
     = f.number_field :quantity, tabindex: 10, step: 0.1
@@ -46,7 +44,8 @@ coffee:
     $form().find("input[name='dosed_ingredient\[#{attr_name}\]']")
   getNumberValue = (attr_name) ->
     value = findInput(attr_name).get(0).valueAsNumber
-    if isNaN(value) then parseFloat(findInput(attr_name).val().replace(',', '.')) else value
+    value = parseFloat(findInput(attr_name).val().replace(',', '.')) if isNaN(value)
+    value = 0.0 if isNaN(value)
   $(document).on 'ready page:load', ->
     $("#save").on 'click', ->
       action = $form().attr('action')
@@ -59,9 +58,9 @@ coffee:
         calories: getNumberValue("calories")
         calories: getNumberValue("quantity")
       data['save'] = true if findInput("save").is(":checked")
-      $.post
+      $.ajax
+        type: 'POST'
         url: action
-        data: data
-        success: -> alert 'success'
-        error: -> alert 'error'
+        data: JSON.stringify({dosed_ingredient: data})
+        contentType: 'application/json; charset=UTF-8'
       false

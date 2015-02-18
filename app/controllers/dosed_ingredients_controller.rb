@@ -26,7 +26,7 @@ class DosedIngredientsController < ApplicationController
   # POST /dosed_ingredients
   # POST /dosed_ingredients.json
   def create
-    @dosed_ingredient = DosedIngredient.new(dosed_ingredient_params)
+    @dosed_ingredient = DosedIngredient.new(dosed_ingredient_params.merge(meal_id: params[:meal_id]))
 
     respond_to do |format|
       if @dosed_ingredient.save
@@ -71,6 +71,6 @@ class DosedIngredientsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def dosed_ingredient_params
-      params.require(:dosed_ingredient).permit(:quantity, :name, :calories, :carbs, :proteins, :fat, :meal_id, :save)
+      params.require(:dosed_ingredient).permit(:quantity, :name, :calories, :carbs, :proteins, :fat, :save)
     end
 end
