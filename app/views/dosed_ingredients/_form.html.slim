@@ -60,7 +60,10 @@ coffee:
       data['save'] = true if findInput("save").is(":checked")
       $.ajax
         type: 'POST'
+        dataType: 'html'
         url: action
         data: JSON.stringify({dosed_ingredient: data})
         contentType: 'application/json; charset=UTF-8'
+        success: ->
+          window.history.back()
       false
