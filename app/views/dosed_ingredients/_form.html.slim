@@ -43,9 +43,12 @@ coffee:
   findInput = (attr_name) ->
     $form().find("input[name='dosed_ingredient\[#{attr_name}\]']")
   getNumberValue = (attr_name) ->
-    value = findInput(attr_name).get(0).valueAsNumber
-    value = parseFloat(findInput(attr_name).val().replace(',', '.')) if isNaN(value)
+    $input = findInput(attr_name)
+    value = $input.get(0).valueAsNumber
+    value = parseFloat($input.val().replace(',', '.')) if isNaN(value)
     value = 0.0 if isNaN(value)
+    console.log "#{attr_name} #{value}"
+    value
   $(document).on 'ready page:load', ->
     $("#save").on 'click', ->
       action = $form().attr('action')
@@ -56,7 +59,7 @@ coffee:
         proteins: getNumberValue("proteins")
         fat: getNumberValue("fat")
         calories: getNumberValue("calories")
-        calories: getNumberValue("quantity")
+        quantity: getNumberValue("quantity")
       data['save'] = true if findInput("save").is(":checked")
       $.ajax
         type: 'POST'
@@ -65,5 +68,5 @@ coffee:
         data: JSON.stringify({dosed_ingredient: data})
         contentType: 'application/json; charset=UTF-8'
         success: ->
-          window.history.back()
+          #window.history.back()
       false
