@@ -24,6 +24,7 @@ gem 'quiet_assets', group: :development
 gem 'devise'
 
 group :development, :test do
+  gem 'rake'
   gem 'rspec-rails', '~> 3.0'
   gem 'capybara'
 end

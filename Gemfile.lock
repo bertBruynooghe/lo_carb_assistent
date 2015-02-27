@@ -200,6 +200,7 @@ DEPENDENCIES
   rails-i18n
   rails_12factor
   rails_layout
+  rake
   ransack
   rspec-rails (~> 3.0)
   sass-rails (~> 4.0.3)
