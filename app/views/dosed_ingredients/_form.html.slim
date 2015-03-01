@@ -53,6 +53,9 @@ coffee:
     $("#save").on 'click', ->
       action = $form().attr('action')
       authenticity_token = $form().find("input[name='authenticity_token']").val()
+      _method = $form().find("input[name='authenticity_token']")
+      method = $form.attr('method')
+      method = _method.val() if _method
       data =
         name: findInput("name").val()
         carbs: getNumberValue("carbs")
@@ -60,9 +63,10 @@ coffee:
         fat: getNumberValue("fat")
         calories: getNumberValue("calories")
         quantity: getNumberValue("quantity")
-      data['save'] = true if findInput("save").is(":checked")
+        authenticity_token: authenticity_token
+       data['save'] = true if findInput("save").is(":checked")
       $.ajax
-        type: 'POST'
+        type: method
         url: action
         data: JSON.stringify({dosed_ingredient: data})
         contentType: 'application/json; charset=UTF-8'
