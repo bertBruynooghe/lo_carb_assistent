@@ -1,8 +1,7 @@
 lo_carb_assistent
 =================
 [![Build Status](http://img.shields.io/travis/bertBruynooghe/lo_carb_assistent.svg)](https://travis-ci.org/bertBruynooghe/lo_carb_assistent)
-[![Coverage Status](https://img.shields.io/coveralls/bertBruynooghe/lo_carb_assistent)](https://coveralls.io/r/bertBruynooghe/lo_carb_assistent)
-[![Coverage Status][https://coveralls.io/r/bertBruynooghe]][Coverage Status]
+[![Coverage Status](https://img.shields.io/coveralls/bertBruynooghe/lo_carb_assistent.svg)](https://coveralls.io/r/bertBruynooghe/lo_carb_assistent)
 
 This app is meant to be a multi-platform food info app that can be used by diabetes patients to calculate their intake.
 It is very important that the app has:
