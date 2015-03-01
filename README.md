@@ -1,5 +1,7 @@
 lo_carb_assistent
 =================
+[![Build Status](http://img.shields.io/travis/UP-nxt/cmis-ruby.svg)](https://travis-ci.org/bertBruynooghe/lo_carb_assistent)
+
 This app is meant to be a multi-platform food info app that can be used by diabetes patients to calculate their intake.
 It is very important that the app has:
 * many product inside
