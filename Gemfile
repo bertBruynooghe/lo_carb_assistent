@@ -29,7 +29,10 @@ group :development, :test do
   gem 'capybara'
 end
 
-gem 'simplecov', require: false, group: :test
+group :test do
+  gem 'simplecov', require: false
+  gem 'coveralls'
+end
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'

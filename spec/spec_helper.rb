@@ -1,5 +1,12 @@
 require 'simplecov'
-SimpleCov.startrequire 'capybara/rspec'
+require 'coveralls'
+
+SimpleCov.formatter = SimpleCov::Formatter::MultiFormatter[
+    SimpleCov::Formatter::HTMLFormatter,
+    Coveralls::SimpleCov::Formatter
+]
+SimpleCov.start
+require 'capybara/rspec'
 RSpec.configure do |config|
   config.expect_with :rspec do |expectations|
     expectations.include_chain_clauses_in_custom_matcher_descriptions = true
