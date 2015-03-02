@@ -2,7 +2,7 @@ lo_carb_assistent
 =================
 [![Build Status](http://img.shields.io/travis/bertBruynooghe/lo_carb_assistent.svg)](https://travis-ci.org/bertBruynooghe/lo_carb_assistent)
 [![Dependency Status](https://img.shields.io/gemnasium/bertBruynooghe/lo_carb_assistent.svg)](https://gemnasium.com/bertBruynooghe/lo_carb_assistent)
-[![Code Climate](https://img.shields.io/codeclimate/bertBruynooghe/lo_carb_assistent.png)](https://codeclimate.com/github/bertBruynooghe/lo_carb_assistent)
+[![Code Climate](http://img.shields.io/codeclimate/github/bertBruynooghe/lo_carb_assistent.svg)](https://codeclimate.com/bertBruynooghe/lo_carb_assistent/cmis-ruby)
 [![Coverage Status](https://img.shields.io/coveralls/bertBruynooghe/lo_carb_assistent.svg)](https://coveralls.io/r/bertBruynooghe/lo_carb_assistent)
 
 This app is meant to be a multi-platform food info app that can be used by diabetes patients to calculate their intake.
