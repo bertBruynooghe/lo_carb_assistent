@@ -3,7 +3,6 @@
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
 $(document).on 'ready page:load', ->
-  $ ->
   $('input[type="number"]').keydown (event) ->
     if event.which == 188 or event.which == 190
       event.preventDefault()
@@ -16,8 +15,6 @@ $(document).on 'ready page:load', ->
       if @value != newValue
         @value = currValue + (if delimiter == ',' then '.' else ',') + '1'
       @setSelectionRange currValue.length + 1, currValue.length + 2
-    return
-  return
 
   window.last_ingedients = []
   $('input#dosed_ingredient_quantity').focus().select()
