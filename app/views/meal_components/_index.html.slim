@@ -1,0 +1,14 @@
+- unless @meal.meal_components.empty?
+  ul
+    - @meal.meal_components.each do |meal_component|
+      li
+        = meal_component.quantity
+        | g &nbsp;
+        strong = meal_component.name
+        | &nbsp;
+        = link_to 'Edit', edit_meal_meal_component_path(@meal, meal_component)
+        | &nbsp;
+        = link_to 'Destroy', [@meal, meal_component], data: {:confirm => 'Are you sure?'}, :method => :delete
+br
+
+= link_to 'New Dosed ingredient', new_meal_meal_component_path(@meal)

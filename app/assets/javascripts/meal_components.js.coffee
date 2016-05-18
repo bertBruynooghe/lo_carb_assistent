@@ -17,7 +17,7 @@ $(document).on 'ready page:load', ->
       @setSelectionRange currValue.length + 1, currValue.length + 2
 
   window.last_ingedients = []
-  $('input#dosed_ingredient_quantity').focus().select()
+  $('input#meal_component_quantity').focus().select()
   findMatches = (q, cb) ->
     success = (ingredients) ->
       window.last_ingedients = ingredients
@@ -30,7 +30,7 @@ $(document).on 'ready page:load', ->
     });
     return
 
-  $('input#dosed_ingredient_name').typeahead({
+  $('input#meal_component_name').typeahead({
       minLength: 3,
       highlight: true,
       hint: true
@@ -40,14 +40,14 @@ $(document).on 'ready page:load', ->
       source: findMatches
     });
 
-  $('input#dosed_ingredient_name').on 'blur', ->
+  $('input#meal_component_name').on 'blur', ->
     stored_ingredient = ingredient for ingredient in window.last_ingedients when ingredient['name'] == $(this).val()
     if stored_ingredient
-      unless $('input#dosed_ingredient_carbs').val() || $('input#dosed_ingredient_proteins').val() || $('input#dosed_ingredient_fat').val() || $('input#dosed_ingredient_calories').val()
-        $('input#dosed_ingredient_carbs').val(stored_ingredient['carbs'])
-        $('input#dosed_ingredient_proteins').val(stored_ingredient['proteins'])
-        $('input#dosed_ingredient_fat').val(stored_ingredient['fat'])
-        $('input#dosed_ingredient_calories').val(stored_ingredient['calories'])
+      unless $('input#meal_component_carbs').val() || $('input#meal_component_proteins').val() || $('input#meal_component_fat').val() || $('input#meal_component_calories').val()
+        $('input#meal_component_carbs').val(stored_ingredient['carbs'])
+        $('input#meal_component_proteins').val(stored_ingredient['proteins'])
+        $('input#meal_component_fat').val(stored_ingredient['fat'])
+        $('input#meal_component_calories').val(stored_ingredient['calories'])
     false
 
   $('form input').on('keydown', (event) ->

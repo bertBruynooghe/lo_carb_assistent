@@ -4,13 +4,13 @@ class MealsController < ApplicationController
   # GET /meals
   # GET /meals.json
   def index
-    @meals = Meal.all.includes(:dosed_ingredients).order(created_at: :desc)
+    @meals = Meal.all.includes(:meal_components).order(created_at: :desc)
   end
 
   # GET /meals/1
   # GET /meals/1.json
   def show
-    @dosed_ingredients = @meal.dosed_ingredients
+    @meal_components = @meal.meal_components
   end
 
   # GET /meals/new

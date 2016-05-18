@@ -28,8 +28,8 @@ This are the steps:
 
 * develop as a straight Rails application using scaffolding. Model structure as follows:
     * account has many meals
-    * meal(date) has many dosed_ingredients
-    * dosed_ingredient(quantity)
+    * meal(date) has many meal_components
+    * meal_component(quantity)
     * ingredient(name, calories, carbs, proteins, fat)
 * heroku backup
 * product lookup

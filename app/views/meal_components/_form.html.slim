@@ -1,9 +1,9 @@
-= form_for [@meal, @dosed_ingredient] do |f|
-  - if @dosed_ingredient.errors.any?
+= form_for [@meal, @meal_component] do |f|
+  - if @meal_component.errors.any?
     #error_explanation
-      h2 = "#{pluralize(@dosed_ingredient.errors.count, "error")} prohibited this dosed_ingredient from being saved:"
+      h2 = "#{pluralize(@meal_component.errors.count, "error")} prohibited this meal_component from being saved:"
       ul
-        - @dosed_ingredient.errors.full_messages.each do |message|
+        - @meal_component.errors.full_messages.each do |message|
           li = message
   .field
     = f.label :quantity
@@ -32,16 +32,16 @@
       = f.number_field :calories, tabindex: 15, step: 0.1
       |kCal / 100g
     .field
-      input(type="checkbox" name="dosed_ingredient[save]" value="1") Add to Favorites
+      input(type="checkbox" name="meal_component[save]" value="1") Add to Favorites
 
   .actions
     button(id="save") Save
 
 coffee:
   $form = ->
-    $("form[class$='dosed_ingredient']")
+    $("form[class$='meal_component']")
   findInput = (attr_name) ->
-    $form().find("input[name='dosed_ingredient\[#{attr_name}\]']")
+    $form().find("input[name='meal_component\[#{attr_name}\]']")
   getNumberValue = (attr_name) ->
     $input = findInput(attr_name)
     value = $input.get(0).valueAsNumber
@@ -68,7 +68,7 @@ coffee:
       $.ajax
         type: method
         url: action
-        data: JSON.stringify({dosed_ingredient: data})
+        data: JSON.stringify({meal_component: data})
         contentType: 'application/json; charset=UTF-8'
         success: ->
           parts = window.location.href.split('/')[0..-3]

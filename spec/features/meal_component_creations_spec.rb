@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.feature "DosedIngredientCreations", type: :feature do
+RSpec.feature "MealComponentCreations", type: :feature do
   describe "the signin process", :type => :feature do
     before :each do
       User.create(:email => 'user@example.com', :password => 'password')
