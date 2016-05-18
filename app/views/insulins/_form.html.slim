@@ -1,0 +1,12 @@
+= form_for @insulin do |f|
+  - if @insulin.errors.any?
+    #error_explanation
+      h2 = "#{pluralize(@insulin.errors.count, "error")} prohibited this insulin from being saved:"
+      ul
+        - @insulin.errors.full_messages.each do |message|
+          li = message
+
+  .field
+    = f.label :name
+    = f.text_area :name
+  .actions = f.submit
