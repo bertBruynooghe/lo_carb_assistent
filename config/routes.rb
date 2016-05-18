@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :blood_sugar_readings
   devise_for :users
   root to: 'meals#index'
 

@@ -1,0 +1,23 @@
+h1 Listing blood_sugar_readings
+
+table
+  thead
+    tr
+      th Value
+      th Read time
+      th
+      th
+      th
+
+  tbody
+    - @blood_sugar_readings.each do |blood_sugar_reading|
+      tr
+        td = blood_sugar_reading.value
+        td = blood_sugar_reading.read_time
+        td = link_to 'Show', blood_sugar_reading
+        td = link_to 'Edit', edit_blood_sugar_reading_path(blood_sugar_reading)
+        td = link_to 'Destroy', blood_sugar_reading, data: {:confirm => 'Are you sure?'}, :method => :delete
+
+br
+
+= link_to 'New Blood sugar reading', new_blood_sugar_reading_path

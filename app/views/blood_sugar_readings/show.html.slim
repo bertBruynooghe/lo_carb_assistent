@@ -1,0 +1,12 @@
+p#notice = notice
+
+p
+  strong Value:
+  = @blood_sugar_reading.value
+p
+  strong Read time:
+  = @blood_sugar_reading.read_time
+
+= link_to 'Edit', edit_blood_sugar_reading_path(@blood_sugar_reading)
+'|
+= link_to 'Back', blood_sugar_readings_path
