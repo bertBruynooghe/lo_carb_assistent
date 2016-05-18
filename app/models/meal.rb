@@ -23,8 +23,8 @@ class Meal < ActiveRecord::Base
   private
 
   def sum(attr_name)
-    meal_components.reduce(0.0) do |m, ingredient|
-      m + (ingredient.send(attr_name) * ingredient.quantity / 100.0)
+    meal_components.reduce(0.0) do |m, nutrient|
+      m + (nutrient.send(attr_name) * nutrient.quantity / 100.0)
     end
   end
 end

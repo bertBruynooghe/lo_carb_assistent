@@ -30,7 +30,7 @@ This are the steps:
     * account has many meals
     * meal(date) has many meal_components
     * meal_component(quantity)
-    * ingredient(name, calories, carbs, proteins, fat)
+    * nutrient(name, calories, carbs, proteins, fat)
 * heroku backup
 * product lookup
 * product image bing 5000 free transactions per month, matches ndb quite well
@@ -41,7 +41,7 @@ This are the steps:
 5. using dualStorage
 
 As the app has been tested in real-life situations, a number of issues came out:
-* landing screen is currently the overview screen. It would probably be better to have the landing screen to be the new dosed ingredient screen, but not yet bound to a meal. (As it is sometimes convenient just to look up an ingredient without calculating a complete meal.) It should have a pageable dropdown (select2) which allows to add the add the ingredient to a new or existing meal.
+* landing screen is currently the overview screen. It would probably be better to have the landing screen to be the new dosed nutrient screen, but not yet bound to a meal. (As it is sometimes convenient just to look up an nutrient without calculating a complete meal.) It should have a pageable dropdown (select2) which allows to add the add the nutrient to a new or existing meal.
 * it would be very convenient to add activities and insuline doses to the system too. I guess there should be a direct link for on a number of screens, and especially on the landing screen.
 * navigating to and searching through the favorites should also be more convenient. (Search box from collapsed menu that triggers a select2 box?) Or should we have the carbs/fat/proteins/kCal displayed directly along with the name in the select2 box?
 * graph support

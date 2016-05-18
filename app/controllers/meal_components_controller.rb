@@ -30,7 +30,7 @@ class MealComponentsController < ApplicationController
 
     respond_to do |format|
       if @meal_component.save
-        format.html { redirect_to @meal_component.meal, notice: 'Dosed ingredient was successfully created.' }
+        format.html { redirect_to @meal_component.meal, notice: 'Dosed nutrient was successfully created.' }
         format.json { render :show, status: :created, location: @meal_component }
       else
         format.html { render :new }
@@ -44,7 +44,7 @@ class MealComponentsController < ApplicationController
   def update
     respond_to do |format|
       if @meal_component.update(meal_component_params)
-        format.html { redirect_to @meal_component.meal, notice: 'Dosed ingredient was successfully updated.' }
+        format.html { redirect_to @meal_component.meal, notice: 'Dosed nutrient was successfully updated.' }
         format.json { render :show, status: :ok, location: @meal_component }
       else
         format.html { render :edit }
@@ -58,7 +58,7 @@ class MealComponentsController < ApplicationController
   def destroy
     @meal_component.destroy
     respond_to do |format|
-      format.html { redirect_to @meal_component.meal, notice: 'Dosed ingredient was successfully destroyed.' }
+      format.html { redirect_to @meal_component.meal, notice: 'Dosed nutrient was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
