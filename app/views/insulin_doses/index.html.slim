@@ -1,0 +1,25 @@
+h1 Listing insulin_doses
+
+table
+  thead
+    tr
+      th Insulin
+      th Dose
+      th Application time
+      th
+      th
+      th
+
+  tbody
+    - @insulin_doses.each do |insulin_dose|
+      tr
+        td = insulin_dose.insulin_id
+        td = insulin_dose.dose
+        td = insulin_dose.application_time
+        td = link_to 'Show', insulin_dose
+        td = link_to 'Edit', edit_insulin_dose_path(insulin_dose)
+        td = link_to 'Destroy', insulin_dose, data: {:confirm => 'Are you sure?'}, :method => :delete
+
+br
+
+= link_to 'New Insulin dose', new_insulin_dose_path
