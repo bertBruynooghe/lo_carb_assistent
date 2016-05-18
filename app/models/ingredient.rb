@@ -1,4 +1,4 @@
-class MealComponent < ActiveRecord::Base
+class Ingredient < ActiveRecord::Base
   belongs_to :meal
 
   def assign_attributes (new_attributes)

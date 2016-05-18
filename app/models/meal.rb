@@ -1,5 +1,5 @@
 class Meal < ActiveRecord::Base
-  has_many :meal_components, dependent: :destroy
+  has_many :ingredients, dependent: :destroy
   def calories
     sum(:calories)
   end
@@ -23,7 +23,7 @@ class Meal < ActiveRecord::Base
   private
 
   def sum(attr_name)
-    meal_components.reduce(0.0) do |m, nutrient|
+    ingredients.reduce(0.0) do |m, nutrient|
       m + (nutrient.send(attr_name) * nutrient.quantity / 100.0)
     end
   end
