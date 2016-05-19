@@ -22,6 +22,11 @@ table {
   @extend .table;
 }
 
+input[type='submit']{
+  @extend .btn;
+  @extend .btn-default;
+}
+
 nav {
   @extend .navbar;
   @extend .navbar-default;

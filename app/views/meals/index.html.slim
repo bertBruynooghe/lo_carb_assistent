@@ -1,4 +1,4 @@
-h1 Listing meals
+= button_to 'New Meal', new_meal_path, method: :get
 
 - if @meals.empty?
     | No meal yet
@@ -36,5 +36,3 @@ h1 Listing meals
 
 
 br
-
-= link_to 'New Meal', new_meal_path

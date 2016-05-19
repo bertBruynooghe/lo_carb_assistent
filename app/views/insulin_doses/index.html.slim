@@ -1,4 +1,4 @@
-h1 Listing insulin_doses
+= button_to 'New Insulin dose', new_insulin_dose_path, method: :get
 
 table
   thead
@@ -21,5 +21,3 @@ table
         td = link_to 'Destroy', insulin_dose, data: {:confirm => 'Are you sure?'}, :method => :delete
 
 br
-
-= link_to 'New Insulin dose', new_insulin_dose_path

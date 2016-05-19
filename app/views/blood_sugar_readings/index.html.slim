@@ -1,4 +1,4 @@
-h1 Listing blood_sugar_readings
+= button_to 'New Blood sugar reading', new_blood_sugar_reading_path, method: :get
 
 table
   thead
@@ -19,5 +19,3 @@ table
         td = link_to 'Destroy', blood_sugar_reading, data: {:confirm => 'Are you sure?'}, :method => :delete
 
 br
-
-= link_to 'New Blood sugar reading', new_blood_sugar_reading_path

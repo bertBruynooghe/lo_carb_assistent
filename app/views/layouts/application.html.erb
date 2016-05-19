@@ -24,22 +24,22 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="#">Intake</a>
+        <a class="navbar-brand" href="#"><%= controller.controller_name %></a>
       </div>
       <div class="menu">
         <ul>
-          <li class="<%= controller.controller_name == 'meals' ? 'active' : 'nil' %>" >
-            <%= link_to 'meals', meals_path %></li>
-          <li class="<%= controller.controller_name == 'insulin_doses' ? 'active' : 'nil' %>" >
-            <%= link_to 'insulin doses', insulin_doses_path %></li>
-          <li class="<%= controller.controller_name == 'blood_sugar_readings' ? 'active' : 'nil' %>" >
-            <%= link_to 'blood sugar readings', blood_sugar_readings_path %></li>
+          <% unless controller.controller_name == 'meals' %>
+            <li><%= link_to 'meals', meals_path %></li><% end %>
+          <% unless controller.controller_name == 'insulin_doses' %>
+            <li><%= link_to 'insulin doses', insulin_doses_path %></li><% end %>
+          <% unless controller.controller_name == 'blood_sugar_readings' %>
+            <li><%= link_to 'blood sugar readings', blood_sugar_readings_path %></li><% end %>
         </ul>
       </div>
     </div>
   </nav>
-  <p class="notice"><%= notice %></p>
-  <p class="alert"><%= alert %></p>
+  <% unless notice.blank? %><p class="notice"><%= notice %></p><% end %>
+  <% unless alert.blank? %><p class="alert"><%= alert %></p><% end %>
 <%= yield %>
 <script>
   Globalize.culture( "<%= I18n.locale == 'en' ? 'en-US' : I18n.locale %>" );
