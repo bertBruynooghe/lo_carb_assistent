@@ -15,8 +15,6 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-  <p class="notice"><%= notice %></p>
-  <p class="alert"><%= alert %></p>
   <nav>
     <div>
       <div class="toggler">
@@ -30,13 +28,18 @@
       </div>
       <div class="menu">
         <ul>
-          <li><%= link_to 'meals', meals_path %></li>
-          <li><%= link_to 'insulin doses', insulin_doses_path %></li>
-          <li><%= link_to 'blood sugar reading', blood_sugar_readings_path %></li>
+          <li class="<%= controller.controller_name == 'meals' ? 'active' : 'nil' %>" >
+            <%= link_to 'meals', meals_path %></li>
+          <li class="<%= controller.controller_name == 'insulin_doses' ? 'active' : 'nil' %>" >
+            <%= link_to 'insulin doses', insulin_doses_path %></li>
+          <li class="<%= controller.controller_name == 'blood_sugar_readings' ? 'active' : 'nil' %>" >
+            <%= link_to 'blood sugar readings', blood_sugar_readings_path %></li>
         </ul>
       </div>
     </div>
   </nav>
+  <p class="notice"><%= notice %></p>
+  <p class="alert"><%= alert %></p>
 <%= yield %>
 <script>
   Globalize.culture( "<%= I18n.locale == 'en' ? 'en-US' : I18n.locale %>" );
