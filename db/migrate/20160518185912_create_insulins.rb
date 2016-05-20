@@ -1,9 +1,0 @@
-class CreateInsulins < ActiveRecord::Migration
-  def change
-    create_table :insulins do |t|
-      t.text :name
-
-      t.timestamps null: false
-    end
-  end
-end
