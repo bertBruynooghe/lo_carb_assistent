@@ -31,8 +31,7 @@
             = meal.calories
             | &nbsp;kCal
           td
-            = link_to meal.consumption_time, meal
-            | &nbsp; ago
+            = link_to render_date_time(meal.consumption_time), meal
 
 
 br

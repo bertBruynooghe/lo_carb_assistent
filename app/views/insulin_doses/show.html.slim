@@ -8,7 +8,7 @@ p
   = @insulin_dose.dose
 p
   strong Application time:
-  = @insulin_dose.application_time
+  = render_date_time(@insulin_dose.application_time)
 
 = link_to 'Edit', edit_insulin_dose_path(@insulin_dose)
 '|

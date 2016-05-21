@@ -2,7 +2,7 @@ p#notice = notice
 
 p
   | Created&nbsp;
-  strong = time_ago_in_words(@meal.created_at)
+  strong = render_date_time(@meal.consumption_time)
   | &nbsp;ago
 
 ul
