@@ -5,7 +5,8 @@ p
   = @blood_sugar_reading.value
 p
   strong Read time:
-  = @blood_sugar_reading.read_time
+  javascript:
+    document.write(new Date('#{@blood_sugar_reading.read_time.iso8601}'));
 
 = link_to 'Edit', edit_blood_sugar_reading_path(@blood_sugar_reading)
 '|
