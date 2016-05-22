@@ -1,5 +1,8 @@
 class Meal < ActiveRecord::Base
   has_many :ingredients, dependent: :destroy
+
+  default_scope { order(consumption_time: :desc) }
+
   def calories
     sum(:calories)
   end
