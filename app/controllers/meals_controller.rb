@@ -15,7 +15,8 @@ class MealsController < ApplicationController
 
   # GET /meals/new
   def new
-    @meal = Meal.new
+    #TODO: explicit initialization is no longer needed if we have separate edit screen
+    @meal = Meal.new(consumption_time: DateTime.now)
     respond_to do |format|
       if @meal.save
         format.html { redirect_to @meal, notice: 'Meal was successfully created.' }
