@@ -5,7 +5,7 @@ p
   = @blood_sugar_reading.value
 p
   strong Read time:
-  = render_date_time(@blood_sugar_reading.read_time)
+  = render_datetime(@blood_sugar_reading.read_time)
 
 = link_to 'Edit', edit_blood_sugar_reading_path(@blood_sugar_reading)
 '|

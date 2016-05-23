@@ -21,3 +21,7 @@ module LoCarbAssistent
     # config.i18n.default_locale = :de
   end
 end
+
+Rails.application.configure do
+  config.action_view.default_form_builder = "FormBuilderWithLocalTimeSupport"
+end
