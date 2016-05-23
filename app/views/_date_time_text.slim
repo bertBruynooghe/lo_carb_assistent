@@ -1,21 +1,13 @@
 javascript:
   date = new Date('#{date_time.try(:iso8601)}');
-  document.write(date.getHours()+':'+date.getMinutes());
+  document.write(date.getHours() + ':' + date.getMinutes());
   now = new Date();
   if (now.getDate() != date.getDate() || now.getMonth() != date.getMonth() || now.getFullYear() != date.getFullYear()){
-    days = ["#{I18n.t('date.abbr_day_names')[0]}",
-    "#{I18n.t('date.abbr_day_names')[1]}",
-    "#{I18n.t('date.abbr_day_names')[2]}",
-    "#{I18n.t('date.abbr_day_names')[3]}",
-    "#{I18n.t('date.abbr_day_names')[4]}",
-    "#{I18n.t('date.abbr_day_names')[5]}",
-    "#{I18n.t('date.abbr_day_names')[6]}",
-    ];
-    document.write(' ' + days[date.getDay()]);
-    if (now.getMonth() != date.getMonth() || now.getFullYear() != date.getFullYear()) {
-      document.write(', ' + date.getDate() + '/' + (date.getMonth()+1));
-    }
-    if (now.getFullYear() != date.getFullYear()) {
-      document.write('/' + date.getFullYear() );
-    }
+    document.write(' ' + window.abbrDayNames[date.getDay()]);
+  }
+  if (now.getMonth() != date.getMonth() || now.getFullYear() != date.getFullYear()) {
+    document.write(', ' + date.getDate() + '/' + (date.getMonth()+1));
+  }
+  if (now.getFullYear() != date.getFullYear()) {
+    document.write('/' + date.getFullYear() );
   }
