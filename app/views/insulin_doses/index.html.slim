@@ -15,7 +15,7 @@ table
       tr
         td = insulin_dose.insulin_id
         td = insulin_dose.dose
-        td = render_datetime(insulin_dose.application_time)
+        td(data-transform='localDatetime') = insulin_dose.application_time.iso8601
         td = link_to 'Show', insulin_dose
         td = link_to 'Edit', edit_insulin_dose_path(insulin_dose)
         td = link_to 'Destroy', insulin_dose, data: {:confirm => 'Are you sure?'}, :method => :delete

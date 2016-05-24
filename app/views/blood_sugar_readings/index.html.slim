@@ -13,7 +13,7 @@ table
     - @blood_sugar_readings.each do |blood_sugar_reading|
       tr
         td = blood_sugar_reading.value
-        td = render_datetime(blood_sugar_reading.read_time)
+        td[data-transform='localDatetime'] = blood_sugar_reading.read_time.iso8601
         td = link_to 'Show', blood_sugar_reading
         td = link_to 'Edit', edit_blood_sugar_reading_path(blood_sugar_reading)
         td = link_to 'Destroy', blood_sugar_reading, data: {:confirm => 'Are you sure?'}, :method => :delete

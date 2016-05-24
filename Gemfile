@@ -21,6 +21,7 @@ gem 'rails-i18n'
 gem 'ransack'
 gem 'quiet_assets', group: :development
 gem 'devise'
+gem 'jquery-turbolinks'
 
 group :development, :test do
   gem 'rake'

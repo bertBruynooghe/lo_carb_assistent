@@ -2,7 +2,7 @@ p#notice = notice
 
 p
   | Created&nbsp;
-  strong = render_datetime(@meal.consumption_time)
+  strong(data-transform='localDatetime') = @meal.consumption_time.iso8601
 
 ul
   li

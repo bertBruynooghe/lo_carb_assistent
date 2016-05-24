@@ -31,7 +31,6 @@
             = meal.calories
             | &nbsp;kCal
           td
-            = link_to render_datetime(meal.consumption_time), meal
-
+            = link_to meal.consumption_time.iso8601, meal, data: {transform: :localDatetime}
 
 br
