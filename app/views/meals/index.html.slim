@@ -1,16 +1,16 @@
-= button_to 'New Meal', new_meal_path, method: :get
+= button_to t('.new'), new_meal_path, method: :get
 
 - if @meals.empty?
-    | No meal yet
+    | = t('.empty')
 - else
   table
     thead
       tr
-        th Carbs
-        th Proteins
-        th Fat
-        th Calories
-        th Consumption time
+        th = Meal.human_attribute_name(:carbs)
+        th = Meal.human_attribute_name(:proteins)
+        th = Meal.human_attribute_name(:fat)
+        th = Meal.human_attribute_name(:calories)
+        th = Meal.human_attribute_name(:consumption_time)
         th
         th
     tbody

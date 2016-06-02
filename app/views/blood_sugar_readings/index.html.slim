@@ -1,10 +1,10 @@
-= button_to 'New Blood sugar reading', new_blood_sugar_reading_path, method: :get
+= button_to t('.new'), new_blood_sugar_reading_path, method: :get
 
 table
   thead
     tr
-      th Value
-      th Read time
+      th = BloodSugarReading.human_attribute_name(:value)
+      th = BloodSugarReading.human_attribute_name(:read_time)
       th
       th
       th
@@ -14,8 +14,7 @@ table
       tr
         td = blood_sugar_reading.value
         td[data-transform='localDatetime'] = blood_sugar_reading.read_time.iso8601
-        td = link_to 'Show', blood_sugar_reading
-        td = link_to 'Edit', edit_blood_sugar_reading_path(blood_sugar_reading)
-        td = link_to 'Destroy', blood_sugar_reading, data: {:confirm => 'Are you sure?'}, :method => :delete
-
+        td = link_to t(:show), blood_sugar_reading
+        td = link_to t(:edit), edit_blood_sugar_reading_path(blood_sugar_reading)
+        td = link_to t(:destroy), blood_sugar_reading, data: {confirm: t(:confirm)}, method: :delete
 br

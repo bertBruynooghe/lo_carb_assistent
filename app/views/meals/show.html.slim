@@ -1,33 +1,35 @@
 p#notice = notice
 
-p
-  | Created&nbsp;
-  strong(data-transform='localDatetime') = @meal.consumption_time.iso8601
+dl
+  dt = Meal.human_attribute_name(:consumption_time)
+  dd
+    strong(data-transform='localDatetime') = @meal.consumption_time.iso8601
 
 ul
   li
     = @meal.carbs
     | g&nbsp;
-    strong Carbs
+    strong = Meal.human_attribute_name(:carbs)
   li
     = @meal.proteins
     | g&nbsp;
-    strong Proteins
+    strong = Meal.human_attribute_name(:proteins)
   li
     = @meal.fat
     | g&nbsp;
-    strong Fat
+    strong = Meal.human_attribute_name(:fat)
   li
     = @meal.calories
-    | &nbsp;kCal
+    | &nbsp;
+    strong = Meal.human_attribute_name(:calories)
   li
     = @meal.glucoseEquivalent
     | g&nbsp;
-    strong Glucose equivalent
+    strong = Meal.human_attribute_name(:glucose_equivalent)
 
 
 = render 'ingredients/index'
 '&nbsp|
-= link_to 'Destroy', @meal, data: {:confirm => 'Are you sure?'}, :method => :delete
+= link_to t(:destroy), @meal, data: {confirm: t(:confirm)}, method: :delete
 '&nbsp|
-= link_to 'Back', meals_path
+= link_to t(:back), meals_path

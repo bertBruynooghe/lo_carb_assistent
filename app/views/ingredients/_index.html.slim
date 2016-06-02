@@ -6,9 +6,9 @@
         | g &nbsp;
         strong = ingredient.name
         | &nbsp;
-        = link_to 'Edit', edit_meal_ingredient_path(@meal, ingredient)
+        = link_to t(:edit), edit_meal_ingredient_path(@meal, ingredient)
         | &nbsp;
-        = link_to 'Destroy', [@meal, ingredient], data: {:confirm => 'Are you sure?'}, :method => :delete
+        = link_to t(:destroy), [@meal, ingredient], data: {confirm: t(:confirmation)}, method: :delete
 br
 
 = link_to 'New Dosed nutrient', new_meal_ingredient_path(@meal)

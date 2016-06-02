@@ -1,7 +1,7 @@
 = form_for [@meal, @ingredient] do |f|
   - if @ingredient.errors.any?
     #error_explanation
-      h2 = "#{pluralize(@ingredient.errors.count, "error")} prohibited this ingredient from being saved:"
+      h2 = I18n.t 'errors.save_failed', errors: "#{pluralize(@ingredient.errors.count, I18n.t(:error))}", model_name: Ingredient.model_name
       ul
         - @ingredient.errors.full_messages.each do |message|
           li = message
@@ -32,10 +32,10 @@
       = f.number_field :calories, tabindex: 15, step: 0.1
       |kCal / 100g
     .field
-      input(type="checkbox" name="ingredient[save]" value="1") Add to Favorites
+      input(type="checkbox" name="ingredient[save]" value="1") = t('.add_to_favorites')
 
   .actions
-    button(id="save") Save
+    button(id="save") = t(:save)
 
 coffee:
   $form = ->

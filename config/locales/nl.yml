@@ -19,5 +19,48 @@
 # To learn more, please read the Rails Internationalization guide
 # available at http://guides.rubyonrails.org/i18n.html.
 
-en:
-  hello: "Hello world"
+nl:
+  activerecord:
+    attributes:
+      blood_sugar_reading:
+        read_time: Opnametijd
+        value: Waarde
+      ingredient:
+        calories: kCal
+        carbs: Koolhydraten
+        fat: Vetten
+        name: Naam
+        proteins: Eiwitten
+        quantity: Hoeveelheid
+      meal:
+        calories: kCal
+        carbs: Koolhydraten
+        consumption_time: Etenstijd
+        glucose_equivalent: Koolhydraatequivalent
+        fat: Vetten
+        name: Naam
+        proteins: Eiwitten
+    models:
+      blood_sugar_reading: Bloedsuikerwaarde
+  back: Terug
+  blood_sugar_readings:
+    index:
+      new: Nieuwe bloeddsuikerwaarde
+  confirm: Bent u zeker?
+  destroy: Verwijderen
+  edit: Aanpassen
+  error: fout
+  errors:
+    save_failed: '%{errors} zorgden ervoor dat deze %{model_name} niet opgeslagen werd:'
+  ingredients:
+    form:
+      add_to_favorites: Toevoegen aan favorieten
+    index:
+      new: Nieuw ingredient
+  new: Nieuwe
+  meals:
+    index:
+      new: Nieuwe maaltijd
+      empty: Nog geen maaltijden
+  save: Opslaan
+  show: Tonen
