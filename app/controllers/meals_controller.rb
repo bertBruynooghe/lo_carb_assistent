@@ -10,22 +10,8 @@ class MealsController < ApplicationController
   # GET /meals/1
   # GET /meals/1.json
   def show
+    # TODO: should not create an instance variable for ingredients
     @ingredients = @meal.ingredients
-  end
-
-  # GET /meals/new
-  def new
-    #TODO: explicit initialization is no longer needed if we have separate edit screen
-    @meal = Meal.new(consumption_time: DateTime.now)
-    respond_to do |format|
-      if @meal.save
-        format.html { redirect_to @meal, notice: 'Meal was successfully created.' }
-        format.json { render :show, status: :created, location: @meal }
-      else
-        format.html { render :new }
-        format.json { render json: @meal.errors, status: :unprocessable_entity }
-      end
-    end
   end
 
   # GET /meals/1/edit
@@ -39,7 +25,7 @@ class MealsController < ApplicationController
 
     respond_to do |format|
       if @meal.save
-        format.html { redirect_to @meal, notice: 'Meal was successfully created.' }
+        format.html { redirect_to edit_meal_path(@meal), notice: 'Meal was successfully created.' }
         format.json { render :show, status: :created, location: @meal }
       else
         format.html { render :new }
@@ -80,6 +66,6 @@ class MealsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def meal_params
-      params.permit(:meal).permit(:creation_time)
+      params.require(:meal).permit(:consumption_time)
     end
 end

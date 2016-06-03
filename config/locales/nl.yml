@@ -42,6 +42,7 @@ nl:
         proteins: Eiwitten
     models:
       blood_sugar_reading: Bloedsuikerwaarde
+  add: Toevoegen
   back: Terug
   blood_sugar_readings:
     index:

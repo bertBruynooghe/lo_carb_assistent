@@ -5,6 +5,16 @@ dl
   dd
     strong(data-transform='localDatetime') = @meal.consumption_time.iso8601
 
+    - unless @meal.ingredients.empty?
+      ul
+        - @meal.ingredients.each do |ingredient|
+          li
+            = ingredient.quantity
+            | g &nbsp;
+            strong = ingredient.name
+            | &nbsp;
+    br
+
 ul
   li
     = @meal.carbs
@@ -27,8 +37,7 @@ ul
     | g&nbsp;
     strong = Meal.human_attribute_name(:glucose_equivalent)
 
-
-= render 'ingredients/index'
+= link_to t(:edit), edit_meal_path(@meal)
 '&nbsp|
 = link_to t(:destroy), @meal, data: {confirm: t(:confirm)}, method: :delete
 '&nbsp|

@@ -16,9 +16,9 @@ RSpec.feature "IngredientCreations", type: :feature do
       expect(page).to have_content I18n.t('.devise.sessions.signed_in')
 
       click_link_or_button I18n.t('meals.index.new')
-      expect(page).to have_content 'New Dosed nutrient'
+      expect(page).to have_content 'Nieuw ingredient'
       meal_url = current_url
-      click_link_or_button 'New Dosed nutrient'
+      click_link_or_button 'Nieuw ingredient'
 
       fill_in Ingredient.human_attribute_name(:quantity), with: '100'
       fill_in Ingredient.human_attribute_name(:name), with: 'some nutrient'
@@ -26,7 +26,7 @@ RSpec.feature "IngredientCreations", type: :feature do
       fill_in Ingredient.human_attribute_name(:proteins), with: '3'
       fill_in Ingredient.human_attribute_name(:fat), with: '4'
       fill_in Ingredient.human_attribute_name(:calories), with: '7'
-      click_link_or_button I18n.t(:save)
+      click_link_or_button I18n.t(:add)
       expect(current_url).to eq(meal_url)
       expect(page).to have_content 'some nutrient'
     end

@@ -1,8 +1,20 @@
-h1 Editing meal
-
 == render 'form'
 
-= link_to 'Show', @meal
-'|
-= link_to 'Back', meals_path
+- unless @meal.ingredients.empty?
+  ul
+    - @meal.ingredients.each do |ingredient|
+      li
+        = ingredient.quantity
+        | g &nbsp;
+        strong = ingredient.name
+        | &nbsp;
+        = link_to t(:edit), edit_meal_ingredient_path(@meal, ingredient)
+        | &nbsp;
+        = link_to t(:destroy), [@meal, ingredient], data: {confirm: t(:confirm)}, method: :delete
+br
 
+= link_to 'Nieuw ingredient', new_meal_ingredient_path(@meal)
+'&nbsp|
+= link_to t(:show), @meal
+'|
+= link_to t(:back), meals_path

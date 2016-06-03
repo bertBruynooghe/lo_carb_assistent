@@ -35,7 +35,7 @@
       input(type="checkbox" name="ingredient[save]" value="1") = t('.add_to_favorites')
 
   .actions
-    button(id="save") = t(:save)
+    button(id="save") = @ingredient.persisted? ? t(:save) : t(:add)
 
 coffee:
   $form = ->

@@ -47,6 +47,7 @@ GEM
     bootstrap-typeahead-rails (0.10.5.1)
       railties (>= 3.0)
     builder (3.2.2)
+    byebug (8.2.5)
     capybara (2.7.1)
       addressable
       mime-types (>= 1.16)
@@ -232,6 +233,7 @@ PLATFORMS
 DEPENDENCIES
   bootstrap-sass
   bootstrap-typeahead-rails
+  byebug
   capybara
   coffee-rails
   coveralls
