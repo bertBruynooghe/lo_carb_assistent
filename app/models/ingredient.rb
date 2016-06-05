@@ -1,5 +1,6 @@
 class Ingredient < ActiveRecord::Base
   belongs_to :meal
+  validates_presence_of :meal, inverse_of: :ingredients
 
   def assign_attributes (new_attributes)
     %w(quantity carbs proteins fat calories).each do |key|
