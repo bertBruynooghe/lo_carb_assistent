@@ -7,7 +7,7 @@ class Ingredient < ActiveRecord::Base
       new_attributes[key] = 0 if new_attributes[key].blank?
     end
 
-    if new_attributes.delete(:save)
+    if new_attributes.delete(:save_as_favorite)
       favorite_nutrient = Nutrient.find_or_initialize_by(name: new_attributes[:name])
       new_attributes.each do |k,v|
         favorite_nutrient.send("#{k}=", v) unless %w(meal_id quantity).include?(k)
