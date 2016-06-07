@@ -14,7 +14,8 @@ class IngredientsController < ApplicationController
 
   # GET /ingredients/new
   def new
-    @meal = Meal.find(params[:meal_id])
+    # TODO: pass permitted params
+    @meal = Meal.new(params.require(:meal).permit!)
     @ingredient = Ingredient.new
   end
 

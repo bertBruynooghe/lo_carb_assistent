@@ -7,6 +7,10 @@ class MealsController < ApplicationController
     @meals = Meal.all.includes(:ingredients)
   end
 
+  def new
+    @meal = Meal.new(params[:meal] ? meal_params : {})
+  end
+
   # GET /meals/1
   # GET /meals/1.json
   def show
@@ -24,12 +28,16 @@ class MealsController < ApplicationController
     @meal = Meal.new(meal_params)
 
     respond_to do |format|
-      if @meal.save
-        format.html { redirect_to edit_meal_path(@meal), notice: 'Meal was successfully created.' }
-        format.json { render :show, status: :created, location: @meal }
+      if params[:add_ingredient]
+        format.html { redirect_to new_ingredient_path(meal: meal_params) }
       else
-        format.html { render :new }
-        format.json { render json: @meal.errors, status: :unprocessable_entity }
+        if @meal.save
+          format.html { redirect_to @meal, notice: 'Meal was successfully created.' }
+          format.json { render :show, status: :created, location: @meal }
+        else
+          format.html { render :new }
+          format.json { render json: @meal.errors, status: :unprocessable_entity }
+        end
       end
     end
   end
@@ -66,6 +74,7 @@ class MealsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def meal_params
-      params.require(:meal).permit(:consumption_time)
+      params.require(:meal).permit(:consumption_time,
+                                  ingredients_attributes: [:quantity, :name, :carbs, :proteins, :fat, :calories])
     end
 end

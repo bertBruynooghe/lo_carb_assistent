@@ -57,11 +57,13 @@ nl:
     form:
       add_to_favorites: Toevoegen aan favorieten
     index:
-      new: Nieuw ingredient
+      new: Nieuw ingrediënt
   new: Nieuwe
   meals:
     index:
       new: Nieuwe maaltijd
       empty: Nog geen maaltijden
+    form:
+      add_ingredient: Nieuw ingrediënt  
   save: Opslaan
   show: Tonen

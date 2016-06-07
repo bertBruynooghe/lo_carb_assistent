@@ -1,4 +1,4 @@
-= form_for @meal do |f|
+= form_for @meal do |meal_fields|
   - if @meal.errors.any?
     #error_explanation
       h2 = "#{pluralize(@meal.errors.count, "error")} prohibited this meal from being saved:"
@@ -6,7 +6,19 @@
         - @meal.errors.full_messages.each do |message|
           li = message
   .field
-    = f.label :consumption_time
-    = f.datetime_local_select :consumption_time
+    = meal_fields.label :consumption_time
+    = meal_fields.datetime_local_select :consumption_time
+    = meal_fields.fields_for :ingredients do |ingredient_fields|
+      / TODO: make sure ids are maintained
+      - Ingredient.attribute_names.each do |attr_name|
+        = ingredient_fields.hidden_field attr_name
 
-  .actions = f.submit t(:save)
+  ul
+    - @meal.ingredients.each do |ingredient|
+      li
+        = ingredient.quantity
+        | &nbsp;
+        = ingredient.name
+
+  .actions = meal_fields.submit t('.add_ingredient'), name: :add_ingredient
+  .actions = meal_fields.submit t(:save)

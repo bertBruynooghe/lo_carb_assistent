@@ -1,7 +1,7 @@
-= button_to t('.new'), meals_path(meal: { consumption_time: DateTime.now }), method: :post
+= button_to t('.new'), new_meal_path(meal: { consumption_time: DateTime.now }), method: :get
 
 - if @meals.empty?
-    | = t('.empty')
+    = t('.empty')
 - else
   table
     thead

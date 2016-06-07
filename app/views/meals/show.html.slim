@@ -1,5 +1,3 @@
-p#notice = notice
-
 dl
   dt = Meal.human_attribute_name(:consumption_time)
   dd
@@ -37,8 +35,8 @@ ul
     | g&nbsp;
     strong = Meal.human_attribute_name(:glucose_equivalent)
 
-= link_to t(:edit), edit_meal_path(@meal)
-'&nbsp|
+/ = link_to t(:edit), edit_meal_path(@meal)
+/ '&nbsp|
 = link_to t(:destroy), @meal, data: {confirm: t(:confirm)}, method: :delete
 '&nbsp|
 = link_to t(:back), meals_path

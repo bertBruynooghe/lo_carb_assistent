@@ -1,76 +1,39 @@
-= form_for [@meal, @ingredient] do |f|
-  - if @ingredient.errors.any?
-    #error_explanation
-      h2 = I18n.t 'errors.save_failed', errors: "#{pluralize(@ingredient.errors.count, I18n.t(:error))}", model_name: Ingredient.model_name
-      ul
-        - @ingredient.errors.full_messages.each do |message|
-          li = message
-  .field
-    = f.label :quantity
-    = f.number_field :quantity, tabindex: 10, step: 0.1
-    |g
-  fieldset
-    / if name matches existing nutrient, auto-fill next fields
-    / otherwise display 'lookup' button
+= form_for @meal, method: :get, url: new_meal_path do |meal_fields|
+  /- if @ingredient.errors.any?
+  /  #error_explanation
+  /    h2 = I18n.t 'errors.save_failed', errors: "#{pluralize(@ingredient.errors.count, I18n.t(:error))}", model_name: Ingredient.model_name
+  /    ul
+  /      - @ingredient.errors.full_messages.each do |message|
+  /        li = message
+  = meal_fields.hidden_field :consumption_time
+  = meal_fields.fields_for :ingredients do |ingredient_fields|
+    - Ingredient.attribute_names.each do |attribute|
+      = ingredient_fields.hidden_field attribute
+  = fields_for "meal[ingredients_attributes][#{@meal.ingredients.length}]", Ingredient.new do |ingredient_fields|
     .field
-      = f.label :name
-      = f.text_field :name, tabindex: 11
+      = ingredient_fields.label :quantity
+      = ingredient_fields.number_field :quantity, tabindex: 10, step: 0.1
     .field
-      = f.label :carbs
-      = f.number_field :carbs, tabindex: 12, step: 0.1
+      = ingredient_fields.label :name
+      = ingredient_fields.text_field :name, tabindex: 11
+    .field
+      = ingredient_fields.label :carbs
+      = ingredient_fields.number_field :carbs, tabindex: 12, step: 0.1
       | g / 100g
     .field
-      = f.label :proteins
-      = f.number_field :proteins, tabindex: 13, step: 0.1
+      = ingredient_fields.label :proteins
+      = ingredient_fields.number_field :proteins, tabindex: 13, step: 0.1
       | g / 100g
     .field
-      = f.label :fat
-      = f.number_field :fat, tabindex: 14, step: 0.1
+      = ingredient_fields.label :fat
+      = ingredient_fields.number_field :fat, tabindex: 14, step: 0.1
       |g / 100g
     .field
-      = f.label :calories
-      = f.number_field :calories, tabindex: 15, step: 0.1
+      = ingredient_fields.label :calories
+      = ingredient_fields.number_field :calories, tabindex: 15, step: 0.1
       |kCal / 100g
     .field
       input(type="checkbox" name="ingredient[save_as_favorite]" value="1") = t('.add_to_favorites')
 
   .actions
     button(id="save") = @ingredient.persisted? ? t(:save) : t(:add)
-
-coffee:
-  $form = ->
-    $("form[class$='ingredient']")
-  findInput = (attr_name) ->
-    $form().find("input[name='ingredient\[#{attr_name}\]']")
-  getNumberValue = (attr_name) ->
-    $input = findInput(attr_name)
-    value = $input.get(0).valueAsNumber
-    value = parseFloat($input.val().replace(',', '.')) if isNaN(value)
-    value = 0.0 if isNaN(value)
-    console.log "#{attr_name} #{value}"
-    value
-  $(document).on 'ready page:load', ->
-    $("#save").on 'click', ->
-      action = $form().attr('action')
-      authenticity_token = $form().find("input[name='authenticity_token']").val()
-      _method = $form().find("input[name='authenticity_token']")
-      method = $form.attr('method')
-      method = _method.val() if _method
-      data =
-        name: findInput("name").val()
-        carbs: getNumberValue("carbs")
-        proteins: getNumberValue("proteins")
-        fat: getNumberValue("fat")
-        calories: getNumberValue("calories")
-        quantity: getNumberValue("quantity")
-        authenticity_token: authenticity_token
-       data['save_as_favorite'] = true if findInput('save_as_favorite').is(":checked")
-      $.ajax
-        type: method
-        url: action
-        data: JSON.stringify({ingredient: data})
-        contentType: 'application/json; charset=UTF-8'
-        success: ->
-          parts = window.location.href.split('/')[0..-3]
-          window.location=parts.join('/')
-      false
