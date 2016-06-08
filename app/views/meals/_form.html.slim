@@ -13,12 +13,13 @@
       - Ingredient.attribute_names.each do |attr_name|
         = ingredient_fields.hidden_field attr_name
 
-  ul
-    - @meal.ingredients.each do |ingredient|
-      li
-        = ingredient.quantity
-        | &nbsp;
-        = ingredient.name
+  table
+    = meal_fields.fields_for :ingredients do |ingredient_fields|
+      tr
+        td
+          = ingredient_fields.object.quantity
+          | &nbsp;
+          = ingredient_fields.object.name
 
   .actions = meal_fields.submit t('.add_ingredient'), name: :add_ingredient
   .actions = meal_fields.submit t(:save)
