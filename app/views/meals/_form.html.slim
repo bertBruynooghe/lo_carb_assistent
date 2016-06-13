@@ -5,8 +5,8 @@
       ul
         - @meal.errors.full_messages.each do |message|
           li = message
-  .field
+  fieldset
     = f.label :consumption_time
     = f.datetime_local_select :consumption_time
 
-  .actions = f.submit t(:save)
+    .actions = f.submit t(:save)
