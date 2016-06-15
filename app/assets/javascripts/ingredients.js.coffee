@@ -3,18 +3,18 @@
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
 $(document).on 'ready page:load', ->
-  $('input[type="number"]').keydown (event) ->
-    if event.which == 188 or event.which == 190
-      event.preventDefault()
-      delimiter = if event.which == 188 then ',' else '.'
-      currValue = @value
-      if currValue == ''
-        currValue = '0'
-      newValue = currValue + delimiter + '1'
-      @value = newValue
-      if @value != newValue
-        @value = currValue + (if delimiter == ',' then '.' else ',') + '1'
-      @setSelectionRange currValue.length + 1, currValue.length + 2
+#  $('input[type="number"]').keydown (event) ->
+#    if event.which == 188 or event.which == 190
+#      event.preventDefault()
+#      delimiter = if event.which == 188 then ',' else '.'
+#      currValue = @value
+#      if currValue == ''
+#        currValue = '0'
+#      newValue = currValue + delimiter + '1'
+#      @value = newValue
+#      if @value != newValue
+#        @value = currValue + (if delimiter == ',' then '.' else ',') + '1'
+#      @setSelectionRange currValue.length + 1, currValue.length + 2
 
   window.last_ingedients = []
   $('input#ingredient_quantity').focus().select()
