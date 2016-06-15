@@ -53,7 +53,7 @@ ActiveRecord::Schema.define(version: 20160524082121) do
     t.datetime "creation_time"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.datetime "consumption_time", null: false
+    t.datetime "consumption_time"
   end
 
   create_table "nutrients", force: :cascade do |t|
