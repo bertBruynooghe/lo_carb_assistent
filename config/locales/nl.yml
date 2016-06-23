@@ -32,6 +32,10 @@ nl:
         name: Naam
         proteins: Eiwitten
         quantity: Hoeveelheid
+      insulin:
+        dose: &dosis Dosis
+        insulin: &insuline Insuline
+        application_time: &toegediend Toegediend
       meal:
         calories: kCal
         carbs: Koolhydraten
@@ -42,6 +46,7 @@ nl:
         proteins: Eiwitten
     models:
       blood_sugar_reading: Bloedsuikerwaarde
+      insulin_dose: Insulinedosis
   add: Toevoegen
   back: Terug
   blood_sugar_readings:
@@ -53,6 +58,12 @@ nl:
   error: fout
   errors:
     save_failed: '%{errors} zorgden ervoor dat deze %{model_name} niet opgeslagen werd:'
+  helpers:
+    label:
+      insulin_dose:
+        application_time: *toegediend
+        dose_integral: *dosis
+        insulin_id: *insuline
   ingredients:
     form:
       add_to_favorites: Toevoegen aan favorieten
