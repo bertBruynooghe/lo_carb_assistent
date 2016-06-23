@@ -1,6 +1,11 @@
 class InsulinDose < ActiveRecord::Base
+  include SplitFloatConcern
   belongs_to :insulin
+
+  #TODO: do this in the controller
   default_scope { order(application_time: :desc) }
+
+  split_float :dose
 
   def dose_fractional
     dose_parts.last.to_i
@@ -16,11 +21,6 @@ class InsulinDose < ActiveRecord::Base
 
   def dose_integral=(value)
     self.dose = "#{value}.#{dose_parts.last}".to_f
-  end
-
-  def save
-    byebug
-    super
   end
 
   private
