@@ -10,8 +10,10 @@
     = f.label :insulin_id
     = f.number_field :insulin_id
   .field
-    = f.label :dose
-    = f.number_field :dose
+    = f.label :dose_integral
+    = f.number_field :dose_integral
+    = f.label :dose_fractional, t(:separator, scope: %i(number format))
+    = f.number_field :dose_fractional
   .field
     = f.label :application_time
     = f.datetime_local_select :application_time
