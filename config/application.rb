@@ -23,5 +23,5 @@ module LoCarbAssistent
 end
 
 Rails.application.configure do
-  config.action_view.default_form_builder = "FormBuilderWithLocalTimeSupport"
+  config.action_view.default_form_builder = "FormBuilder"
 end
