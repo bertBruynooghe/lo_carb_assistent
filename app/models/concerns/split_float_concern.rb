@@ -1,6 +1,8 @@
 module SplitFloatConcern
   extend ActiveSupport::Concern
 
+  #TODO: find out if we cannot use http://api.rubyonrails.org/classes/ActiveRecord/Aggregations/ClassMethods.html instead
+
   class_methods do
     def split_float(*methods)
       methods.each {|method| define_partial_accessors(method)}
