@@ -30,7 +30,7 @@ class IngredientsController < ApplicationController
 
     respond_to do |format|
       if @ingredient.save
-        format.html { redirect_to edit_meal_path(@ingredient.meal), notice: 'Ingredient was successfully added.' }
+        format.html { redirect_to @ingredient.meal, notice: 'Ingredient was successfully added.' }
         format.json { render :show, status: :created, location: @ingredient }
       else
         format.html { render :new }
