@@ -14,10 +14,9 @@
     tbody
       - @meals.each do |meal|
         tr
-          td = link_to(t(:show),meal_path(meal))
+          td = button_to t(:destroy), meal, method: :delete
           td
-            = meal.carbs
-            |g
+            = link_to "#{meal.carbs} g", meal
           / td
           /   = meal.proteins
           /   |g
@@ -27,6 +26,7 @@
           / td
           /   = meal.calories
           /   | &nbsp;kCal
-          td(data-transform='localDatetime') = meal.consumption_time.iso8601
+          td
+            = link_to meal.consumption_time.iso8601, meal, data: {transform: 'localDatetime'}
 
 br

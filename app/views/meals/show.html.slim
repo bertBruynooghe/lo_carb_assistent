@@ -1,5 +1,7 @@
 == render 'form'
 
+
+
 - unless @meal.ingredients.empty?
   ul
     - @meal.ingredients.each do |ingredient|
@@ -12,6 +14,8 @@
         | &nbsp;
         = link_to t(:destroy), [@meal, ingredient], data: {confirm: t(:confirm)}, method: :delete
 br
+
+
 
 = link_to 'Nieuw ingredient', new_meal_ingredient_path(@meal)
 '&nbsp|
