@@ -1,4 +1,3 @@
-= button_to t('.new'), meals_path(meal: { consumption_time: DateTime.now }), method: :post
 
 - if @meals.empty?
     = t('.empty')
@@ -6,11 +5,11 @@
   table
     thead
       tr
-        th
+        th = button_to t('.new'), meals_path(meal: { consumption_time: DateTime.now }), method: :post
         th = Meal.human_attribute_name(:carbs)
-        th = Meal.human_attribute_name(:proteins)
-        th = Meal.human_attribute_name(:fat)
-        th = Meal.human_attribute_name(:calories)
+        / th = Meal.human_attribute_name(:proteins)
+        / th = Meal.human_attribute_name(:fat)
+        / th = Meal.human_attribute_name(:calories)
         th = Meal.human_attribute_name(:consumption_time)
     tbody
       - @meals.each do |meal|
@@ -19,15 +18,15 @@
           td
             = meal.carbs
             |g
-          td
-            = meal.proteins
-            |g
-          td
-            = meal.fat
-            | g
-          td
-            = meal.calories
-            | &nbsp;kCal
+          / td
+          /   = meal.proteins
+          /   |g
+          / td
+          /   = meal.fat
+          /   | g
+          / td
+          /   = meal.calories
+          /   | &nbsp;kCal
           td(data-transform='localDatetime') = meal.consumption_time.iso8601
 
 br

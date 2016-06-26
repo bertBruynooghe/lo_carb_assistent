@@ -1,44 +1,20 @@
-p#notice = notice
+== render 'form'
 
-dl
-  dt = Meal.human_attribute_name(:consumption_time)
-  dd
-    strong(data-transform='localDatetime') = @meal.consumption_time.iso8601
+- unless @meal.ingredients.empty?
+  ul
+    - @meal.ingredients.each do |ingredient|
+      li
+        = ingredient.quantity
+        | g &nbsp;
+        strong = ingredient.name
+        | &nbsp;
+        = link_to t(:edit), edit_meal_ingredient_path(@meal, ingredient)
+        | &nbsp;
+        = link_to t(:destroy), [@meal, ingredient], data: {confirm: t(:confirm)}, method: :delete
+br
 
-    - unless @meal.ingredients.empty?
-      ul
-        - @meal.ingredients.each do |ingredient|
-          li
-            = ingredient.quantity
-            | g &nbsp;
-            strong = ingredient.name
-            | &nbsp;
-    br
-
-ul
-  li
-    = @meal.carbs
-    | g&nbsp;
-    strong = Meal.human_attribute_name(:carbs)
-  li
-    = @meal.proteins
-    | g&nbsp;
-    strong = Meal.human_attribute_name(:proteins)
-  li
-    = @meal.fat
-    | g&nbsp;
-    strong = Meal.human_attribute_name(:fat)
-  li
-    = @meal.calories
-    | &nbsp;
-    strong = Meal.human_attribute_name(:calories)
-  li
-    = @meal.glucoseEquivalent
-    | g&nbsp;
-    strong = Meal.human_attribute_name(:glucose_equivalent)
-
-= link_to t(:edit), edit_meal_path(@meal)
+= link_to 'Nieuw ingredient', new_meal_ingredient_path(@meal)
 '&nbsp|
-= link_to t(:destroy), @meal, data: {confirm: t(:confirm)}, method: :delete
-'&nbsp|
+= link_to t(:show), @meal
+'|
 = link_to t(:back), meals_path

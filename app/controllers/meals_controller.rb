@@ -7,15 +7,8 @@ class MealsController < ApplicationController
     @meals = Meal.all.includes(:ingredients)
   end
 
-  # GET /meals/1
-  # GET /meals/1.json
+  # GET /meals
   def show
-    # TODO: should not create an instance variable for ingredients
-    @ingredients = @meal.ingredients
-  end
-
-  # GET /meals/1/edit
-  def edit
   end
 
   # POST /meals
@@ -25,7 +18,7 @@ class MealsController < ApplicationController
 
     respond_to do |format|
       if @meal.save
-        format.html { redirect_to edit_meal_path(@meal), notice: 'Meal was successfully created.' }
+        format.html { redirect_to meal_path(@meal), notice: 'Meal was successfully created.' }
         format.json { render :show, status: :created, location: @meal }
       else
         format.html { render :new }
