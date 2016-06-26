@@ -10,15 +10,11 @@
     = f.label :name
     = f.text_area :name
   .field
-    = f.label :calories
-    = f.text_field :calories
+    = f.split_float_fields :calories
   .field
-    = f.label :carbs
-    = f.text_field :carbs
+    = f.split_float_fields :carbs
   .field
-    = f.label :proteins
-    = f.text_field :proteins
+    = f.split_float_fields :proteins
   .field
-    = f.label :fat
-    = f.text_field :fat
+    = f.split_float_fields :fat
   .actions = f.submit 'Save'

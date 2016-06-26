@@ -19,13 +19,13 @@ module SplitFloatConcern
 
     def define_fractional_part_writer(method)
       define_method("#{method}_fractional=") do |value|
-        self.send("#{method}=", "#{value}.#{fractional_part(method)}".to_f)
+        self.send("#{method}=", "#{integral_part(method)}.#{value}".to_f)
       end
     end
 
     def define_integral_part_writer(method)
       define_method("#{method}_integral=") do |value|
-        self.send("#{method}=", "#{integral_part(method)}.#{value}".to_f)
+        self.send("#{method}=", "#{value}.#{fractional_part(method)}".to_f)
       end
     end
   end

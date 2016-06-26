@@ -16,20 +16,16 @@
       = f.label :name
       = f.text_field :name, tabindex: 11
     .field
-      = f.label :carbs
-      = f.number_field :carbs, tabindex: 12, step: 0.1
+      = f.split_float_fields :carbs
       | g / 100g
     .field
-      = f.label :proteins
-      = f.number_field :proteins, tabindex: 13, step: 0.1
+      = f.split_float_fields :proteins
       | g / 100g
     .field
-      = f.label :fat
-      = f.number_field :fat, tabindex: 14, step: 0.1
+      = f.split_float_fields :fat
       |g / 100g
     .field
-      = f.label :calories
-      = f.number_field :calories, tabindex: 15, step: 0.1
+      = f.split_float_fields :calories
       |kCal / 100g
     .field
       input(type="checkbox" name="ingredient[save_as_favorite]" value="1") = t('.add_to_favorites')

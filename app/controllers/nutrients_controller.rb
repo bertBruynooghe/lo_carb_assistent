@@ -69,6 +69,11 @@ class NutrientsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def nutrient_params
-      params.require(:nutrient).permit(:name, :calories, :carbs, :proteins, :fat)
+      params.require(:nutrient)
+          .permit(:name_integral, :name_fractional,
+                  :calories_integral, :calories_fractional,
+                  :carbs_integral, :carbs_fractional,
+                  :proteins_integral, :proteins_fractional, 
+                  :fat_integral, :fat_fractional)
     end
 end
