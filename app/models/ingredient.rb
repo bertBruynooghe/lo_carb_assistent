@@ -4,6 +4,10 @@ class Ingredient < ActiveRecord::Base
 
   #TODO: this looks like a controller issue rather than a model issue?
   def assign_attributes (new_attributes)
+    %w(carbs proteins fat calories).each do |key|
+      new_attributes[key] = 0 if new_attributes[key].blank?
+    end
+
     if new_attributes.delete(:save_as_favorite)
       favorite_nutrient = Nutrient.find_or_initialize_by(name: new_attributes[:name])
       new_attributes.each do |k,v|
