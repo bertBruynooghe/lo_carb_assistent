@@ -5,6 +5,7 @@ require File.expand_path('../../config/environment', __FILE__)
 require 'rspec/rails'
 require 'capybara/rails'
 Capybara.javascript_driver = :webkit
+require 'capybara-screenshot/rspec'
 
 ActiveRecord::Migration.maintain_test_schema!
 

@@ -35,6 +35,7 @@ end
 group :test do
   gem 'simplecov', require: false
   gem 'coveralls'
+  gem 'capybara-screenshot'
 end
 
 # Use jquery as the JavaScript library

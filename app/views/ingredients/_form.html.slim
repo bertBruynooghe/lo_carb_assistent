@@ -1,4 +1,4 @@
-= form_for [@meal, @ingredient] do |f|
+= form_for @ingredient do |f|
   - if @ingredient.errors.any?
     #error_explanation
       h2 = I18n.t 'errors.save_failed', errors: "#{pluralize(@ingredient.errors.count, I18n.t(:error))}", model_name: Ingredient.model_name
@@ -31,7 +31,7 @@
       input(type="checkbox" name="ingredient[save_as_favorite]" value="1") = t('.add_to_favorites')
 
   .actions
-    button(id="save") = @ingredient.persisted? ? t(:save) : t(:add)
+    button(id="save") = t(:save)
 
 coffee:
   $form = ->

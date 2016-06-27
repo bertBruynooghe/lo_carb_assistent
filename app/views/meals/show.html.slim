@@ -5,12 +5,12 @@
 
 table
   tr
-    th = button_to 'Nieuw', new_meal_ingredient_path(@meal), method: :get
+    th = button_to t('ingredients.index.new'), meal_ingredients_path(@meal, ingredient: { quantity: 0 })
     th Ingrediënten
   - @meal.ingredients.each do |ingredient|
     tr
       td
-        = button_to t(:destroy), [@meal, ingredient], data: {confirm: t(:confirm)}, method: :delete
+        = button_to t(:destroy), ingredient, data: {confirm: t(:confirm)}, method: :delete
       td
-        = link_to "#{ingredient.quantity}g #{ingredient.name}" , edit_meal_ingredient_path(@meal, ingredient)
+        = link_to "#{ingredient.quantity}g #{ingredient.name}" , ingredient
 = button_to t(:back), meals_path, method: :get

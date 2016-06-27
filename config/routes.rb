@@ -5,10 +5,9 @@ Rails.application.routes.draw do
   devise_for :users
   root to: 'meals#index'
 
-  resources :meals, except: %i(new edit) do
-    resources :ingredients, except: :index
+  resources :meals, except: %i(new edit), shallow: true do
+    resources :ingredients, except: %i(index new edit)
   end
-
 
   resources :nutrients
 

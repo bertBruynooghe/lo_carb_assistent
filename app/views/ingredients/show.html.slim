@@ -1,24 +1,3 @@
-p#notice = notice
+== render 'form'
 
-p
-  strong Quantity:
-  = @ingredient.quantity
-p
-  strong Name:
-  = @ingredient.name
-p
-  strong Calories:
-  = @ingredient.calories
-p
-  strong Carbs:
-  = @ingredient.carbs
-p
-  strong Proteins:
-  = @ingredient.proteins
-p
-  strong Fat:
-  = @ingredient.fat
-
-= link_to 'Edit', edit_ingredient_path(@ingredient)
-'|
-= link_to 'Back', meal_path(@ingredient.meal)
+= link_to t(:back), @ingredient.meal
