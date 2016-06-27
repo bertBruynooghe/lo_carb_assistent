@@ -12,6 +12,7 @@
   <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/globalize/0.1.1/cultures/globalize.culture.fr-MC.min.js"></script>
   <%= javascript_tag do %>
     window.abbrDayNames = <%= raw I18n.t('date.abbr_day_names') %>;
+    window.decimalSeparator = '<%= raw I18n.t('number.format.separator') %>';
   <% end %>
   <%= csrf_meta_tags %>
 </head>

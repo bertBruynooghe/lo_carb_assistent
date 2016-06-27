@@ -7,7 +7,7 @@ class FormBuilder < ActionView::Helpers::FormBuilder
   end
 
   def split_float_fields(method)
-    @template.content_tag(:div, class: method) do
+    @template.content_tag(:div, class: method, data: {transform: :splitFloat}) do
       self.label("#{method}_integral", @object.class.human_attribute_name(method))
         .concat(self.number_field("#{method}_integral", value: integral_part(method)))
         .concat(self.label("#{method}_fractional", I18n.t('number.format.separator')))
