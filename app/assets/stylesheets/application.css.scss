@@ -50,3 +50,12 @@ nav {
     }
   }
 }
+
+form {
+  label:first-child { width: 8em; text-align: right; margin-right: 0.5em;}
+  .carbs, .proteins, .fat, .calories {
+    input:nth-child(2) { width: 3em; text-align: right;}
+    input:last-child { width: 3em; margin-right: 0.5em; }
+    display: inline-block;
+  }
+}
