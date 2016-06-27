@@ -71,10 +71,10 @@ class IngredientsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def ingredient_params
-      floats = %i(calories carbs proteins fat)
+      float_fields = %i(calories carbs proteins fat)
 
       params.require(:ingredient)
-        .join_split_floats(*floats)
-        .permit(:quantity, :name, :save_as_favorite, *floats)
+        .join_split_floats(*float_fields)
+        .permit(:quantity, :name, :save_as_favorite, *float_fields)
     end
 end

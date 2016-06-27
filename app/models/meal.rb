@@ -2,8 +2,6 @@ class Meal < ActiveRecord::Base
   has_many :ingredients, inverse_of: :meal, dependent: :destroy
   accepts_nested_attributes_for :ingredients, allow_destroy: true
 
-  default_scope { order(consumption_time: :desc) }
-
   def calories
     sum(:calories)
   end
