@@ -8,8 +8,22 @@ class FormBuilder < ActionView::Helpers::FormBuilder
 
   def split_float_fields(method)
     self.label("#{method}_integral", @object.class.human_attribute_name(method))
-      .concat(self.number_field("#{method}_integral"))
+      .concat(self.number_field("#{method}_integral", value: integral_part(method)))
       .concat(self.label("#{method}_fractional", I18n.t('number.format.separator')))
-      .concat(self.number_field("#{method}_fractional"))
+      .concat(self.number_field("#{method}_fractional", value: fractional_part(method)))
+  end
+
+  private
+
+  def integral_part(method)
+    float_parts(method).first.to_i
+  end
+
+  def fractional_part(method)
+    float_parts(method).last.to_i
+  end
+
+  def float_parts(method)
+    @object.send(method).to_f.to_s.split('.')
   end
 end

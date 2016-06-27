@@ -69,6 +69,8 @@ class InsulinDosesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def insulin_dose_params
-      params.require(:insulin_dose).permit(:insulin_id, :dose_integral, :dose_fractional, :application_time)
+      params.require(:insulin_dose)
+        .join_split_floats(:dose)
+        .permit(:insulin_id, :dose, :application_time)
     end
 end
