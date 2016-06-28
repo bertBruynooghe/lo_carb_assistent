@@ -3,5 +3,6 @@ class Nutrient < ActiveRecord::Base
     %w(carbs proteins fat calories).each do |key|
       new_attributes[key] = 0 if new_attributes[key].blank?
     end
+    super
   end
 end
