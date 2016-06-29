@@ -3,7 +3,8 @@ require 'rails_helper'
 RSpec.describe "blood_sugar_readings/new", type: :view do
   before(:each) do
     assign(:blood_sugar_reading, BloodSugarReading.new(
-      :value => 1
+      value: 1,
+      read_time: DateTime.now
     ))
   end
 
