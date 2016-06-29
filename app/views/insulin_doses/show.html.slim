@@ -8,7 +8,7 @@ p
   = @insulin_dose.dose
 p
   strong Application time:
-  span(data-transform='localDatetime') = @insulin_dose.application_time.iso8601
+  span(data-transform='dateTimeLocal') = @insulin_dose.application_time.iso8601
 
 = link_to 'Edit', edit_insulin_dose_path(@insulin_dose)
 '|

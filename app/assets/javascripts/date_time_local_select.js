@@ -28,7 +28,7 @@ $(document).on('ready page:load', function(){
     });
   }
 
-  $('[data-transform=dateTimeLocalSelects]').each(function(_, el){
+  $('[data-transform=dateTimeLocalSelect]').each(function(_, el){
     id = $(el).find('select').attr('id').split('_').slice(0, -1).join('_');
     timeSelectInLocalTimezone('#'+id);
     $(el).find('.timeZone').remove();
