@@ -14,7 +14,7 @@ class InsulinDosesController < ApplicationController
 
   # GET /insulin_doses/new
   def new
-    @insulin_dose = InsulinDose.new
+    @insulin_dose = InsulinDose.new(application_time: DateTime.now)
   end
 
   # GET /insulin_doses/1/edit

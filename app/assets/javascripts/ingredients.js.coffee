@@ -4,6 +4,8 @@
 
 $(document).on 'ready page:load', ->
   window.last_ingedients = []
+  # does not seem to work on Windows phone; keyboard does not open on focus,
+  # and select is lost when clicking on the field
   $('input#ingredient_quantity').focus().select()
   findMatches = (q, cb) ->
     success = (nutrients) ->
