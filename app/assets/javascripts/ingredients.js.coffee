@@ -30,11 +30,22 @@ $(document).on 'ready page:load', ->
   $('input#ingredient_name').on 'blur', ->
     stored_nutrient = nutrient for nutrient in window.last_ingedients when nutrient['name'] == $(this).val()
     if stored_nutrient
-      unless $('input#ingredient_carbs').val() || $('input#ingredient_proteins').val() || $('input#ingredient_fat').val() || $('input#ingredient_calories').val()
-        $('input#ingredient_carbs').val(stored_nutrient['carbs'])
-        $('input#ingredient_proteins').val(stored_nutrient['proteins'])
-        $('input#ingredient_fat').val(stored_nutrient['fat'])
-        $('input#ingredient_calories').val(stored_nutrient['calories'])
+      unless parseInt($('input#ingredient_carbs_integral').val()) ||
+             parseInt($('input#ingredient_proteins_integral').val()) ||
+             parseInt($('input#ingredient_fat_integral').val()) ||
+             parseInt($('input#ingredient_calories_integral').val()) ||
+             parseInt($('input#ingredient_carbs_fractional').val()) ||
+             parseInt($('input#ingredient_proteins_fractional').val()) ||
+             parseInt($('input#ingredient_fat_fractional').val()) ||
+             parseInt($('input#ingredient_calories_fractional').val())
+        $('input#ingredient_carbs_integral').val(stored_nutrient['carbs'].split('.')[0])
+        $('input#ingredient_proteins_integral').val(stored_nutrient['proteins'].split('.')[0])
+        $('input#ingredient_fat_integral').val(stored_nutrient['fat'].split('.')[0])
+        $('input#ingredient_calories_integral').val(stored_nutrient['calories'].split('.')[0])
+        $('input#ingredient_carbs_fractional').val(stored_nutrient['carbs'].split('.')[1])
+        $('input#ingredient_proteins_fractional').val(stored_nutrient['proteins'].split('.')[1])
+        $('input#ingredient_fat_fractional').val(stored_nutrient['fat'].split('.')[1])
+        $('input#ingredient_calories_fractional').val(stored_nutrient['calories'].split('.')[1])
     false
 
   $('form input').on('keydown', (event) ->
