@@ -12,5 +12,5 @@ table
       td
         = button_to t(:destroy), ingredient, data: {confirm: t(:confirm)}, method: :delete
       td
-        = link_to "#{ingredient.quantity}g #{ingredient.name}" , ingredient
+        = link_to "#{ ingredient.quantity || 0 }g #{ ingredient.name }" , ingredient
 = button_to t(:back), meals_path, method: :get
