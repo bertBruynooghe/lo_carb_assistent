@@ -58,4 +58,9 @@ form {
     input:last-child { width: 3em; margin-right: 0.5em; }
     display: inline-block;
   }
+  .quantity {
+    input:nth-child(2) { width: 6em; text-align: right;}
+    input:last-child { width: 3em; margin-right: 0.5em; }
+    display: inline-block;
+  }
 }

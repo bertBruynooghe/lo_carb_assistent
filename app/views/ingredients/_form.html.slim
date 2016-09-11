@@ -6,7 +6,6 @@
         - @ingredient.errors.full_messages.each do |message|
           li = message
   .field
-    = f.label :quantity
     = f.split_float_fields :quantity
     |g
   fieldset
