@@ -7,7 +7,7 @@
           li = message
   .field
     = f.label :quantity
-    = f.split_float_fields :quantity, tabindex: 10, step: 0.1
+    = f.split_float_fields :quantity
     |g
   fieldset
     / if name matches existing nutrient, auto-fill next fields
