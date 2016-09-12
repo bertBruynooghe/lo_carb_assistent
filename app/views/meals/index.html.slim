@@ -27,3 +27,5 @@ table
         td
           = link_to meal.consumption_time.iso8601, meal, data: {transform: 'dateTimeLocal'}
 br
+
+= will_paginate(@meals)

@@ -24,6 +24,8 @@ gem 'devise'
 gem 'devise-i18n'
 gem 'devise-i18n-views'
 gem 'jquery-turbolinks'
+gem 'will_paginate'
+gem 'will-paginate-i18n'
 
 group :development, :test do
   gem 'rake'
