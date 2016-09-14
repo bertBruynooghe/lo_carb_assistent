@@ -2,7 +2,7 @@ class FormBuilder < ActionView::Helpers::FormBuilder
   def datetime_local_select(method)
     @template.content_tag(:div, class: method, data: { transform: :dateTimeLocalSelect }) do
       @template.datetime_select(@object_name, method)
-        .concat(@template.content_tag(:span, class: :timeZone) { @object.send(method).zone })
+        .concat(@template.content_tag(:span, class: :timeZone) { (@object.send(method)||DateTime.now).zone })
     end
   end
 
