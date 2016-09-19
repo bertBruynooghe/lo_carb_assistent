@@ -14,7 +14,7 @@ class BloodSugarReadingsController < ApplicationController
 
   # GET /blood_sugar_readings/new
   def new
-    @blood_sugar_reading = BloodSugarReading.new
+    @blood_sugar_reading = BloodSugarReading.new(blood_sugar_reading_params)
   end
 
   # GET /blood_sugar_readings/1/edit
