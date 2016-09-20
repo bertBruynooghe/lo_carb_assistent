@@ -51,7 +51,7 @@ RSpec.describe BloodSugarReadingsController, type: :controller do
 
   describe "GET #new" do
     it "assigns a new blood_sugar_reading as @blood_sugar_reading" do
-      get :new, {}, valid_session
+      get :new, { blood_sugar_reading: { read_time: DateTime.now } }, valid_session
       expect(assigns(:blood_sugar_reading)).to be_a_new(BloodSugarReading)
     end
   end
