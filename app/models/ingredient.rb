@@ -1,5 +1,5 @@
 class Ingredient < ActiveRecord::Base
-  belongs_to :meal
+  belongs_to :meal, required: true
   validates_presence_of :meal, inverse_of: :ingredients
 
   #TODO: this looks like a controller issue rather than a model issue?
