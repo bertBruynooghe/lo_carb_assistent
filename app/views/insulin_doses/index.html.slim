@@ -13,7 +13,7 @@ table
   tbody
     - @insulin_doses.each do |insulin_dose|
       tr
-        td = insulin_dose.insulin.name
+        td = insulin_dose.insulin.try(:name)
         td = insulin_dose.dose
         td(data-transform='dateTimeLocal') = insulin_dose.application_time.iso8601
         td = link_to 'Show', insulin_dose
