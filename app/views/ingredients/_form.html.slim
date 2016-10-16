@@ -6,7 +6,7 @@
         - @ingredient.errors.full_messages.each do |message|
           li = message
   .field
-    = f.split_float_fields :quantity
+    = f.split_float_fields :quantity, autocomplete: :off
     |g
   fieldset
     / if name matches existing nutrient, auto-fill next fields
