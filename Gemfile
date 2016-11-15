@@ -19,11 +19,9 @@ gem 'slim-rails'
 gem 'rails_layout'
 gem 'rails-i18n'
 gem 'ransack'
-gem 'quiet_assets', group: :development
 gem 'devise'
 gem 'devise-i18n'
 gem 'devise-i18n-views'
-gem 'jquery-turbolinks'
 gem 'will_paginate'
 gem 'will-paginate-i18n'
 
@@ -32,35 +30,22 @@ group :development, :test do
   gem 'rspec-rails'
   gem 'capybara'
   gem 'byebug'
+  gem  'listen'
 end
 
 group :test do
   gem 'simplecov', require: false
   gem 'coveralls'
   gem 'capybara-screenshot'
+  gem 'rails-controller-testing'
 end
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
-# Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
-gem 'turbolinks'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder'
-# bundle exec rake doc:rails generates the API under doc/api.
-gem 'sdoc',          group: :doc
 
 # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
 gem 'spring',        group: :development
 
-# Use ActiveModel has_secure_password
-# gem 'bcrypt', '~> 3.1.7'
-
-# Use unicorn as the app server
-# gem 'unicorn'
-
-# Use Capistrano for deployment
-# gem 'capistrano-rails', group: :development
-
-# Use debugger
-# gem 'debugger', group: [:development, :test]
 gem 'rails_12factor', group: :production

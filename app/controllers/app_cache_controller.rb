@@ -6,7 +6,6 @@ class AppCacheController < ApplicationController
   def show
     @cache_lines = ["CACHE MANIFEST\n"]
 
-    @cache_lines << 'favicon.ico'
     @cache_lines << 'meals'
     @cache_lines << 'insulin_doses'
     @cache_lines << 'blood_sugar_readings'
@@ -29,11 +28,11 @@ class AppCacheController < ApplicationController
     #   digest << "##{File.mtime(actual_file)}" if File.exist?(actual_file)
     # end
     # @cache_lines << "\n# Modification Digest: #{digest.hexdigest}"
-
-    render text: @cache_lines.join("\n"), content_type: 'text/cache-manifest', layout: nil
+    render plain: @cache_lines.join("\n"), content_type: 'text/cache-manifest', layout: nil
   end
 
   protected
+  
   def add_from_asset_manifest
     manifest_file = File.join(Rails.root,'public','assets','manifest.yml')
     if FileTest.exist?(manifest_file)

@@ -36,7 +36,7 @@ RSpec.describe BloodSugarReadingsController, type: :controller do
   describe "GET #index" do
     it "assigns all blood_sugar_readings as @blood_sugar_readings" do
       blood_sugar_reading = BloodSugarReading.create! valid_attributes
-      get :index, {}, valid_session
+      get :index, params: {}
       expect(assigns(:blood_sugar_readings)).to eq([blood_sugar_reading])
     end
   end
@@ -44,14 +44,14 @@ RSpec.describe BloodSugarReadingsController, type: :controller do
   describe "GET #show" do
     it "assigns the requested blood_sugar_reading as @blood_sugar_reading" do
       blood_sugar_reading = BloodSugarReading.create! valid_attributes
-      get :show, {:id => blood_sugar_reading.to_param}, valid_session
+      get :show, params: {:id => blood_sugar_reading.to_param}
       expect(assigns(:blood_sugar_reading)).to eq(blood_sugar_reading)
     end
   end
 
   describe "GET #new" do
     it "assigns a new blood_sugar_reading as @blood_sugar_reading" do
-      get :new, { blood_sugar_reading: { read_time: DateTime.now } }, valid_session
+      get :new, params: { blood_sugar_reading: { read_time: DateTime.now } }
       expect(assigns(:blood_sugar_reading)).to be_a_new(BloodSugarReading)
     end
   end
@@ -59,7 +59,7 @@ RSpec.describe BloodSugarReadingsController, type: :controller do
   describe "GET #edit" do
     it "assigns the requested blood_sugar_reading as @blood_sugar_reading" do
       blood_sugar_reading = BloodSugarReading.create! valid_attributes
-      get :edit, {:id => blood_sugar_reading.to_param}, valid_session
+      get :edit, params: {:id => blood_sugar_reading.to_param}
       expect(assigns(:blood_sugar_reading)).to eq(blood_sugar_reading)
     end
   end
@@ -68,30 +68,30 @@ RSpec.describe BloodSugarReadingsController, type: :controller do
     context "with valid params" do
       it "creates a new BloodSugarReading" do
         expect {
-          post :create, {:blood_sugar_reading => valid_attributes}, valid_session
+          post :create, params: {:blood_sugar_reading => valid_attributes}
         }.to change(BloodSugarReading, :count).by(1)
       end
 
       it "assigns a newly created blood_sugar_reading as @blood_sugar_reading" do
-        post :create, {:blood_sugar_reading => valid_attributes}, valid_session
+        post :create, params: {:blood_sugar_reading => valid_attributes}
         expect(assigns(:blood_sugar_reading)).to be_a(BloodSugarReading)
         expect(assigns(:blood_sugar_reading)).to be_persisted
       end
 
       it "redirects to the created blood_sugar_reading" do
-        post :create, {:blood_sugar_reading => valid_attributes}, valid_session
+        post :create, params: {:blood_sugar_reading => valid_attributes}
         expect(response).to redirect_to(BloodSugarReading.last)
       end
     end
 
     context "with invalid params" do
       it "assigns a newly created but unsaved blood_sugar_reading as @blood_sugar_reading" do
-        post :create, {:blood_sugar_reading => invalid_attributes}, valid_session
+        post :create, params: {blood_sugar_reading: invalid_attributes}
         expect(assigns(:blood_sugar_reading)).to be_a_new(BloodSugarReading)
       end
 
       it "re-renders the 'new' template" do
-        post :create, {:blood_sugar_reading => invalid_attributes}, valid_session
+        post :create, params: {blood_sugar_reading: invalid_attributes}
         expect(response).to render_template("new")
       end
     end
@@ -103,20 +103,20 @@ RSpec.describe BloodSugarReadingsController, type: :controller do
 
       it "updates the requested blood_sugar_reading" do
         blood_sugar_reading = BloodSugarReading.create! valid_attributes
-        put :update, {:id => blood_sugar_reading.to_param, :blood_sugar_reading => new_attributes}, valid_session
+        put :update, params: {id: blood_sugar_reading.to_param, :blood_sugar_reading => new_attributes}
         blood_sugar_reading.reload
         expect(blood_sugar_reading.value).to eq(134)
       end
 
       it "assigns the requested blood_sugar_reading as @blood_sugar_reading" do
         blood_sugar_reading = BloodSugarReading.create! valid_attributes
-        put :update, {:id => blood_sugar_reading.to_param, :blood_sugar_reading => valid_attributes}, valid_session
+        put :update, params: {id: blood_sugar_reading.to_param, :blood_sugar_reading => valid_attributes}
         expect(assigns(:blood_sugar_reading)).to eq(blood_sugar_reading)
       end
 
       it "redirects to the blood_sugar_reading" do
         blood_sugar_reading = BloodSugarReading.create! valid_attributes
-        put :update, {:id => blood_sugar_reading.to_param, :blood_sugar_reading => valid_attributes}, valid_session
+        put :update, params: {id: blood_sugar_reading.to_param, :blood_sugar_reading => valid_attributes}
         expect(response).to redirect_to(blood_sugar_reading)
       end
     end
@@ -124,13 +124,13 @@ RSpec.describe BloodSugarReadingsController, type: :controller do
     context "with invalid params" do
       it "assigns the blood_sugar_reading as @blood_sugar_reading" do
         blood_sugar_reading = BloodSugarReading.create! valid_attributes
-        put :update, {:id => blood_sugar_reading.to_param, :blood_sugar_reading => invalid_attributes}, valid_session
+        put :update, params: {id: blood_sugar_reading.to_param, :blood_sugar_reading => invalid_attributes}
         expect(assigns(:blood_sugar_reading)).to eq(blood_sugar_reading)
       end
 
       it "re-renders the 'edit' template" do
         blood_sugar_reading = BloodSugarReading.create! valid_attributes
-        put :update, {:id => blood_sugar_reading.to_param, :blood_sugar_reading => invalid_attributes}, valid_session
+        put :update, params: {id: blood_sugar_reading.to_param, :blood_sugar_reading => invalid_attributes}
         expect(response).to render_template("edit")
       end
     end
@@ -140,13 +140,13 @@ RSpec.describe BloodSugarReadingsController, type: :controller do
     it "destroys the requested blood_sugar_reading" do
       blood_sugar_reading = BloodSugarReading.create! valid_attributes
       expect {
-        delete :destroy, {:id => blood_sugar_reading.to_param}, valid_session
+        delete :destroy, params: {id: blood_sugar_reading.to_param}
       }.to change(BloodSugarReading, :count).by(-1)
     end
 
     it "redirects to the blood_sugar_readings list" do
       blood_sugar_reading = BloodSugarReading.create! valid_attributes
-      delete :destroy, {:id => blood_sugar_reading.to_param}, valid_session
+      delete :destroy, params: {id: blood_sugar_reading.to_param}
       expect(response).to redirect_to(blood_sugar_readings_url)
     end
   end
