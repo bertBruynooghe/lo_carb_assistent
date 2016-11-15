@@ -4,7 +4,7 @@ class NutrientsController < ApplicationController
   # GET /nutrients
   # GET /nutrients.json
   def index
-    @nutrients = Nutrient.search(params[:q]).result
+    @nutrients = Nutrient.search(params[:q]).result.order(name: :asc)
   end
 
   # GET /nutrients/1
