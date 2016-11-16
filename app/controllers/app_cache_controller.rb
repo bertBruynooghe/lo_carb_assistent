@@ -3,13 +3,15 @@ class AppCacheController < ApplicationController
     # Generates a plain text list of cache_lines that changes
     # when one of the listed cache_lines change...
     # So the client knows when to refresh its cache.
-  def show
+  def index
     @cache_lines = ["CACHE MANIFEST\n"]
+
 
     @cache_lines << 'meals'
     @cache_lines << 'insulin_doses'
     @cache_lines << 'blood_sugar_readings'
     @cache_lines << 'nutrients'
+    @cache_lines << 'cache_updater.html'
 
     add_from_asset_manifest
 
@@ -32,7 +34,7 @@ class AppCacheController < ApplicationController
   end
 
   protected
-  
+
   def add_from_asset_manifest
     manifest_file = File.join(Rails.root,'public','assets','manifest.yml')
     if FileTest.exist?(manifest_file)

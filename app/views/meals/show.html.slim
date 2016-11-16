@@ -13,4 +13,4 @@ table
         = button_to t(:destroy), ingredient, data: {confirm: t(:confirm)}, method: :delete
       td
         = link_to "#{ ingredient.quantity || 0 }g #{ ingredient.name }" , ingredient
-= button_to t(:back), meals_path, method: :get
+= button_to t(:back), cache_loader_path, method: :get, params: {url: meals_path}

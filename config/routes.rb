@@ -11,5 +11,6 @@ Rails.application.routes.draw do
 
   resources :nutrients
 
-  get 'appcache.manifest', to: 'app_cache#show'
+  get 'appcache.manifest', to: 'app_cache#index'
+  get 'cache_loader', to: 'cache_loader#index'
 end

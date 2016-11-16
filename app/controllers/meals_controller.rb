@@ -48,7 +48,7 @@ class MealsController < ApplicationController
   def destroy
     @meal.destroy
     respond_to do |format|
-      format.html { redirect_to meals_url, notice: 'Meal was successfully destroyed.' }
+      format.html { redirect_to cache_loader_path(url: meals_url) }
       format.json { head :no_content }
     end
   end
