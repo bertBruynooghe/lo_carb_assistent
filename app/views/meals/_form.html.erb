@@ -1,0 +1,16 @@
+<%= form_for @meal do |f| %>
+  <% if @meal.errors.any? %>
+    <h2><%= "#{pluralize(@meal.errors.count, "error")} prohibited this meal from being saved:" %></h2>
+    <ul>
+      <% @meal.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  <% end %>
+  <fieldset>
+    <%= f.label :consumption_time %>
+    <%= f.datetime_local_select :consumption_time %>
+
+    <div class="actions"><%= f.submit t(:save) %><div>
+  </fieldset>
+<% end %>
