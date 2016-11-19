@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :other_meals
   resources :insulin_doses
   resources :insulins
   resources :blood_sugar_readings
