@@ -6,7 +6,6 @@ class AppCacheController < ApplicationController
   def index
     @cache_lines = ["CACHE MANIFEST\n"]
 
-
     @cache_lines << 'meals'
     @cache_lines << 'insulin_doses'
     @cache_lines << 'blood_sugar_readings'

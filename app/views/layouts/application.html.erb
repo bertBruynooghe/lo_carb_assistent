@@ -1,5 +1,9 @@
 <!DOCTYPE html>
-<html <%= raw 'manifest="/appcache.manifest"' if %w(index).include?(action_name) %> >
+<!--
+  We link to an unexisting manifest to get rid of the old obsolete one.
+  We might get rid of it once we're sure all platform have this update.
+-->
+<html <%= raw 'manifest="/unknown.manifest"' if %w(index).include?(action_name) %> >
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">

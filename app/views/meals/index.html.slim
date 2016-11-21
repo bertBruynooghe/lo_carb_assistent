@@ -25,7 +25,7 @@ table
         /   = meal.calories
         /   | &nbsp;kCal
         td
-          = link_to meal.consumption_time.iso8601, meal, data: {transform: 'dateTimeLocal'}
+          = link_to meal.consumption_time.try(:iso8601), meal, data: {transform: 'dateTimeLocal'}
 br
 
 = will_paginate(@meals)

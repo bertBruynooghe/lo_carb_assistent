@@ -48,7 +48,7 @@ class MealsController < ApplicationController
   def destroy
     @meal.destroy
     respond_to do |format|
-      format.html { redirect_to updated_meals_path }
+      format.html { redirect_to meals_path }
       format.json { head :no_content }
     end
   end
