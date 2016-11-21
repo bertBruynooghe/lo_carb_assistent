@@ -1,4 +1,4 @@
-class Ingredient < ActiveRecord::Base
+class Ingredient < ApplicationRecord
   belongs_to :meal, required: true
   validates_presence_of :meal, inverse_of: :ingredients
 

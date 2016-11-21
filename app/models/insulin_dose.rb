@@ -1,3 +1,3 @@
-class InsulinDose < ActiveRecord::Base
+class InsulinDose < ApplicationRecord
   belongs_to :insulin, required: true
 end

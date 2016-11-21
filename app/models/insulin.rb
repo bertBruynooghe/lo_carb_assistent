@@ -1,2 +1,2 @@
-class Insulin < ActiveRecord::Base
+class Insulin < ApplicationRecord
 end
