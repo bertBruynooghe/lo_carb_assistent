@@ -1,0 +1,28 @@
+<!--
+  This is a file that is cached, needed to update the appcache in case it is needed, and to redirect afterwards as soon
+  as the cache is fully loaded.
+  It is not meant to be loaded directly, but only in an iframe in order to have the number of cached pages limited.
+  It will call a method in the parent page (which does not have to be cached), so that one can do the redirect.
+-->
+<!DOCTYPE html>
+<html manifest="/appcache.manifest">
+  <head>
+      <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <title>cache updater</title>
+      <script>
+        function cacheReady(){
+          top.document.cacheReady();
+        }
+        window.addEventListener('load', function(e) {
+          var appCache = window.applicationCache;
+          appCache.addEventListener('updateready', cacheReady, false);
+          appCache.addEventListener('noupdate', cacheReady, false);
+        }, false);
+      </script>
+  </head>
+  <body>
+    iframe
+  </body>
+</html>
