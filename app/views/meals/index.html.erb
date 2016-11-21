@@ -1,0 +1,27 @@
+<table>
+  <thead>
+    <tr>
+      <th><%= button_to t('.new'), meals_path(meal: { consumption_time: DateTime.now }) %></th>
+      <th><%= Meal.human_attribute_name(:carbs) %></th>
+      <th><%= Meal.human_attribute_name(:proteins) %></th>
+      <th><%= Meal.human_attribute_name(:fat) %></th>
+      <th><%= Meal.human_attribute_name(:calories) %></th>
+      <th><%= Meal.human_attribute_name(:consumption_time) %></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @meals.each do |meal| %>
+      <tr class="<%= meal.consumption_time.strftime('%A') %>">
+        <td><%= button_to t(:destroy), meal, method: :delete %></td>
+        <td><%= link_to "#{meal.carbs}g", meal %></td>
+        <td><%= meal.proteins %>g</td>
+        <td><%= meal.fat %>g</td>
+        <td><%= meal.calories %>kCal</td>
+        <td><%= link_to meal.consumption_time.try(:iso8601), meal, data: {transform: 'dateTimeLocal'} %>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<br>
+
+<%= will_paginate(@meals) %>

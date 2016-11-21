@@ -64,3 +64,27 @@ form {
     display: inline-block;
   }
 }
+
+// bundle same days visually in the table
+tr {
+  // give all day table rows fat border top
+  &.Monday, &.Tuesday, &.Wednesday, &.Thursday, &.Friday, &.Saturday, &.Sunday{
+    border-top: 2px dotted #cccccc;
+  }
+  // except if they are preceded by a row from the same day
+  &.Monday + &.Monday,
+  &.Tuesday + &.Tuesday,
+  &.Wednesday + &.Wednesday,
+  &.Thursday + &.Thursday,
+  &.Friday + &.Friday,
+  &.Saturday + &.Saturday,
+  &.Sunday + &.Sunday{
+    border-top: 1px dotted silver;
+  }
+  // if it is the first row in the body
+  &:first-child{
+    &.Monday, &.Tuesday, &.Wednesday, &.Thursday, &.Friday, &.Saturday, &.Sunday{
+      border-top: none;
+    }
+  }
+}
