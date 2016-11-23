@@ -11,6 +11,7 @@ class MealsController < ApplicationController
 
   # GET /meals
   def show
+    @meal.assign_attributes(session.fetch(:meal, {}).delete(params[:id]) || {})
   end
 
   # POST /meals
@@ -35,6 +36,7 @@ class MealsController < ApplicationController
     respond_to do |format|
       if (params[:new_ingredient])
         @ingredient = Ingredient.create(meal: @meal)
+        session[:meal] = { @meal.id => meal_params }
         format.html { redirect_to @ingredient }
       elsif @meal.update(meal_params)
         format.html { redirect_to @meal, notice: 'Meal was successfully updated.' }
