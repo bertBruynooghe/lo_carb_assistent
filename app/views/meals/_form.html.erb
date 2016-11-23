@@ -11,6 +11,8 @@
     <%= f.label :consumption_time %>
     <%= f.datetime_local_select :consumption_time %>
 
+    <%= f.submit t('ingredients.index.new'), name: :new_ingredient %>
+
     <div class="actions"><%= f.submit t(:save) %><div>
   </fieldset>
 <% end %>

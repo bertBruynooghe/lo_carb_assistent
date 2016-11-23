@@ -33,7 +33,10 @@ class MealsController < ApplicationController
   # PATCH/PUT /meals/1.json
   def update
     respond_to do |format|
-      if @meal.update(meal_params)
+      if (params[:new_ingredient])
+        @ingredient = Ingredient.create(meal: @meal)
+        format.html { redirect_to @ingredient }
+      elsif @meal.update(meal_params)
         format.html { redirect_to @meal, notice: 'Meal was successfully updated.' }
         format.json { render :show, status: :ok, location: @meal }
       else

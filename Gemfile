@@ -16,7 +16,6 @@ gem 'coffee-rails'
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
 # gem 'therubyracer',  platforms: :ruby
 gem 'slim-rails'
-gem 'rails_layout'
 gem 'rails-i18n'
 gem 'ransack'
 gem 'devise'
