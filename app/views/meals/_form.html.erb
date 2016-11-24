@@ -1,3 +1,4 @@
+<%= @meal.carbs %>g koolhydaten
 <%= form_for @meal do |f| %>
   <% if @meal.errors.any? %>
     <h2><%= "#{pluralize(@meal.errors.count, "error")} prohibited this meal from being saved:" %></h2>
@@ -7,12 +8,31 @@
       <% end %>
     </ul>
   <% end %>
-  <fieldset>
-    <%= f.label :consumption_time %>
-    <%= f.datetime_local_select :consumption_time %>
+  <%= f.label :consumption_time %>
+  <%= f.datetime_local_select :consumption_time %>
 
-    <%= f.submit t('ingredients.index.new'), name: :new_ingredient %>
+  <table>
+    <tr>
+      <th><%= f.submit t('ingredients.index.new'), name: :new_ingredient %></th>
+      <th>Ingrediënten</th>
+    </tr>
 
-    <div class="actions"><%= f.submit t(:save) %><div>
-  </fieldset>
+    <%= f.fields_for :ingredients do |ff| %>
+      <% ingredient = @meal.ingredients[ff.index] %>
+      <% if ingredient._destroy %>
+        <%# ff.hidden_field(:_destroy) %>
+      <% else %>
+        <tr>
+          <td><%= ff.submit 'edit', name: "edit_ingredient[#{ff.index}]" %>
+          <%= ff.submit 'delete', name: "delete_ingredient[#{ff.index}]" %></td>
+          <td><%= ingredient.quantity || 0 %>g <%= ingredient.name %></td>
+        </tr>
+      <% end %>
+    <% end %>
+  </table>
+
+
+
+  <div class="actions"><%= f.submit t(:save) %><div>
+
 <% end %>

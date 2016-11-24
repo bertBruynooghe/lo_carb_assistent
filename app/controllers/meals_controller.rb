@@ -38,6 +38,16 @@ class MealsController < ApplicationController
         @ingredient = Ingredient.create(meal: @meal)
         session[:meal] = { @meal.id => meal_params }
         format.html { redirect_to @ingredient }
+      elsif (params[:edit_ingredient])
+        session[:meal] = { @meal.id => meal_params }
+        format.html { redirect_to @meal.ingredients[params[:edit_ingredient].keys.first.to_i]}
+      elsif (params[:delete_ingredient])
+        meal_index = params[:delete_ingredient].keys.first
+        @meal.ingredients[meal_index.to_i].destroy
+        #params[:meal][:ingredients_attributes][meal_index][:_destroy] = true
+        params[:meal][:ingredients_attributes].delete(meal_index)
+        session[:meal] = { @meal.id => meal_params }
+        format.html { redirect_to @meal }
       elsif @meal.update(meal_params)
         format.html { redirect_to @meal, notice: 'Meal was successfully updated.' }
         format.json { render :show, status: :ok, location: @meal }
@@ -66,6 +76,6 @@ class MealsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def meal_params
-      params.require(:meal).permit(:consumption_time)
+      params.require(:meal).permit(:consumption_time, ingredients_attributes: [:id, :_destroy])
     end
 end

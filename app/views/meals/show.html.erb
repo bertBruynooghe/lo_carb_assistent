@@ -1,21 +1,4 @@
 <%== render 'form' %>
 
-<%= @meal.carbs %>g koolhydaten
-
-<table>
-  <tr>
-    <th>&nbsp;</th>
-    <th>Ingrediënten</th>
-  </tr>
-  <% @meal.ingredients.each do |ingredient| %>
-    <tr>
-      <td>
-        <%= button_to t(:destroy), ingredient, data: {confirm: t(:confirm)}, method: :delete %>
-      </td>
-      <td>
-        <%= link_to "#{ ingredient.quantity || 0 }g #{ ingredient.name }" , ingredient %>
-      </td>
-    </tr>
-  <% end %>
-</table>
-<%= link_to t(:back), meals_path %>
+<%# TODO: enable this back when we don't persist everything rightaway anymore %>
+<%# link_to t(:back), meals_path %>
