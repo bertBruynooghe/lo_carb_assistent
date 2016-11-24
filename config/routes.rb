@@ -6,8 +6,10 @@ Rails.application.routes.draw do
   devise_for :users
   root to: redirect('meals')
 
-  resources :meals, except: %i(new edit), shallow: true do
-    resources :ingredients, except: %i(index new edit)
+  resources :ingredients, only: %i(new create)
+
+  resources :meals, except: %i(edit), shallow: true do
+    resources :ingredients, only: %i(show update)
   end
 
   resources :nutrients

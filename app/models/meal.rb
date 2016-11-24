@@ -26,7 +26,7 @@ class Meal < ApplicationRecord
 
   def sum(attr_name)
     ingredients.reduce(0.0) do |m, nutrient|
-      m + (nutrient.send(attr_name) * (nutrient.quantity || 0.0) / 100.0)
+      m + ((nutrient.send(attr_name) || 0.0) * (nutrient.quantity || 0.0) / 100.0)
     end
   end
 end

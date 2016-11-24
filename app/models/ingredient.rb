@@ -2,18 +2,13 @@ class Ingredient < ApplicationRecord
   belongs_to :meal, required: true
   validates_presence_of :meal, inverse_of: :ingredients
 
-  #TODO: this looks like a controller issue rather than a model issue?
   def assign_attributes (new_attributes)
-    %w(carbs proteins fat calories).each do |key|
-      new_attributes[key] = 0 if new_attributes[key].blank?
-    end
-
-    if new_attributes.delete(:save_as_favorite)
-      favorite_nutrient = Nutrient.find_or_initialize_by(name: new_attributes[:name])
-      new_attributes.each do |k,v|
-        favorite_nutrient.send("#{k}=", v) unless %w(meal_id quantity).include?(k)
-      end
-      favorite_nutrient.save
+    %w(quantity carbs proteins fat calories).each do |method|
+      new_attributes[method] = 0 if new_attributes[method].blank?
+      i = new_attributes.delete("#{method}_integral")
+      new_attributes[method] = i unless i.blank?
+      f = new_attributes.delete("#{method}_fractional")
+      new_attributes[method] = "#{new_attributes[method]}.#{f}" unless f.blank?
     end
     super
   end

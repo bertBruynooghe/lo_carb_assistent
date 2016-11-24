@@ -14,6 +14,12 @@ class MealsController < ApplicationController
     @meal.assign_attributes(session.fetch(:meal, {}).delete(params[:id]) || {})
   end
 
+  # GET /meals/new
+  def new
+    params[:meal] ||= { consumption_time: DateTime.now }
+    @meal = Meal.new(meal_params)
+  end
+
   # POST /meals
   # POST /meals.json
   def create
@@ -76,6 +82,7 @@ class MealsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def meal_params
-      params.require(:meal).permit(:consumption_time, ingredients_attributes: [:id, :_destroy])
+      params.require(:meal).permit(:consumption_time,
+                                   ingredients_attributes: %i(id _destroy, name calories carbs proteins fat quantity) )
     end
 end

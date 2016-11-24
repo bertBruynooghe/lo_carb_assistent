@@ -23,9 +23,16 @@
         <%# ff.hidden_field(:_destroy) %>
       <% else %>
         <tr>
-          <td><%= ff.submit 'edit', name: "edit_ingredient[#{ff.index}]" %>
-          <%= ff.submit 'delete', name: "delete_ingredient[#{ff.index}]" %></td>
-          <td><%= ingredient.quantity || 0 %>g <%= ingredient.name %></td>
+          <td>
+            <%= ff.submit 'edit', name: "edit_ingredient[#{ff.index}]" %>
+            <%= ff.submit 'delete', name: "delete_ingredient[#{ff.index}]" %>
+          </td>
+          <td>
+            <% Ingredient.attribute_names.each do |attribute_name| %>
+              <%= ff.hidden_field(attribute_name) %>
+            <% end %>
+            <%= ingredient.quantity || 0 %>g <%= ingredient.name %>
+          </td>
         </tr>
       <% end %>
     <% end %>
