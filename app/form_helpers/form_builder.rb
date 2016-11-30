@@ -9,23 +9,9 @@ class FormBuilder < ActionView::Helpers::FormBuilder
   def split_float_fields(method, options = {})
     @template.content_tag(:div, class: method, data: { transform: :splitFloat }) do
       self.label("#{method}_integral", @object.class.human_attribute_name(method))
-        .concat(self.number_field("#{method}_integral", options.merge(value: integral_part(method), placeholder: '0')))
+        .concat(self.number_field("#{method}_integral", placeholder: '0'))
         .concat(self.label("#{method}_fractional", I18n.t('number.format.separator')))
-        .concat(self.number_field("#{method}_fractional", options.merge(value: fractional_part(method), placeholder: '00')))
+        .concat(self.number_field("#{method}_fractional", placeholder: '00'))
     end
-  end
-
-  private
-
-  def integral_part(method)
-    float_parts(method).first.to_i.tap{ |i| return nil if  i == 0 }
-  end
-
-  def fractional_part(method)
-    float_parts(method).last.to_i.tap{ |i| return nil if  i == 0 }
-  end
-
-  def float_parts(method)
-    @object.send(method).to_f.to_s.split('.')
   end
 end

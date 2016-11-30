@@ -74,7 +74,7 @@ class IngredientsController < ApplicationController
 
     def sync_nutrient
       if (params[:ingredient].delete(:save_as_favorite))
-        Nutrient.create(ingredient_params.select{ |k, _| Nutrient.attribute_names.include?(k) && k != 'id' })
+        Nutrient.create(ingredient_params.select{ |k, _| %(name carbs_integral proteins_integral fat_integral calories_integral carbs_fractional proteinscarbs_fractional fatcarbs_fractional caloriescarbs_fractional).include?(k) })
       end
     end
 end

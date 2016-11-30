@@ -70,9 +70,7 @@ class NutrientsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def nutrient_params
       float_fields = %i(calories carbs proteins fat)
-
-      params.require(:nutrient)
-        .join_split_floats(*float_fields)
-        .permit(:name, *float_fields)
+      float_fields = float_fields.map{|i| :"#{i}_fractional"} + float_fields.map{|i| :"#{i}_integral"}
+      params.require(:nutrient).permit(:name, *float_fields)
     end
 end
