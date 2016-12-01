@@ -1,4 +1,9 @@
 class Nutrient < ApplicationRecord
   include FloatFormConcern
-  split_float *%i(carbs proteins fat calories)
+
+  def self.float_keys
+    %i(carbs proteins fat calories)
+  end
+
+  split_float *float_keys
 end

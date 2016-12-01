@@ -14,26 +14,31 @@ class IngredientsController < ApplicationController
 
   # GET /ingredients/new
   def new
-    @ingredient = Ingredient.new
+    @ingredient = Form::Ingredient.new(Ingredient.new)
   end
 
   # GET /ingredients/1/edit
   def edit
+    @ingredient = Form::Ingredient.new(@ingredient)
     @meal = @ingredient.meal
   end
 
   # POST /ingredients
   def create
-    sync_nutrient
+    @ingredient =  Form::Ingredient.new(ingredient_params)
     respond_to do |format|
-      format.html { redirect_to  new_meal_path(params: { meal: { ingredients_attributes: [ingredient_params.to_unsafe_hash] } }) }
+      if @ingredient.save
+        format.html { redirect_to  new_meal_path(params: { meal: { ingredients_attributes: [ingredient_params.to_unsafe_hash] } }) , notice: 'Ingredient was successfully created.' }
+      else
+        format.html { render :new }
+      end
     end
   end
 
   # PATCH/PUT /ingredients/1
   # PATCH/PUT /ingredients/1.json
   def update
-    sync_nutrient
+    @ingredient = Form::Ingredient.new(@ingredient)
     respond_to do |format|
       if @ingredient.update(ingredient_params)
         format.html { redirect_to @ingredient.meal, notice: 'Ingredient was successfully updated.' }
@@ -70,11 +75,5 @@ class IngredientsController < ApplicationController
       end
 
       params.require(:ingredient).permit(:name, *float_fields)
-    end
-
-    def sync_nutrient
-      if (params[:ingredient].delete(:save_as_favorite))
-        Nutrient.create(ingredient_params.select{ |k, _| %(name carbs_integral proteins_integral fat_integral calories_integral carbs_fractional proteinscarbs_fractional fatcarbs_fractional caloriescarbs_fractional).include?(k) })
-      end
     end
 end

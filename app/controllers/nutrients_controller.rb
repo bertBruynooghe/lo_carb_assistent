@@ -28,7 +28,7 @@ class NutrientsController < ApplicationController
 
     respond_to do |format|
       if @nutrient.save
-        format.html { redirect_to meal_path(params[:meal_id]), notice: 'Nutrient was successfully created.' }
+        format.html { redirect_to nutrients_path, notice: 'Nutrient was successfully created.' }
         format.json { render :show, status: :created, location: @nutrient }
       else
         format.html { render :new }

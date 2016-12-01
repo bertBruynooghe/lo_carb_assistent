@@ -25,6 +25,8 @@ gem 'will_paginate'
 gem 'will-paginate-i18n'
 
 group :development, :test do
+  gem 'binding_of_caller'
+  gem 'better_errors'
   gem 'rake'
   gem 'rspec-rails'
   gem 'capybara'

@@ -83,6 +83,6 @@ class MealsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def meal_params
       params.require(:meal).permit(:consumption_time,
-                                   ingredients_attributes: %i(id _destroy, name calories carbs proteins fat quantity) )
+                                   ingredients_attributes: %i(id _destroy name calories_integral carbs_integral proteins_integral fat_integral quantity_integral calories_fractional carbs_fractional proteins_fractional fat_fractional quantity_fractional) )
     end
 end
