@@ -53,5 +53,10 @@ module FloatFormConcern
          define_method("#{m}_fractional=") { |v| accessor.set_fractional_part(self, v) }
       end
     end
+
+    def expanded_float_keys
+      keys = self.float_keys
+      keys.map{ |k| :"#{k}_integral"} + keys.map{ |k| :"#{k}fractional"}
+    end
   end
 end

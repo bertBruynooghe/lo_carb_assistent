@@ -1,7 +1,7 @@
 <table>
   <thead>
     <tr>
-      <th><%= button_to t('.new'), meals_path(meal: { consumption_time: DateTime.now }) %></th>
+      <th><%= link_to t('.new'), new_meal_path %></th>
       <th><%= Meal.human_attribute_name(:carbs) %></th>
       <th><%= Meal.human_attribute_name(:proteins) %></th>
       <th><%= Meal.human_attribute_name(:fat) %></th>

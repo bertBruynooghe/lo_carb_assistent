@@ -1,45 +1,51 @@
-<%= @meal.carbs %>g koolhydaten
-<%= form_for @meal do |f| %>
-  <% if @meal.errors.any? %>
-    <h2><%= "#{pluralize(@meal.errors.count, "error")} prohibited this meal from being saved:" %></h2>
-    <ul>
-      <% @meal.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-    </ul>
-  <% end %>
-  <%= f.label :consumption_time %>
-  <%= f.datetime_local_select :consumption_time %>
+<%= form_for(meal) do |meal_form| %>
+  <% if meal.errors.any? %>
+    <div id="error_explanation">
+        <h2><%= pluralize(meal.errors.count, "error") %>
+            prohibited this meal from being saved:</h2>
 
-  <table>
-    <tr>
-      <th><%= f.submit t('ingredients.index.new'), name: :new_ingredient %></th>
-      <th>Ingrediënten</th>
-    </tr>
-
-    <%= f.fields_for :ingredients do |ff| %>
-      <% ingredient = @meal.ingredients[ff.index] %>
-      <% if ingredient._destroy %>
-        <%# ff.hidden_field(:_destroy) %>
-      <% else %>
-        <tr>
-          <td>
-            <%= ff.submit 'edit', name: "edit_ingredient[#{ff.index}]" %>
-            <%= ff.submit 'delete', name: "delete_ingredient[#{ff.index}]" %>
-          </td>
-          <td>
-            <% Ingredient.attribute_names.each do |attribute_name| %>
-              <%= ff.hidden_field(attribute_name) %>
+        <ul>
+            <% meal.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
             <% end %>
-            <%= ingredient.quantity || 0 %>g <%= ingredient.name %>
-          </td>
-        </tr>
-      <% end %>
+        </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+      <%= meal_form.label :consumption_time %>
+      <%= meal_form.datetime_local_select :consumption_time %>
+  </div>
+
+  <%= meal_form.fields_for(:ingredients) do |ingredient_form| %>
+    <% %i(name _destroy).each do |s| %>
+      <%= ingredient_form.hidden_field(s) %>
     <% end %>
-  </table>
+    <% %i(quantity carbs proteins fat calories).each do |s| %>
+      <%= ingredient_form.hidden_field "#{s}_integral" %>
+      <%= ingredient_form.hidden_field "#{s}_fractional" %>
+    <% end %>
+    <% unless meal.ingredients[ingredient_form.index]._destroy %>
+      <p>
+        <%= meal.ingredients[ingredient_form.index].quantity || 0 %>g <%= meal.ingredients[ingredient_form.index].name %>
+        <%= ingredient_form.button "Edit",
+                                   name: "meal[ingredients_attributes][#{ingredient_form.index}][commit]",
+                                   value: :edit   %>
+        <%= ingredient_form.button "Delete",
+                                   name: "meal[ingredients_attributes][#{ingredient_form.index}][commit]",
+                                   value: :delete,
+                                   data: { confirm: 'Are you sure?' } %>
+      </p>
+    <% end %>
+  <% end %>
 
 
 
-  <div class="actions"><%= f.submit t(:save) %><div>
+  <%= meal_form.button "New #{Ingredient.model_name.human}",
+                        name: "meal[ingredients_attributes][#{meal.ingredients.length}][commit]",
+                        value: :new %>
 
+  <div class="actions">
+      <%= meal_form.submit %>
+  </div>
 <% end %>

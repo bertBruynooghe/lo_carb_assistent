@@ -6,12 +6,7 @@ Rails.application.routes.draw do
   devise_for :users
   root to: redirect('meals')
 
-  resources :ingredients, only: %i(new create)
-
-  resources :meals, except: %i(edit), shallow: true do
-    resources :ingredients, only: %i(show update)
-  end
-
+  resources :meals
   resources :nutrients
 
   get 'appcache.manifest', to: 'app_cache#index'

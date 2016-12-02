@@ -68,12 +68,6 @@ class IngredientsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def ingredient_params
-      float_fields = %i(calories carbs proteins fat quantity).each_with_object([]) do |method, result|
-        result << method
-        result << "#{method}_integral"
-        result << "#{method}_fractional"
-      end
-
-      params.require(:ingredient).permit(:name, *float_fields)
+      params.require(:ingredient).permit(:name, *Ingredient.expanded_float_keys)
     end
 end

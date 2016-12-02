@@ -1,4 +1,14 @@
-<%== render 'form' %>
+<p id="notice"><%= notice %></p>
 
-<%# TODO: enable this back when we don't persist everything rightaway anymore %>
-<%# link_to t(:back), meals_path %>
+<p>
+  <strong>Consumption time:</strong>
+  <%= @meal.consumption_time %>
+</p>
+
+<p>
+ingredients:
+  <%= @meal.ingredients.map(&:name) %>
+</p>
+
+<%= link_to 'Edit', edit_meal_path(@meal) %> |
+<%= link_to 'Back', meals_path %>

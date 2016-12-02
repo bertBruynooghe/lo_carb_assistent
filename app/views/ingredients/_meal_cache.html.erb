@@ -1,0 +1,5 @@
+<%= meal_form.hidden_field :consumption_time %>
+<%= meal_form.fields_for :ingredients do |ingredient_form| %>
+  <%= ingredient_form.hidden_field(:name) %>
+  <%= ingredient_form.hidden_field(:_destroy) %>
+<% end %>

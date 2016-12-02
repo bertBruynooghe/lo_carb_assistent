@@ -1,1 +1,1 @@
-json.extract! @nutrient, :id, :name, :calories, :carbs, :proteins, :fat, :created_at, :updated_at
+json.extract! @nutrient, :id, :name, :created_at, :updated_at, *Nutrient.float_keys

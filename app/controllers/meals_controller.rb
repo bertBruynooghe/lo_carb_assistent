@@ -9,25 +9,28 @@ class MealsController < ApplicationController
       .paginate(page: params[:page], per_page: 10)
   end
 
-  # GET /meals
+  # GET /meals/1
+  # GET /meals/1.json
   def show
-    @meal.assign_attributes(session.fetch(:meal, {}).delete(params[:id]) || {})
   end
 
   # GET /meals/new
   def new
-    params[:meal] ||= { consumption_time: DateTime.now }
-    @meal = Meal.new(meal_params)
+    @meal = Forms::Meal.new({})
+  end
+
+  # GET /meals/1/edit
+  def edit
+    @meal = Forms::Meal.new(@meal)
   end
 
   # POST /meals
   # POST /meals.json
   def create
-    @meal = Meal.new(meal_params)
-
+    @meal = Forms::Meal.new(meal_params)
     respond_to do |format|
       if @meal.save
-        format.html { redirect_to meal_path(@meal), notice: 'Meal was successfully created.' }
+        format.html { redirect_to @meal, notice: 'Meal was successfully created.' }
         format.json { render :show, status: :created, location: @meal }
       else
         format.html { render :new }
@@ -39,23 +42,11 @@ class MealsController < ApplicationController
   # PATCH/PUT /meals/1
   # PATCH/PUT /meals/1.json
   def update
+    @meal = Forms::Meal.new(@meal)
+    @meal.assign_attributes(meal_params)
     respond_to do |format|
-      if (params[:new_ingredient])
-        @ingredient = Ingredient.create(meal: @meal)
-        session[:meal] = { @meal.id => meal_params }
-        format.html { redirect_to @ingredient }
-      elsif (params[:edit_ingredient])
-        session[:meal] = { @meal.id => meal_params }
-        format.html { redirect_to @meal.ingredients[params[:edit_ingredient].keys.first.to_i]}
-      elsif (params[:delete_ingredient])
-        meal_index = params[:delete_ingredient].keys.first
-        @meal.ingredients[meal_index.to_i].destroy
-        #params[:meal][:ingredients_attributes][meal_index][:_destroy] = true
-        params[:meal][:ingredients_attributes].delete(meal_index)
-        session[:meal] = { @meal.id => meal_params }
-        format.html { redirect_to @meal }
-      elsif @meal.update(meal_params)
-        format.html { redirect_to meals_path, notice: 'Meal was successfully updated.' }
+      if @meal.save(meal_params)
+        format.html { redirect_to @meal, notice: 'Meal was successfully updated.' }
         format.json { render :show, status: :ok, location: @meal }
       else
         format.html { render :edit }
@@ -69,7 +60,7 @@ class MealsController < ApplicationController
   def destroy
     @meal.destroy
     respond_to do |format|
-      format.html { redirect_to meals_path }
+      format.html { redirect_to meals_url, notice: 'Meal was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
@@ -83,6 +74,20 @@ class MealsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def meal_params
       params.require(:meal).permit(:consumption_time,
-                                   ingredients_attributes: %i(id _destroy name calories_integral carbs_integral proteins_integral fat_integral quantity_integral calories_fractional carbs_fractional proteins_fractional fat_fractional quantity_fractional) )
+                                   :new_ingredient,
+                                   ingredients_attributes: %i(id
+                                                              name
+                                                              calories_integral
+                                                              carbs_integral
+                                                              proteins_integral
+                                                              fat_integral
+                                                              quantity_integral
+                                                              calories_fractional
+                                                              carbs_fractional
+                                                              proteins_fractional
+                                                              fat_fractional
+                                                              quantity_fractional
+                                                              commit
+                                                              _destroy))
     end
 end
