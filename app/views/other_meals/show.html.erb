@@ -1,9 +1,0 @@
-<p id="notice"><%= notice %></p>
-
-<p>
-  <strong><%= Meal.human_attribute_name(:consumption_time) %>:</strong>
-  <span data-transform="dateTimeLocal"><%= @meal.consumption_time.iso8601 %></span>
-</p>
-
-<%= link_to 'Edit', edit_other_meal_path(@meal) %> |
-<%= link_to 'Back', other_meals_path %>
