@@ -2,6 +2,8 @@
   <%= render "ingredients/#{@meal.ingredient_action}",
              meal: @meal,
              ingredient: @meal.ingredients[@meal.ingredient_index] || Ingredient.new %>
+<% elsif @meal.ingredient_action == :lookup %>
+  <% controller.redirect_to "https://www.google.be/#q=#{@meal.ingredients[@meal.ingredient_index].name}+koolhydraten" %>
 <% else %>
   <%= render 'form', meal: @meal %>
   <%= link_to 'Show', @meal %> |

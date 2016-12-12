@@ -7,6 +7,9 @@
 <div class="field">
     <%= ingredient_form.label :name %>
     <%= ingredient_form.text_field :name, data: { typeahead: 'nutrient_name' } %>
+    <%= ingredient_form.button 'look up',
+                                name: "meal[ingredients_attributes][#{meal.ingredient_index}][commit]",
+                                value: :lookup %>
 </div>
 <div class="field">
   <%= ingredient_form.split_float_fields :carbs %>g / 100g
