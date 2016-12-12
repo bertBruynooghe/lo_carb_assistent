@@ -1,5 +1,5 @@
 <% if %i(edit new).include? @meal.ingredient_action %>
-  <%= render 'ingredients/edit',
+  <%= render "ingredients/#{@meal.ingredient_action}",
              meal: @meal,
              ingredient: @meal.ingredients[@meal.ingredient_index] || Ingredient.new %>
 <% else %>

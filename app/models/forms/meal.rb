@@ -18,6 +18,11 @@ module Forms
       if ingredient_action == :delete
         new_attributes[:ingredients_attributes][ingredient_index.to_s][:_destroy] = '1'
       end
+      if new_attributes[:ingredients_attributes].fetch(ingredient_index.to_s, {}).delete(:save_as_nutrient) == '1'
+        Nutrient.create(new_attributes[:ingredients_attributes][ingredient_index.to_s].select do |k, _|
+          (Nutrient.float_keys.map{ |k| "#{k}_integral" } + Nutrient.float_keys.map{ |k| "#{k}_fractional" } + ['name']).include?(k)
+        end)
+      end
       @meal.assign_attributes(new_attributes)
     end
 

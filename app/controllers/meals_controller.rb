@@ -88,6 +88,7 @@ class MealsController < ApplicationController
                                                               fat_fractional
                                                               quantity_fractional
                                                               commit
+                                                              save_as_nutrient
                                                               _destroy))
     end
 end

@@ -21,7 +21,8 @@
   <%= ingredient_form.split_float_fields :calories %>kCal / 100g
 </div>
 <div class="field">
-  <input type="checkbox" name="ingredient[save_as_favorite]" value="1"> <%= t('.add_to_favorites') %>
+    <input type="checkbox" name="meal[ingredients_attributes][<%= meal.ingredient_index %>][save_as_nutrient]"  value="1">
+    <%= t('.add_to_favorites') %>
 </div>
 
 <%= ingredient_form.button t("helpers.submit.#{action}", model: Ingredient.model_name.human),
