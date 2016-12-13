@@ -1,18 +1,19 @@
-<%= form_for(meal) do |meal_form| %>
+<%= form_for(form_object) do |meal_form| %>
 <%= render 'ingredients/meal_cache', meal_form: meal_form %>
-<%= fields_for "meal[ingredients_attributes][#{meal.ingredient_index}]", ingredient do |ingredient_form| %>
+<%= fields_for "meal[ingredients_attributes][#{form_object.ingredient_index}]", form_object.selected_ingredient do |ingredient_form| %>
 <div class="field">
     <%= ingredient_form.split_float_fields :quantity, autocomplete: :false %>g
 </div>
 <div class="field">
+    <%# ingredient_form.select :name, Nutrient.all.collect{ |n| [n.name, n.id] } %>
     <%= ingredient_form.label :name %>
     <%= ingredient_form.text_field :name, data: { typeahead: 'nutrient_name' } %>
-    <%= ingredient_form.button 'look up',
-                                name: "meal[ingredients_attributes][#{meal.ingredient_index}][commit]",
-                                value: :lookup %>
 </div>
 <div class="field">
   <%= ingredient_form.split_float_fields :carbs %>g / 100g
+  <%= ingredient_form.button 'look up',
+                              name: "meal[ingredients_attributes][#{form_object.ingredient_index}][commit]",
+                              value: :lookup %>
 </div>
 <div class="field">
   <%= ingredient_form.split_float_fields :proteins %>g / 100g
@@ -24,20 +25,20 @@
   <%= ingredient_form.split_float_fields :calories %>kCal / 100g
 </div>
 <div class="field">
-    <input type="checkbox" name="meal[ingredients_attributes][<%= meal.ingredient_index %>][save_as_nutrient]"  value="1">
+    <input type="checkbox" name="meal[ingredients_attributes][<%= form_object.ingredient_index %>][save_as_nutrient]"  value="1">
     <%= t('.add_to_favorites') %>
 </div>
 
-<%= ingredient_form.button t("helpers.submit.#{action}", model: Ingredient.model_name.human),
-                                name: "meal[ingredients_attributes][#{meal.ingredient_index}][commit]",
-                                value: action %>
+<%= ingredient_form.button t("helpers.submit.#{form_object.selected_ingredient_present? ? :update : :create}", model: Ingredient.model_name.human),
+                                name: "meal[ingredients_attributes][#{form_object.ingredient_index}][commit]",
+                                value: form_object.selected_ingredient_present? ? :update : :create %>
 <% end %>
 <% end %>
 
 <%# cancel form %>
-<%= form_for(meal) do |meal_form| %>
+<%= form_for(form_object) do |meal_form| %>
 <%= render 'ingredients/meal_cache', meal_form: meal_form %>
 <%= meal_form.button 'Back',
-                       name: "meal[ingredients_attributes][#{meal.ingredient_index}][commit]",
+                       name: "meal[ingredients_attributes][#{form_object.ingredient_index}][commit]",
                        value: :update %>
 <% end %>

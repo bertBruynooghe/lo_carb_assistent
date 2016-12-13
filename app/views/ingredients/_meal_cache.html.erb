@@ -1,5 +1,9 @@
 <%= meal_form.hidden_field :consumption_time %>
 <%= meal_form.fields_for :ingredients do |ingredient_form| %>
   <%= ingredient_form.hidden_field(:name) %>
+  <% %w(quantity carbs proteins fat calories).each do |a| %>
+    <%= ingredient_form.hidden_field("#{a}_integral") %>
+    <%= ingredient_form.hidden_field("#{a}_fractional") %>
+  <% end %>
   <%= ingredient_form.hidden_field(:_destroy) %>
 <% end %>

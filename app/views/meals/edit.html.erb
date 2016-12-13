@@ -1,11 +1,9 @@
-<% if %i(edit new).include? @meal.ingredient_action %>
-  <%= render "ingredients/#{@meal.ingredient_action}",
-             meal: @meal,
-             ingredient: @meal.ingredients[@meal.ingredient_index] || Ingredient.new %>
-<% elsif @meal.ingredient_action == :lookup %>
-  <% controller.redirect_to "https://www.google.be/#q=#{@meal.ingredients[@meal.ingredient_index].name}+koolhydraten" %>
+<% if %i(edit new).include? @form_object.ingredient_action %>
+  <%= render "ingredients/#{@form_object.ingredient_action}", form_object: @form_object %>
+<% elsif @form_object.ingredient_action == :lookup %>
+  <% controller.redirect_to "https://www.google.be/#q=#{@form_object.ingredients[@form_object.ingredient_index].name}+koolhydraten" %>
 <% else %>
-  <%= render 'form', meal: @meal %>
-  <%= link_to 'Show', @meal %> |
+  <%= render 'form', form_object: @form_object %>
+  <%= link_to 'Show', @form_object %> |
   <%= link_to 'Back', meals_path %>
 <% end %>

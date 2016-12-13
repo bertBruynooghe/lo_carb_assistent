@@ -1,11 +1,11 @@
-<%= form_for(meal) do |meal_form| %>
-  <% if meal.errors.any? %>
+<%= form_for(form_object) do |meal_form| %>
+  <% if form_object.errors.any? %>
     <div id="error_explanation">
-        <h2><%= pluralize(meal.errors.count, "error") %>
+        <h2><%= pluralize(form_object.errors.count, "error") %>
             prohibited this meal from being saved:</h2>
 
         <ul>
-            <% meal.errors.full_messages.each do |message| %>
+            <% form_object.errors.full_messages.each do |message| %>
             <li><%= message %></li>
             <% end %>
         </ul>
@@ -25,9 +25,9 @@
       <%= ingredient_form.hidden_field "#{s}_integral" %>
       <%= ingredient_form.hidden_field "#{s}_fractional" %>
     <% end %>
-    <% unless meal.ingredients[ingredient_form.index]._destroy %>
+    <% unless form_object.ingredients[ingredient_form.index]._destroy %>
       <p>
-        <%= meal.ingredients[ingredient_form.index].quantity || 0 %>g <%= meal.ingredients[ingredient_form.index].name %>
+        <%= form_object.ingredients[ingredient_form.index].quantity || 0 %>g <%= form_object.ingredients[ingredient_form.index].name %>
         <%= ingredient_form.button "Edit",
                                    name: "meal[ingredients_attributes][#{ingredient_form.index}][commit]",
                                    value: :edit   %>
@@ -42,7 +42,7 @@
 
 
   <%= meal_form.button t('ingredients.index.new'),
-                        name: "meal[ingredients_attributes][#{meal.ingredients.length}][commit]",
+                        name: "meal[ingredients_attributes][#{form_object.ingredients.length}][commit]",
                         value: :new %>
 
   <div class="actions">

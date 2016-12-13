@@ -1,9 +1,9 @@
-module Forms
-  class Meal
+class Meal
+  class FormObject
     attr_reader :ingredient_index
     attr_reader :ingredient_action
 
-    def initialize(meal_or_attributes)
+    def initialize(meal_or_attributes = {})
       if meal_or_attributes.is_a?(::Meal)
         @meal = meal_or_attributes
       else
@@ -12,7 +12,7 @@ module Forms
       end
     end
 
-    # custom behaviour of the Forms::Meal
+    # custom behaviour of the Meal::FormObject
     def assign_attributes(new_attributes)
       extract_ingredients_action_args(new_attributes)
       if ingredient_action == :delete
@@ -32,8 +32,20 @@ module Forms
       @meal.save
     end
 
+    def selected_ingredient
+      ingredients[ingredient_index] || Ingredient.new
+    end
+
+    def selected_ingredient_present?
+      ingredients[ingredient_index].present?
+    end
+
     def method_missing(method, *args)
       @meal.send(method, *args)
+    end
+
+    def self.find(*args)
+      self.new(Meal.find(*args))
     end
 
     def self.method_missing(method, *args)
