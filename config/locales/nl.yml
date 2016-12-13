@@ -47,6 +47,7 @@ nl:
     models:
       blood_sugar_reading: Bloedsuikerwaarde
       insulin_dose: Insulinedosis
+      ingredient: Ingrediënt
   add: Toevoegen
   back: Terug
   blood_sugar_readings:
@@ -68,7 +69,7 @@ nl:
     form:
       add_to_favorites: Toevoegen aan favorieten
     index:
-      new: Nieuw ingredient
+      new: Nieuw Ingrediënt
   new: Nieuwe
   meals:
     index:

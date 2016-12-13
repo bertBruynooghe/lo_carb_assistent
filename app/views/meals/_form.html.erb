@@ -41,7 +41,7 @@
 
 
 
-  <%= meal_form.button "New #{Ingredient.model_name.human}",
+  <%= meal_form.button t('ingredients.index.new'),
                         name: "meal[ingredients_attributes][#{meal.ingredients.length}][commit]",
                         value: :new %>
 

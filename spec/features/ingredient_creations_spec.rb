@@ -23,7 +23,7 @@ RSpec.feature "IngredientCreations", type: :feature do
       fill_in Ingredient.human_attribute_name(:proteins), with: '3'
       fill_in Ingredient.human_attribute_name(:fat), with: '4'
       fill_in Ingredient.human_attribute_name(:calories), with: '7'
-      click_link_or_button I18n.t(:save)
+      click_link_or_button I18n.t("helpers.submit.create", model: Ingredient.model_name.human)
       #Capybara::Screenshot.screenshot_and_save_page
       expect(page).to have_content 'some nutrient'
       # expect(page).to have_selector("input[value='#{I18n.t('ingredients.index.new')}']")
