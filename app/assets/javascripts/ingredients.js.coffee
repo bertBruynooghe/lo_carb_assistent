@@ -13,14 +13,14 @@ $(document).on 'ready page:load', ->
     .on 'blur', ->
       stored_nutrient = nutrient for nutrient in last_ingedients when nutrient['name'] == $(this).val()
       if stored_nutrient
-        $('input[id$="carbs_integral"]').val(stored_nutrient['carbs'].split('.')[0])
-        $('input[id$="proteins_integral"]').val(stored_nutrient['proteins'].split('.')[0])
-        $('input[id$="fat_integral"]').val(stored_nutrient['fat'].split('.')[0])
-        $('input[id$="calories_integral"]').val(stored_nutrient['calories'].split('.')[0])
-        $('input[id$="carbs_fractional"]').val(stored_nutrient['carbs'].split('.')[1])
-        $('input[id$="proteins_fractional"]').val(stored_nutrient['proteins'].split('.')[1])
-        $('input[id$="fat_fractional"]').val(stored_nutrient['fat'].split('.')[1])
-        $('input[id$="calories_fractional"]').val(stored_nutrient['calories'].split('.')[1])
+        $('input[type="number"][id$="carbs_integral"]').val(stored_nutrient['carbs'].split('.')[0])
+        $('input[type="number"][id$="proteins_integral"]').val(stored_nutrient['proteins'].split('.')[0])
+        $('input[type="number"][id$="fat_integral"]').val(stored_nutrient['fat'].split('.')[0])
+        $('input[type="number"][id$="calories_integral"]').val(stored_nutrient['calories'].split('.')[0])
+        $('input[type="number"][id$="carbs_fractional"]').val(stored_nutrient['carbs'].split('.')[1])
+        $('input[type="number"][id$="proteins_fractional"]').val(stored_nutrient['proteins'].split('.')[1])
+        $('input[type="number"][id$="fat_fractional"]').val(stored_nutrient['fat'].split('.')[1])
+        $('input[type="number"][id$="calories_fractional"]').val(stored_nutrient['calories'].split('.')[1])
       last_ingedients = []
       false
 
