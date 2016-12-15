@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources 'uploads', only: %i(new create)
+
   resources :insulin_doses
   resources :insulins
   resources :blood_sugar_readings

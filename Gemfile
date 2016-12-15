@@ -23,6 +23,7 @@ gem 'devise-i18n'
 gem 'devise-i18n-views'
 gem 'will_paginate'
 gem 'will-paginate-i18n'
+gem 'virtus'
 
 group :development, :test do
   gem 'binding_of_caller'
