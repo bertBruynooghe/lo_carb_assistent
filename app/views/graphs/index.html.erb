@@ -1,5 +1,5 @@
 <% @graphs.each do |graph| %>
-  <%= line_chart(graph) %>
+  <%= line_chart(graph, max: 500, curve: false) %>
 <% end %> 
 <% if params[:week] %>
   <%= link_to 'Volgende week', 
