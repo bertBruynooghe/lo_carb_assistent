@@ -1,0 +1,11 @@
+<% @graphs.each do |graph| %>
+  <%= line_chart(graph) %>
+<% end %> 
+<% if params[:week] %>
+  <%= link_to 'Volgende week', 
+               graphs_path(params: { week: DateTime.iso8601(params[:week]) + 7 }) %>|
+<% end %>
+
+<%= link_to 'Vorige week', 
+              graphs_path(params: { week: params[:week] ? DateTime.iso8601(params[:week]) - 7 : Date.today - Date.today.cwday - 6 }) %>
+

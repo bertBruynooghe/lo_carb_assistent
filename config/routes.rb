@@ -9,6 +9,7 @@ Rails.application.routes.draw do
 
   resources :meals
   resources :nutrients
+  resources :graphs
 
   get 'appcache.manifest', to: 'app_cache#index'
   get 'cache_loader', to: 'cache_loader#index'
