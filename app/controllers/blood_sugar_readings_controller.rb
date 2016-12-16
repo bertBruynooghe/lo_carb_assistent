@@ -4,7 +4,7 @@ class BloodSugarReadingsController < ApplicationController
   # GET /blood_sugar_readings
   # GET /blood_sugar_readings.json
   def index
-    @blood_sugar_readings = BloodSugarReading.order(read_time: :desc)
+    @blood_sugar_readings = BloodSugarReading.order(read_time: :desc).for_week(params[:week])
   end
 
   # GET /blood_sugar_readings/1

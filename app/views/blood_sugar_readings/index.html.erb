@@ -1,0 +1,27 @@
+<%= button_to t('.new'), new_blood_sugar_reading_path, method: :get, params: { 'blood_sugar_reading[read_time]' => DateTime.now } %>
+
+<table>
+  <thead>
+    <tr>
+      <th><%= BloodSugarReading.human_attribute_name(:value) %>
+      <th><%= BloodSugarReading.human_attribute_name(:read_time) %>
+      <th><th><th>
+  <tbody>
+    <% @blood_sugar_readings.each do |blood_sugar_reading| %>
+      <tr>
+        <td><%= blood_sugar_reading.value %>
+        <td data-transform='dateTimeLocal'><%= blood_sugar_reading.read_time.iso8601 %>
+        <td><%= link_to t(:show), blood_sugar_reading %>
+        <td><%= link_to t(:edit), edit_blood_sugar_reading_path(blood_sugar_reading) %>
+        <td><%= link_to t(:destroy), blood_sugar_reading, data: {confirm: t(:confirm)}, method: :delete %>
+    <% end %>
+</table>
+
+<% if params[:week] %>
+  <%= link_to 'Volgende week', 
+               blood_sugar_readings_path(params: { week: DateTime.iso8601(params[:week]) + 7 }) %>
+<% end %>
+|
+<%= link_to 'Vorige week', 
+              blood_sugar_readings_path(params: { week: params[:week] ? DateTime.iso8601(params[:week]) - 7 : Date.today - Date.today.cwday - 6 }) %>
+<br>
