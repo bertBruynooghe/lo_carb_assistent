@@ -1,5 +1,5 @@
 <% @graphs.each do |graph| %>
-  <%= line_chart(graph, max: 500, curve: false) %>
+  <%= line_chart(graph.data, graph.options) %>
   <%# line_chart(graph, max: 500, curve: false, library: {
     title: {display: true, text: 'tada'},
     elements: { point: { radius: 2 }},
