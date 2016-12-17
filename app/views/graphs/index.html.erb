@@ -1,11 +1,17 @@
 <% @graphs.each do |graph| %>
   <%= line_chart(graph, max: 500, curve: false) %>
-<% end %> 
+  <%# line_chart(graph, max: 500, curve: false, library: {
+    title: {display: true, text: 'tada'},
+    elements: { point: { radius: 2 }},
+    scales: { yAxes: [
+      { ticks: { min: 0, max: 500, beginAtZero: true, stepSize: 500 }},
+      { ticks: { min: 0, max: 500, beginAtZero: true, stepSize: 65, maxTicksLimit: 2 }}
+      ]}} ) %>
+<% end %>
 <% if params[:week] %>
-  <%= link_to 'Volgende week', 
+  <%= link_to 'Volgende week',
                graphs_path(params: { week: DateTime.iso8601(params[:week]) + 7 }) %>|
 <% end %>
 
-<%= link_to 'Vorige week', 
+<%= link_to 'Vorige week',
               graphs_path(params: { week: params[:week] ? DateTime.iso8601(params[:week]) - 7 : Date.today - Date.today.cwday - 6 }) %>
-
