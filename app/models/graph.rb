@@ -17,23 +17,38 @@ class Graph
   def self.graph_for_day(end_datetime)
     relation = BloodSugarReading.where('read_time > ?', end_datetime - 1.days)
                                 .where('read_time <= ?', end_datetime)
-    hypo = relation.select{ |bsr| bsr.value < 65 }
-    normal = relation.select{ |bsr| 65 <= bsr.value && bsr.value <= 120 }
-    hyper = relation.select { |bsr| 120 < bsr.value }
 
-    hypo = Hash[hypo.map{ |bsr| [bsr.read_time, bsr.value] }]
-    normal = Hash[normal.map{ |bsr| [bsr.read_time, bsr.value] }]
-    hyper = Hash[hyper.map{ |bsr| [bsr.read_time, bsr.value] }]
-    Graph.new([ colorSetting('red').merge(name: '<65', data: hypo),
-                colorSetting('lime').merge(name: 'normaal', data: normal),
-                colorSetting('orange').merge(name: '>120', data: hyper),
-                { data: { end_datetime - 1.days => 65, end_datetime => 65}, library: { spanGaps: true, pointRadius: 0, borderColor: 'silver' } },
-                { data: { end_datetime - 1.days => 120, end_datetime => 120}, library: { spanGaps: true, pointRadius: 0, borderColor: 'silver' } }
+    glucose = Hash[relation.map{ |bsr| [bsr.read_time, bsr.value] }]
+    Graph.new([ colorSetting(glucose.map{ |k, v| to_color(v) }).merge(name: 'glucose', data: glucose),
+                indicator_line(end_datetime, 65),
+                indicator_line(end_datetime, 120)
               ])
   end
 
-  def self.colorSetting(color)
-    { library: { borderColor: color, pointBorderColor: color, pointBackgroundColor: color, backgroundColor: color } }
+  def self.colorSetting(colors)
+    colors.unshift('black')
+    { library: {
+      borderColor: colors,
+      pointBorderColor: colors,
+      pointBackgroundColor: colors,
+      backgroundColor: colors }
+    }
   end
 
+  def self.indicator_line(end_datetime, value)
+    {
+      data: { end_datetime - 1.days => value, end_datetime => value},
+      library: { spanGaps: true, pointRadius: 0, borderColor: 'silver' }
+    }
+  end
+
+  def self.to_color(value)
+    if value < 56
+      'red'
+    elsif value > 120
+      'orange'
+    else
+      'lime'
+    end
+  end
 end
