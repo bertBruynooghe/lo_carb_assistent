@@ -49,10 +49,11 @@ class Graph
   def self.carbs_data(end_datetime)
     meals = Meal.where('consumption_time > ?', end_datetime - 1.days)
                 .where('consumption_time <= ?', end_datetime)
-    data = { name: 'gKH', data: {}, library: { showLine: false, pointStyle: 'triangle', pointRadius: [100], pointBackgroundColor: "rgba(255, 0, 0, 0.2)", pointBorderColor: "rgba(255, 0, 0, 0.2)" } }
+    data = { name: 'gKH', data: {}, library: { showLine: false, pointStyle: 'triangle', pointHitRadius: 0, pointHoverRadius: [100], pointRadius: [100], pointBackgroundColor: "rgba(255, 0, 0, 0.2)", pointBorderColor: "rgba(255, 0, 0, 0.2)" } }
     meals.each do |meal|
       data[:data][meal.consumption_time] = meal.carbs
       data[:library][:pointRadius] << meal.carbs
+      data[:library][:pointHoverRadius] << meal.carbs
     end
     data
   end
@@ -60,10 +61,11 @@ class Graph
   def self.basal_data(end_datetime)
     insulin_doses = InsulinDose.where('application_time > ?', end_datetime - 1.days)
                                .where('application_time <= ?', end_datetime)
-    data = { name: 'E', data: {}, library: { showLine: false, pointStyle: 'triangle', pointRadius: [100], pointBackgroundColor: "rgba(0, 255, 0, 0.2)", pointBorderColor: "rgba(0, 255, 0, 0.2)" } }
+    data = { name: 'E', data: {}, library: { showLine: false, pointStyle: 'triangle', pointHitRadius: 0, pointRadius: [100, 100, 100], pointHoverRadius: [100, 100, 100], pointBackgroundColor: "rgba(0, 255, 0, 0.2)", pointBorderColor: "rgba(0, 255, 0, 0.2)" } }
     insulin_doses.each do |insulin_dose|
       data[:data][insulin_dose.application_time] = insulin_dose.dose
-      data[:library][:pointRadius] << (insulin_dose.dose.to_i * 12)
+      data[:library][:pointRadius] << (insulin_dose.dose * 12)
+      data[:library][:pointHoverRadius] << (insulin_dose.dose * 12)
     end
     data
   end
