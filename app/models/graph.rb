@@ -15,11 +15,15 @@ class Graph
   private
 
   def self.graph_for_day(end_datetime)
-    relation = BloodSugarReading.where('read_time > ?', end_datetime - 1.days)
+    glucose = BloodSugarReading.where('read_time > ?', end_datetime - 1.days)
                                 .where('read_time <= ?', end_datetime)
 
-    glucose = Hash[relation.map{ |bsr| [bsr.read_time, bsr.value] }]
+    glucose = Hash[glucose.map{ |bsr| [bsr.read_time, bsr.value] }]
+
+
     Graph.new([ colorSetting(glucose.map{ |k, v| to_color(v) }).merge(name: 'glucose', data: glucose),
+                carbs_data(end_datetime),
+                basal_data(end_datetime),
                 indicator_line(end_datetime, 65),
                 indicator_line(end_datetime, 120)
               ])
@@ -40,6 +44,28 @@ class Graph
       data: { end_datetime - 1.days => value, end_datetime => value},
       library: { spanGaps: true, pointRadius: 0, borderColor: 'silver' }
     }
+  end
+
+  def self.carbs_data(end_datetime)
+    meals = Meal.where('consumption_time > ?', end_datetime - 1.days)
+                .where('consumption_time <= ?', end_datetime)
+    data = { name: 'gKH', data: {}, library: { pointStyle: 'triangle', pointRadius: [100], pointBackgroundColor: "rgba(255, 0, 0, 0.2)", pointBorderColor: "rgba(255, 0, 0, 0.2)" } }
+    meals.each do |meal|
+      data[:data][meal.consumption_time] = meal.carbs
+      data[:library][:pointRadius] << meal.carbs
+    end
+    data
+  end
+
+  def self.basal_data(end_datetime)
+    insulin_doses = InsulinDose.where('application_time > ?', end_datetime - 1.days)
+                               .where('application_time <= ?', end_datetime)
+    data = { name: 'E', data: {}, library: { pointStyle: 'triangle', pointRadius: [100], pointBackgroundColor: "rgba(0, 255, 0, 0.2)", pointBorderColor: "rgba(0, 255, 0, 0.2)" } }
+    insulin_doses.each do |insulin_dose|
+      data[:data][insulin_dose.application_time] = insulin_dose.dose
+      data[:library][:pointRadius] << (insulin_dose.dose.to_i * 12)
+    end
+    data
   end
 
   def self.to_color(value)
