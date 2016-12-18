@@ -31,11 +31,15 @@ class Graph
 
   def self.colorSetting(colors)
     colors.unshift('black')
-    { library: {
-      borderColor: colors,
-      pointBorderColor: colors,
-      pointBackgroundColor: colors,
-      backgroundColor: colors }
+    {
+      library:
+      {
+        borderColor: colors,
+        pointBorderColor: colors,
+        pointBackgroundColor: colors,
+        backgroundColor: colors,
+        spanGaps: true
+      }
     }
   end
 
