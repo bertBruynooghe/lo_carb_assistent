@@ -75,7 +75,7 @@ class Graph
   end
 
   def self.to_color(value)
-    if value < 56
+    if value < 65
       'red'
     elsif value > 120
       'orange'
