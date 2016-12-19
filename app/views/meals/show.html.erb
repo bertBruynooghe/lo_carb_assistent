@@ -2,12 +2,19 @@
 
 <p>
   <strong>Consumption time:</strong>
-  <%= @meal.consumption_time %>
+  <span data-transform="dateTimeLocal" %><%= @meal.consumption_time.iso8601 %></span>
+</p>
+
+<p>
+  <%= @meal.carbs %>gkH, <%= @meal.proteins %>g proteïne
 </p>
 
 <p>
 ingredients:
-  <%= @meal.ingredients.map(&:name) %>
+  <ul>
+  <% @meal.ingredients.each do |ingredient| %>
+    <li><%= ingredient.quantity %>g <%= ingredient.name %>
+  <% end %>
 </p>
 
 <%= link_to 'Edit', edit_meal_path(@meal) %> |
