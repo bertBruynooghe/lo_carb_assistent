@@ -38,8 +38,7 @@ class Upload
       if InsulinDose.where(application_time: time, dose: fast, insulin_id: 1).empty?
         InsulinDose.create(application_time: time, dose: fast, insulin_id: 1)
       end
-    end
-    byebug
+    end 
     slow = tokens[10]
     if slow.present?
       slow = slow.gsub(',', '.').to_f
