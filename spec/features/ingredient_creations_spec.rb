@@ -10,7 +10,7 @@ RSpec.feature "IngredientCreations", type: :feature do
       visit '/'
       within("#new_user") do
         fill_in 'Email', :with => 'user@example.com'
-        fill_in 'Password', :with => 'password'
+        fill_in 'Wachtwoord', :with => 'password'
       end
       click_button I18n.t('.devise.sessions.new.sign_in')
       expect(page).to have_content I18n.t('.devise.sessions.signed_in')
