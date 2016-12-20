@@ -18,10 +18,10 @@
 </table>
 
 <% if params[:week] %>
-  <%= link_to 'Volgende nadien',
-               blood_sugar_readings_path(params: { week: DateTime.iso8601(params[:week]) + 7 }) %>
+  <%= link_to 'Week nadien',
+               blood_sugar_readings_path(params: { week: week_later_start_date_time(params[:week]) }) %>
 <% end %>
 |
 <%= link_to 'Week voordien',
-              blood_sugar_readings_path(params: { week: params[:week] ? DateTime.iso8601(params[:week]) - 7 : Date.today - Date.today.cwday - 13 }) %>
+              blood_sugar_readings_path(params: { week: week_earlier_start_date_time(params[:week]) }) %>
 <br>
