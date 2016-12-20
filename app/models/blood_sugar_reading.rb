@@ -6,7 +6,7 @@ class BloodSugarReading < ApplicationRecord
       start_day = DateTime.iso8601(start_day)
       where('read_time < ?', start_day + 7.days).where('read_time >= ?', start_day)
     else
-      where('read_time > ?', 7.days.ago)
+      where('read_time > ?', Date.today - (Date.today.cwday+6).days)
     end
   }
 end
