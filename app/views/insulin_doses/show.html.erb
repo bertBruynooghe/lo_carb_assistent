@@ -1,0 +1,18 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong> Insulin: </strong>
+  <%= @insulin_dose.insulin.name %>
+</p>
+<p>
+  <strong> Dose: </strong>
+  <%= @insulin_dose.dose %>
+</p>
+<p>
+  <strong> Application time: </strong>
+  <span data-transform='dateTimeLocal'><%= @insulin_dose.application_time.iso8601 %><span>
+</p>
+
+<%= link_to 'Edit', edit_insulin_dose_path(@insulin_dose) %>
+|
+<%= link_to 'Back', insulin_doses_path %>

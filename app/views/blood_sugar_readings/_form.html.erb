@@ -1,0 +1,22 @@
+<%= form_for @blood_sugar_reading do |f| %>
+<% if @blood_sugar_reading.errors.any? %>
+  <div id="error_explanation" %>
+    <h2><%= I18n.t('errors.save_failed', errors: pluralize(@blood_sugar_reading.errors.count, I18n.t(:error)), model_name: BloodSugarReading.model_name.name) %></h2>
+    <ul>
+      <% @blood_sugar_reading.errors.full_messages.each do |message| %>
+        <li><%= message %>
+      <% end %>
+  </div>
+<% end %>
+  <div class="field">
+    <%= f.label :value %>
+    <%= f.number_field :value %>
+  </div>
+  <div class="field">
+    <%= f.label :read_time %>
+    <%= f.datetime_local_select :read_time %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
