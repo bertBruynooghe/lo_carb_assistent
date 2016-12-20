@@ -17,7 +17,6 @@ gem 'coffee-rails'
 # gem 'therubyracer',  platforms: :ruby
 gem 'slim-rails'
 gem 'rails-i18n'
-gem 'ransack'
 gem 'devise'
 gem 'devise-i18n'
 gem 'devise-i18n-views'
