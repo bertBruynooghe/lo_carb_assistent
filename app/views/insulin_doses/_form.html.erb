@@ -9,8 +9,8 @@
     </div>
   <% end %>
   <div class="field">
-    <%= f.label :insulin_id %>
-    <%= f.select :insulin_id, Insulin.all.collect {|i| [ i.name, i.id ] } %>
+    <%= f.label :bolus %>
+    <%= f.check_box :bolus %>
   </div>
   <div class="field">
     <%= f.split_float_fields :dose %>

@@ -2,7 +2,7 @@
 
 <p>
   <strong> Insulin: </strong>
-  <%= @insulin_dose.insulin.name %>
+  <%= @insulin_dose.bolus? ? 'snelwerkend' : 'traagwerkend' %>
 </p>
 <p>
   <strong> Dose: </strong>

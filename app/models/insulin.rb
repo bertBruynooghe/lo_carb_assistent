@@ -1,2 +1,0 @@
-class Insulin < ApplicationRecord
-end

@@ -32,9 +32,9 @@ nl:
         name: Naam
         proteins: Eiwitten
         quantity: Hoeveelheid
-      insulin:
+      insulin_dose:
         dose: &dosis Dosis
-        insulin: &insuline Insuline
+        bolus: Snelwerkend
         application_time: &toegediend Toegediend
       meal:
         calories: kCal
@@ -64,7 +64,7 @@ nl:
       insulin_dose:
         application_time: *toegediend
         dose_integral: *dosis
-        insulin_id: *insuline
+        bolus: Snelwerkend
   ingredients:
     form:
       add_to_favorites: Toevoegen aan favorieten

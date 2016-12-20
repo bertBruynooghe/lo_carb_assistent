@@ -35,15 +35,15 @@ class Upload
     fast = tokens[6]
     if fast.present?
       fast = fast.gsub(',', '.').to_f
-      if InsulinDose.where(application_time: time, dose: fast, insulin_id: 1).empty?
-        InsulinDose.create(application_time: time, dose: fast, insulin_id: 1)
+      if InsulinDose.where(application_time: time, dose: fast, bolus: true).empty?
+        InsulinDose.create(application_time: time, dose: fast, bolus: true)
       end
-    end 
+    end
     slow = tokens[10]
     if slow.present?
       slow = slow.gsub(',', '.').to_f
-      if InsulinDose.where(application_time: time, dose: slow, insulin_id: 2).empty?
-        InsulinDose.create(application_time: time, dose: slow, insulin_id: 2)
+      if InsulinDose.where(application_time: time, dose: slow, bolus: false).empty?
+        InsulinDose.create(application_time: time, dose: slow, bolus: false)
       end
     end
   end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161219123205) do
+ActiveRecord::Schema.define(version: 20161220120750) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -20,7 +20,9 @@ ActiveRecord::Schema.define(version: 20161219123205) do
     t.datetime "read_time"
     t.datetime "created_at",                null: false
     t.datetime "updated_at",                null: false
+    t.integer  "subject_id"
     t.boolean  "manual",     default: true
+    t.index ["subject_id"], name: "index_blood_sugar_readings_on_subject_id", using: :btree
   end
 
   create_table "ingredients", force: :cascade do |t|
@@ -36,17 +38,13 @@ ActiveRecord::Schema.define(version: 20161219123205) do
   end
 
   create_table "insulin_doses", force: :cascade do |t|
-    t.integer  "insulin_id"
     t.decimal  "dose"
     t.datetime "application_time"
-    t.datetime "created_at",       null: false
-    t.datetime "updated_at",       null: false
-  end
-
-  create_table "insulins", force: :cascade do |t|
-    t.text     "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
+    t.integer  "subject_id"
+    t.boolean  "bolus",            default: true
+    t.index ["subject_id"], name: "index_insulin_doses_on_subject_id", using: :btree
   end
 
   create_table "meals", force: :cascade do |t|
@@ -54,6 +52,8 @@ ActiveRecord::Schema.define(version: 20161219123205) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.datetime "consumption_time"
+    t.integer  "subject_id"
+    t.index ["subject_id"], name: "index_meals_on_subject_id", using: :btree
   end
 
   create_table "nutrients", force: :cascade do |t|
@@ -64,6 +64,14 @@ ActiveRecord::Schema.define(version: 20161219123205) do
     t.decimal  "fat"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "subject_id"
+    t.index ["subject_id"], name: "index_nutrients_on_subject_id", using: :btree
+  end
+
+  create_table "subjects", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "users", force: :cascade do |t|
@@ -79,6 +87,13 @@ ActiveRecord::Schema.define(version: 20161219123205) do
     t.inet     "last_sign_in_ip"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "subject_id"
+    t.index ["subject_id"], name: "index_users_on_subject_id", using: :btree
   end
 
+  add_foreign_key "blood_sugar_readings", "subjects"
+  add_foreign_key "insulin_doses", "subjects"
+  add_foreign_key "meals", "subjects"
+  add_foreign_key "nutrients", "subjects"
+  add_foreign_key "users", "subjects"
 end
