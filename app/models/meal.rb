@@ -22,6 +22,15 @@ class Meal < ApplicationRecord
     carbs + proteins / 5.0
   end
 
+  scope :for_week, -> (start_day) {
+    if start_day
+      start_day = DateTime.iso8601(start_day)
+      where('consumption_time< ?', start_day + 7.days).where('consumption_time>= ?', start_day)
+    else
+      where('consumption_time> ?', Date.today - (Date.today.cwday + 6).days)
+    end
+  }
+
   private
 
   def sum(attr_name)

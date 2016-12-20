@@ -4,7 +4,7 @@ class InsulinDosesController < ApplicationController
   # GET /insulin_doses
   # GET /insulin_doses.json
   def index
-    @insulin_doses = InsulinDose.order(application_time: :desc)
+    @insulin_doses = InsulinDose.for_week(params[:week]).order(application_time: :desc)
   end
 
   # GET /insulin_doses/1

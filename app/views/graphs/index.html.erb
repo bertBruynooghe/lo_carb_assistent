@@ -3,9 +3,6 @@
 <% end %>
 
 <% if params[:week] %>
-  <%= link_to 'Volgende week',
-               graphs_path(params: { week: DateTime.iso8601(params[:week]) + 7 }) %>|
+  <%= link_to 'Week nadien', graphs_path(params: { week: week_later_start_date_time(params[:week]) }) %> |
 <% end %>
-
-<%= link_to 'Vorige week',
-              graphs_path(params: { week: params[:week] ? DateTime.iso8601(params[:week]) - 7 : Date.today - Date.today.cwday - 6 }) %>
+<%= link_to 'Week voordien', graphs_path(params: { week: week_earlier_start_date_time(params[:week]) }) %>

@@ -20,8 +20,6 @@ gem 'rails-i18n'
 gem 'devise'
 gem 'devise-i18n'
 gem 'devise-i18n-views'
-gem 'will_paginate'
-gem 'will-paginate-i18n'
 gem 'virtus'
 gem 'chartkick'
 

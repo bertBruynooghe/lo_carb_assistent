@@ -24,4 +24,7 @@
 </table>
 <br>
 
-<%= will_paginate(@meals) %>
+<% if params[:week] %>
+  <%= link_to 'Week nadien', meals_path(params: { week: week_later_start_date_time(params[:week]) }) %> |
+<% end %>
+<%= link_to 'Week voordien', meals_path(params: { week: week_earlier_start_date_time(params[:week]) }) %>

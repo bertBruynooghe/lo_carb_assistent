@@ -3,9 +3,7 @@ class MealsController < ApplicationController
   # GET /meals
   # GET /meals.json
   def index
-    @meals = Meal.includes(:ingredients)
-      .order(consumption_time: :desc)
-      .paginate(page: params[:page], per_page: 10)
+    @meals = Meal.includes(:ingredients).for_week(params[:week]).order(consumption_time: :desc)
   end
 
   # GET /meals/1

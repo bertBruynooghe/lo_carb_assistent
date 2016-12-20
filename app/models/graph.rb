@@ -2,9 +2,15 @@ class Graph
   attr_reader :data
   attr_reader :options
 
-  def self.for_week(start_datetime)
-    end_datetime = start_datetime ? (DateTime.iso8601(start_datetime) + 7.days) : DateTime.now
-    (0..6).map{ |i| self.graph_for_day(end_datetime - i.days) }
+  def self.for_week(start_day)
+    if start_day
+      start_day = DateTime.iso8601(start_day)
+      end_day = start_day + 6.days
+    else
+      start_day = Date.today - (Date.today.cwday + 6).days
+      end_day = Date.today
+    end
+    (start_day..end_day).map{ |day| self.graph_for_day(day) }.reverse
   end
 
   def initialize(data)
