@@ -1,3 +1,6 @@
+<p>
+  <%= @form_object.carbs %>gkH, <%= @form_object.proteins %>g proteïne
+</p>
 <% if %i(edit new).include? @form_object.ingredient_action %>
   <%= render "ingredients/#{@form_object.ingredient_action}", form_object: @form_object %>
 <% elsif @form_object.ingredient_action == :lookup %>
