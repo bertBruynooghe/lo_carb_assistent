@@ -1,7 +1,7 @@
 class FormBuilder < ActionView::Helpers::FormBuilder
   def datetime_local_select(method)
     @template.content_tag(:div, class: method, data: { transform: %w(dateTimeLocalSelect steppable).join(' ') }) do
-      @template.datetime_select(@object_name, method, end_year: Date.tomorrow.year, with_css_classes: true)
+      datetime_select(method, end_year: Date.tomorrow.year, with_css_classes: true)
         .concat(@template.content_tag(:span, class: :timeZone) { (@object.send(method)||DateTime.now).zone })
     end
   end
