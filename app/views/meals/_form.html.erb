@@ -14,7 +14,7 @@
 
   <div class="field">
       <%= meal_form.label :consumption_time %>
-      <%= meal_form.datetime_local_select :consumption_time %>
+      <%= meal_form.text_field :consumption_time, class: 'meal-consumptionTimeInput' %>
   </div>
 
   <%= meal_form.fields_for(:ingredients) do |ingredient_form| %>

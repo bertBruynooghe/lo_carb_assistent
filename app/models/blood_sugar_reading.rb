@@ -1,6 +1,8 @@
 class BloodSugarReading < ApplicationRecord
   validates :value, :read_time, presence: true
 
+  after_initialize { read_time ||= DateTime.now }
+
   scope :for_week, -> (start_day) {
     if start_day
       start_day = DateTime.iso8601(start_day)

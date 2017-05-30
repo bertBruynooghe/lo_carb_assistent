@@ -17,6 +17,8 @@
 
 @import "bootstrap-sprockets";
 @import "bootstrap";
+@import "blood_sugar_readings";
+@import "insulin_doses";
 
 table {
   @extend .table;

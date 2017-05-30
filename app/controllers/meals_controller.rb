@@ -14,7 +14,7 @@ class MealsController < ApplicationController
 
   # GET /meals/new
   def new
-    @form_object = Meal::FormObject.new
+    @form_object = Meal::FormObject.new(consumption_time: DateTime.now)
   end
 
   # GET /meals/1/edit

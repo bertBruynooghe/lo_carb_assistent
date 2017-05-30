@@ -1,10 +1,10 @@
 class FormBuilder < ActionView::Helpers::FormBuilder
-  def datetime_local_select(method)
-    @template.content_tag(:div, class: method, data: { transform: %w(dateTimeLocalSelect steppable).join(' ') }) do
-      datetime_select(method, end_year: Date.tomorrow.year, with_css_classes: true)
-        .concat(@template.content_tag(:span, class: :timeZone) { (@object.send(method)||DateTime.now).zone })
-    end
-  end
+  # def datetime_local_select(method)
+  #   @template.content_tag(:div, class: method, data: { transform: %w(dateTimeLocalSelect steppable).join(' ') }) do
+  #     datetime_select(method, end_year: Date.tomorrow.year, with_css_classes: true)
+  #       .concat(@template.content_tag(:span, class: :timeZone) { (@object.send(method)||DateTime.now).zone })
+  #   end
+  # end
 
   def split_float_fields(method, options = {})
     @template.content_tag(:div, class: method, data: { transform: :splitFloat }) do
