@@ -71,7 +71,7 @@ GEM
     capybara-screenshot (1.0.11)
       capybara (>= 1.0, < 3)
       launchy
-    chartkick (2.2.1)
+    chartkick (3.3.0)
     coderay (1.1.1)
     coercible (1.0.0)
       descendants_tracker (~> 0.0.1)
