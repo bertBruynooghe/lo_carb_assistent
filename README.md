@@ -18,7 +18,7 @@ As to the initial versions, the app will have to run on the following platforms:
 
 Not willing to pay the developer fee for all these platforms, the app will be distributed as a webpage on all platforms,
 and it will be ready to be deployed as a phonegap app too as offline pages are not something the windows phone platform supports.
-For now, the app will be hosted on heroku, and signup is restricted. (In later versions, there will be support for multiple users.)
+For now, the app will be hosted on heroku, and sign up is restricted. (In later versions, there will be support for multiple users.)
 As for the data of the program, there will be two ways of filling in the data which will be stored in the local database as well:
 * manual entry
 * suggestions taken from http://ndb.nal.usda.gov/ndb/doc/index
@@ -33,8 +33,8 @@ This are the steps:
     * nutrient(name, calories, carbs, proteins, fat)
 * heroku backup
 * product lookup
-* product image bing 5000 free transactions per month, matches ndb quite well
-* product translation bing
+* product image Bing 5000 free transactions per month, matches ndb quite well
+* product translation Bing
 2. authn and accounts
 3. versioned API
 4. single page app using backbone
@@ -45,5 +45,5 @@ As the app has been tested in real-life situations, a number of issues came out:
 * it would be very convenient to add activities and insuline doses to the system too. I guess there should be a direct link for on a number of screens, and especially on the landing screen.
 * navigating to and searching through the favorites should also be more convenient. (Search box from collapsed menu that triggers a select2 box?) Or should we have the carbs/fat/proteins/kCal displayed directly along with the name in the select2 box?
 * graph support
-* support for input data from glucose mesurings.
+* support for input data from glucose measurements.
 * decimal separator support in windows phone is still quite clunky.
