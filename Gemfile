@@ -2,12 +2,13 @@ source 'https://rubygems.org'
 
 ruby '2.6.6'
 
-gem 'rails', '~>5.0.0'
+gem 'rails', '~>5.2.0'
 # Use postgresql as the database for Active Record
 gem 'pg'
 # Use SCSS for stylesheets
 gem 'sass-rails'
 gem 'bootstrap-sass'
+gem 'bootsnap'
 gem 'bootstrap-typeahead-rails'
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier'
