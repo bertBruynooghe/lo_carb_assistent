@@ -4,7 +4,7 @@
 <% if %i(edit new).include? @form_object.ingredient_action %>
   <%= render "ingredients/#{@form_object.ingredient_action}", form_object: @form_object %>
 <% elsif @form_object.ingredient_action == :lookup %>
-  <% controller.redirect_to "https://www.google.be/#q=#{URI.escape(@form_object.ingredients[@form_object.ingredient_index].name)}+koolhydraten" %>
+  <% controller.redirect_to "https://www.duckduckgo.com/?#{URI.encode_www_form(q: @form_object.ingredients[@form_object.ingredient_index].name)}+koolhydraten" %>
 <% else %>
   <%= render 'form', form_object: @form_object %>
   <%= link_to 'Show', @form_object %> |
