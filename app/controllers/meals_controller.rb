@@ -28,7 +28,7 @@ class MealsController < ApplicationController
     @form_object = Meal::FormObject.new(form_object_params)
     respond_to do |format|
       if @form_object.save
-        format.html { redirect_to @form_object, notice: 'Meal was successfully created.' }
+        format.html { redirect_to @form_object, notice: 'Meal was successfully created.', only_path: true }
         format.json { render :show, status: :created, location: @form_object }
       else
         format.html { render :new }
@@ -44,7 +44,7 @@ class MealsController < ApplicationController
     @form_object.assign_attributes(form_object_params)
     respond_to do |format|
       if @form_object.save(form_object_params)
-        format.html { redirect_to @form_object, notice: 'Meal was successfully updated.' }
+        format.html { redirect_to @form_object, notice: 'Meal was successfully updated.', only_path: true }
         format.json { render :show, status: :ok, location: @form_object }
       else
         format.html { render :edit }
@@ -59,7 +59,7 @@ class MealsController < ApplicationController
     @meal = Meal.find(params[:id])
     @meal.destroy
     respond_to do |format|
-      format.html { redirect_to meals_url, notice: 'Meal was successfully destroyed.' }
+      format.html { redirect_to meals_url, notice: 'Meal was successfully destroyed.', only_path: true }
       format.json { head :no_content }
     end
   end
