@@ -11,6 +11,7 @@
   <title>Intake</title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= javascript_pack_tag 'application', 'data-turbolinks-track' => true %>
   <%= javascript_tag do %>
     window.abbrDayNames = <%= raw I18n.t('date.abbr_day_names') %>;
     window.decimalSeparator = '<%= raw I18n.t('number.format.separator') %>';
