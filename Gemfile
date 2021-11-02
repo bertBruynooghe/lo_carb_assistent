@@ -1,8 +1,8 @@
 source 'https://rubygems.org'
 
-ruby '2.6.6'
+ruby '3.0.2'
 
-gem 'rails', '~>5.2.0'
+gem 'rails', '~>6.1.4'
 # Use postgresql as the database for Active Record
 gem 'pg'
 # Use SCSS for stylesheets
@@ -51,3 +51,7 @@ gem 'jbuilder'
 gem 'spring',        group: :development
 
 gem 'rails_12factor', group: :production
+
+gem "puma", "~> 5.5"
+
+gem "thin", "~> 1.8"
