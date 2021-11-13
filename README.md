@@ -1,4 +1,4 @@
-lo_carb_assistent
+meals-the_numbers
 =================
 [![Build Status](http://img.shields.io/travis/bertBruynooghe/lo_carb_assistent.svg)](https://travis-ci.org/bertBruynooghe/lo_carb_assistent)
 [![Dependency Status](https://img.shields.io/gemnasium/bertBruynooghe/lo_carb_assistent.svg)](https://gemnasium.com/bertBruynooghe/lo_carb_assistent)
