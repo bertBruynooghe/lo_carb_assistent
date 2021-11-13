@@ -2,28 +2,18 @@
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
 #
-# Note that this schema.rb definition is the authoritative source for your
-# database schema. If you need to create the application database on another
-# system, you should be using db:schema:load, not running all the migrations
-# from scratch. The latter is a flawed and unsustainable approach (the more migrations
-# you'll amass, the slower it'll run and the greater likelihood for issues).
+# This file is the source Rails uses to define your schema when running `bin/rails
+# db:schema:load`. When creating a new database, `bin/rails db:schema:load` tends to
+# be faster and is potentially less error prone than running all of your
+# migrations from scratch. Old migrations may fail to apply correctly if those
+# migrations use external dependencies or application code.
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2016_12_20_120750) do
+ActiveRecord::Schema.define(version: 2021_11_13_110734) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-
-  create_table "blood_sugar_readings", force: :cascade do |t|
-    t.integer "value"
-    t.datetime "read_time"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.integer "subject_id"
-    t.boolean "manual", default: true
-    t.index ["subject_id"], name: "index_blood_sugar_readings_on_subject_id"
-  end
 
   create_table "ingredients", force: :cascade do |t|
     t.decimal "quantity"
@@ -37,23 +27,11 @@ ActiveRecord::Schema.define(version: 2016_12_20_120750) do
     t.datetime "updated_at"
   end
 
-  create_table "insulin_doses", force: :cascade do |t|
-    t.decimal "dose"
-    t.datetime "application_time"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.integer "subject_id"
-    t.boolean "bolus", default: true
-    t.index ["subject_id"], name: "index_insulin_doses_on_subject_id"
-  end
-
   create_table "meals", force: :cascade do |t|
     t.datetime "creation_time"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.datetime "consumption_time"
-    t.integer "subject_id"
-    t.index ["subject_id"], name: "index_meals_on_subject_id"
   end
 
   create_table "nutrients", force: :cascade do |t|
@@ -64,14 +42,6 @@ ActiveRecord::Schema.define(version: 2016_12_20_120750) do
     t.decimal "fat"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer "subject_id"
-    t.index ["subject_id"], name: "index_nutrients_on_subject_id"
-  end
-
-  create_table "subjects", force: :cascade do |t|
-    t.string "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
   end
 
   create_table "users", force: :cascade do |t|
@@ -87,13 +57,6 @@ ActiveRecord::Schema.define(version: 2016_12_20_120750) do
     t.inet "last_sign_in_ip"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer "subject_id"
-    t.index ["subject_id"], name: "index_users_on_subject_id"
   end
 
-  add_foreign_key "blood_sugar_readings", "subjects"
-  add_foreign_key "insulin_doses", "subjects"
-  add_foreign_key "meals", "subjects"
-  add_foreign_key "nutrients", "subjects"
-  add_foreign_key "users", "subjects"
 end

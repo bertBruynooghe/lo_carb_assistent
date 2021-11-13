@@ -1,9 +1,5 @@
 <!DOCTYPE html>
-<!--
-  We link to an unexisting manifest to get rid of the old obsolete one.
-  We might get rid of it once we're sure all platform have this update.
--->
-<html <%= raw 'manifest="/unknown.manifest"' if %w(index).include?(action_name) %> >
+<html>
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -34,10 +30,6 @@
         <ul>
           <% unless controller.controller_name == 'meals' %>
             <li><%= link_to 'meals', meals_path %></li><% end %>
-          <% unless controller.controller_name == 'insulin_doses' %>
-            <li><%= link_to 'insulin doses', insulin_doses_path %></li><% end %>
-          <% unless controller.controller_name == 'blood_sugar_readings' %>
-            <li><%= link_to 'blood sugar readings', blood_sugar_readings_path %></li><% end %>
         </ul>
       </div>
     </div>

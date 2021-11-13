@@ -1,8 +1,0 @@
-<% @graphs.each do |graph| %>
-  <%= line_chart(graph.data, graph.options) %>
-<% end %>
-
-<% if params[:week] %>
-  <%= link_to 'Week nadien', graphs_path(params: { week: week_later_start_date_time(params[:week]) }) %> |
-<% end %>
-<%= link_to 'Week voordien', graphs_path(params: { week: week_earlier_start_date_time(params[:week]) }) %>

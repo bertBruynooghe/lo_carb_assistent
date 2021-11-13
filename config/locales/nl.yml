@@ -22,9 +22,6 @@
 nl:
   activerecord:
     attributes:
-      blood_sugar_reading:
-        read_time: Opnametijd
-        value: Waarde
       ingredient:
         calories: kCal
         carbs: Koolhydraten
@@ -32,10 +29,6 @@ nl:
         name: Naam
         proteins: Eiwitten
         quantity: Hoeveelheid
-      insulin_dose:
-        dose: &dosis Dosis
-        bolus: Snelwerkend
-        application_time: &toegediend Toegediend
       meal:
         calories: kCal
         carbs: Koolhydraten
@@ -45,26 +38,15 @@ nl:
         name: Naam
         proteins: Eiwitten
     models:
-      blood_sugar_reading: Bloedsuikerwaarde
-      insulin_dose: Insulinedosis
       ingredient: Ingrediënt
   add: Toevoegen
   back: Terug
-  blood_sugar_readings:
-    index:
-      new: Nieuwe bloeddsuikerwaarde
   confirm: Bent u zeker?
   destroy: Verwijderen
   edit: Aanpassen
   error: fout
   errors:
     save_failed: '%{errors} zorgden ervoor dat deze %{model_name} niet opgeslagen werd:'
-  helpers:
-    label:
-      insulin_dose:
-        application_time: *toegediend
-        dose_integral: *dosis
-        bolus: Snelwerkend
   ingredients:
     form:
       add_to_favorites: Toevoegen aan favorieten
