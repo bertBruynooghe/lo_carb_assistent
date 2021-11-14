@@ -13,8 +13,11 @@
     window.decimalSeparator = '<%= raw I18n.t('number.format.separator') %>';
   <% end %>
   <%= csrf_meta_tags %>
+  <%# <link rel="manifest" href="/manifest.json" />%>
+  <meta name="apple-mobile-web-app-capable" content="yes">
 </head>
 <body>
+ <!-- <%# ActionController::Base.helpers.asset_pack_path('json/manifest.json') %> -->
   <nav>
     <div>
       <div class="toggler">

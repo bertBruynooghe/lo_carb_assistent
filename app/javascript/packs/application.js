@@ -14,3 +14,8 @@
 //
 // const images = require.context('../images', true)
 // const imagePath = (name) => images(name, true)
+
+import initServiceworker from '../src/serviceworker-companion'
+
+initServiceworker()
+console.log('Hello World from Webpacker!')
