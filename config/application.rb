@@ -17,7 +17,7 @@ module LoCarbAssistent
     # -- all .rb files in that directory are automatically loaded.
     config.i18n.default_locale = :nl
 
-    config.middleware.unshift PwaManager
+    config.middleware.unshift ServiceWorkerManager
   end
 end
 
