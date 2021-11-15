@@ -1,5 +1,5 @@
 require_relative 'boot'
-require_relative '../lib/pwa_manager'
+require_relative '../lib/service_worker_manager'
 
 require 'rails/all'
 

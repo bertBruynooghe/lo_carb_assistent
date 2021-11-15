@@ -13,7 +13,7 @@
 // or the `imagePath` JavaScript helper below.
 //
 
-import initServiceworker from '../src/serviceworker-companion'
+import initServiceWorker from '../src/service_worker_companion'
 
-initServiceworker()
+initServiceWorker()
 console.log('Hello World from Webpacker!')

@@ -4,7 +4,7 @@ const CACHE_NAME = CACHE_VERSION + ':sw-cache-'
 // mmm, it looks like the caches don't get updated once they're changed.
 // I guess the version should be a hash so it updates whenever one of the cached files changes
 const CACHES = [
-  // make sure serviceworker.js is not required by application.js
+  // make sure service_worker.js is not required by application.js
   // if you want to reference application.js from here
   '<%= ActionController::Base.helpers.asset_path "application.js" %>',
   '<%= ActionController::Base.helpers.asset_path "application.css" %>',
@@ -29,12 +29,12 @@ const dbConnection = new Promise((resolve, reject) => {
 })
 
 function onInstall(e) {
-  console.log('[Serviceworker]', 'Installing!', e)
+  console.log('[ServiceWorker]', 'Installing!', e)
   e.waitUntil(caches.open(CACHE_NAME).then(cache => cache.addAll(CACHES)))
 }
 
 function onActivate(e) {
-  console.log('[Serviceworker]', 'Activating!', e)
+  console.log('[ServiceWorker]', 'Activating!', e)
   e.waitUntil(
     caches.keys().then(keys =>
       // remember that caches are shared across the whole origin
@@ -50,7 +50,7 @@ const offlineHandler = async (request) => {
   // if not found in cache, return default offline content for navigate requests
   if (request.mode === 'navigate' ||
     (request.method === 'GET' && request.headers.get('accept').includes('text/html'))) {
-    console.log('[Serviceworker]', 'Fetching offline content')
+    console.log('[ServiceWorker]', 'Fetching offline content')
     return caches.match('/offline.html')
   }
 }
