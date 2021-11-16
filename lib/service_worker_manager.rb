@@ -19,7 +19,7 @@
 
       # let the other middleware handlers do their stuff
       status, headers, response = @app.call(env)
-      headers['Cache-Control'] = 'no-cache' if @service_worker_path == ENV['PATH_INFO']
+      headers['Cache-Control'] = 'no-cache' if @service_worker_path == env['PATH_INFO']
       [status, headers, response]
     end
   end
