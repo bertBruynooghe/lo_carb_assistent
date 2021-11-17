@@ -1,10 +1,8 @@
 import { isNutrientFetch, fetchNutrients } from '../src/nutrients_fetch_handler.js.erb'
-const CACHE_VERSION = 'v1'
-const CACHE_NAME = CACHE_VERSION + ':sw-cache-'
 
 // mmm, it looks like the caches don't get updated once they're changed.
 // I guess the version should be a hash so it updates whenever one of the cached files changes
-const CACHES = [
+const resourcesToCache = [
   // make sure service_worker.js is not required by application.js
   // if you want to reference application.js from here
   '<%= ActionController::Base.helpers.asset_path "application.js" %>',
@@ -14,7 +12,7 @@ const CACHES = [
 
 function onInstall(e) {
   console.log('[ServiceWorker]', 'Installing!', e)
-  e.waitUntil(caches.open(CACHE_NAME).then(cache => cache.addAll(CACHES)))
+  e.waitUntil(Promise.all(resourcesToCache.map(name => caches.open(name).then(cache => cache.add(name)))))
 }
 
 function onActivate(e) {
@@ -23,7 +21,7 @@ function onActivate(e) {
     caches.keys().then(keys =>
       // remember that caches are shared across the whole origin
       Promise.all(
-        keys.filter(key => key.indexOf(CACHE_VERSION) !== 0)
+        keys.filter(key => !resourcesToCache.includes(key))
           .map(key => caches.delete(key)))))
 }
 
