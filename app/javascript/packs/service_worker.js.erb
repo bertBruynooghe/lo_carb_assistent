@@ -72,7 +72,10 @@ const fetchNutrients = async request => {
 
 const nutrientsUrl = location.origin + '<%= Rails.application.routes.url_helpers.nutrients_path %>'
 
-const isNutrientFetch = r => r.method === 'GET' && r.url.indexOf(nutrientsUrl) === 0 // also check if request is json request
+const isNutrientFetch = r => {
+  const acceptHeader = r.headers.get('accept')
+  return r.method === 'GET' && r.url.indexOf(nutrientsUrl) === 0 && acceptHeader && acceptHeader.includes('application/json')
+}  // also check if request is json request
 
 // Borrowed from https://github.com/TalAter/UpUp
 async function onFetch(e) {
