@@ -15,6 +15,8 @@
   <%= favicon_link_tag image_path('maskable_icon.png'), :rel => 'icon', :type =>  'image/png' %>
   <%= csrf_meta_tags %>
   <link rel="manifest" href="/app.webmanifest" />
+  <link rel=”apple-touch-icon” href=”<%= image_path('maskable_icon.png') %>” />
+  <link rel="icon" sizes="610x610" href=”<%= image_path('maskable_icon.png') %>”>
   <meta name="apple-mobile-web-app-capable" content="yes">
 </head>
 <body>
