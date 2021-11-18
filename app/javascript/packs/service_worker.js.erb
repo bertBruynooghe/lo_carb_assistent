@@ -41,7 +41,7 @@ const offlineHandler = async (request) => {
 async function onFetch(e) {
   const result = isNutrientFetch(e.request) 
     ? fetchNutrients(e.request)
-    : fetch(e.request).catch(offlineHandler)
+    : fetch(e.request).catch(() => offlineHandler(e.request))
   
   e.respondWith(result)
 }
