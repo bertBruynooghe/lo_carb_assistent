@@ -12,6 +12,7 @@
     window.abbrDayNames = <%= raw I18n.t('date.abbr_day_names') %>;
     window.decimalSeparator = '<%= raw I18n.t('number.format.separator') %>';
   <% end %>
+  <%= favicon_link_tag image_path('maskable_icon.png'), :rel => 'icon', :type =>  'image/png' %>
   <%= csrf_meta_tags %>
   <link rel="manifest" href="/app.webmanifest" />
   <meta name="apple-mobile-web-app-capable" content="yes">
