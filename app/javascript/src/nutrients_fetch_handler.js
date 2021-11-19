@@ -1,4 +1,4 @@
-export const nutrientsUrl = location.origin + '<%= Rails.application.routes.url_helpers.nutrients_path %>'
+export const nutrientsUrl = location.origin + '<%= nutrients_path %>'
 export const isNutrientFetch = r => {
     const acceptHeader = r.headers.get('accept')
     return r.method === 'GET' && r.url.indexOf(nutrientsUrl) === 0 && acceptHeader && acceptHeader.includes('application/json')

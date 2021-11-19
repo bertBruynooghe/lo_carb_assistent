@@ -1,5 +1,4 @@
 require_relative 'boot'
-require_relative '../lib/service_worker_manager'
 
 require 'rails/all'
 
@@ -16,8 +15,6 @@ module LoCarbAssistent
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.
     config.i18n.default_locale = :nl
-
-    config.middleware.unshift ServiceWorkerManager
   end
 end
 

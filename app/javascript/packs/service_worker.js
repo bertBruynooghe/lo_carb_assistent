@@ -1,12 +1,9 @@
-import { isNutrientFetch, fetchNutrients } from '../src/nutrients_fetch_handler.js.erb'
+import { isNutrientFetch, fetchNutrients } from '../src/nutrients_fetch_handler.js'
 
-// mmm, it looks like the caches don't get updated once they're changed.
-// I guess the version should be a hash so it updates whenever one of the cached files changes
 const resourcesToCache = [
-  // make sure service_worker.js is not required by application.js
-  // if you want to reference application.js from here
-  '<%= ActionController::Base.helpers.asset_path "application.js" %>',
-  '<%= ActionController::Base.helpers.asset_path "application.css" %>',
+  '<%= asset_path "application.js" %>',
+  '<%= asset_pack_path "application.js" %>',
+  '<%= asset_path "application.css" %>',
   '/offline.html'
 ]
 
