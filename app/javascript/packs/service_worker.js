@@ -3,9 +3,12 @@ import { isNutrientFetch, fetchNutrients } from '../src/nutrients_fetch_handler.
 const resourcesToCache = {
   '<%= asset_path "application.js" %>': {},
   '<%= asset_pack_path "application.js" %>': {},
-  '<%= nutrients_url %>': { Accept: 'text/html,application/xhtml+xml,application/xml' },
   '<%= asset_path "application.css" %>': {},
-  '/app.webmanifest': {}
+
+  '<%= nutrients_url %>': { Accept: 'text/html,application/xhtml+xml,application/xml' },
+  '<%= meals_url %>': {},
+
+  '/app.webmanifest': {},
 }
 
 function onInstall(e) {
