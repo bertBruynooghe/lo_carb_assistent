@@ -9,6 +9,14 @@ const resourcesToCache = {
   '<%= meals_url %>': {},
 
   '/app.webmanifest': {},
+  '<%= image_path "maskable_icon_x48.png" %>': {},
+  '<%= image_path "maskable_icon_x72.png" %>': {},
+  '<%= image_path "maskable_icon_x96.png" %>': {},
+  '<%= image_path "maskable_icon_x128.png" %>': {},
+  '<%= image_path "maskable_icon_x192.png" %>': {},
+  '<%= image_path "maskable_icon_x384.png" %>': {},
+  '<%= image_path "maskable_icon_x512.png" %>': {},
+  '<%= image_path "maskable_icon.png" %>': {}
 }
 
 function onInstall(e) {
