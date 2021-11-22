@@ -1,8 +1,5 @@
 export const nutrientsUrl = location.origin + '<%= nutrients_path %>'
-export const isNutrientFetch = r => {
-  const acceptHeader = r.headers.get('accept')
-  return r.method === 'GET' && r.url.indexOf(nutrientsUrl) === 0 && acceptHeader && acceptHeader.includes('application/json')
-}  // also check if request is json request
+export const isNutrientFetch = r => r.method === 'GET' && r.url.indexOf(nutrientsUrl) === 0
 
 const dbOpenRequest = self.indexedDB.open('nutrientsCalculator', 1)
 
@@ -22,7 +19,25 @@ const dbConnection = new Promise((resolve, reject) => {
   }
 })
 
-export const fetchNutrients = async request => {
+export const fetchNutrients = r => {
+  console.log('fetchNutrients')
+  const acceptHeader = r.headers.get('accept')
+  return (acceptHeader && acceptHeader.includes('application/json')
+    ? fetchNutrientsJSON(r)
+    : fetchNutrientsHTML(r))
+}
+
+const fetchNutrientsHTML = async request => {
+  const oldResponse = await caches.match(request)
+
+  const newResponse = fetch(request)
+  newResponse.then(response => caches.open(request.url)
+    .then(cache => cache.put(request, response))
+    .catch(e => console.log('could not fetch nutrients', e)))
+  return oldResponse || (await newResponse).clone()
+}
+
+const fetchNutrientsJSON = async request => {
   const searchString = new URL(request.url).searchParams.get('q[name_cont]').toLowerCase()
 
   const requestClone = new Request(nutrientsUrl, request)
