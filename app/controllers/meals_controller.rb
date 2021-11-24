@@ -4,6 +4,8 @@ class MealsController < ApplicationController
   # GET /meals.json
   def index
     @meals = Meal.includes(:ingredients).for_week(params[:week]).order(consumption_time: :desc)
+    # TODO: strong params? 1 object? 
+    @offline = params[:offline]
   end
 
   # GET /meals/1
