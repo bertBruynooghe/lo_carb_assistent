@@ -20,7 +20,7 @@ const resourcesToCache = {
 }
 
 function onInstall(e) {
-  console.log('[ServiceWorker]', 'Installing!', e)
+  // console.log('[ServiceWorker]', 'Installing!', e)
   e.waitUntil(
     Promise.all(
       Object.entries(resourcesToCache)
@@ -32,7 +32,7 @@ function onInstall(e) {
 }
 
 function onActivate(e) {
-  console.log('[ServiceWorker]', 'Activating!', e)
+  // console.log('[ServiceWorker]', 'Activating!', e)
   e.waitUntil(
     caches.keys().then(keys =>
       // remember that caches are shared across the whole origin
@@ -48,7 +48,7 @@ const offlineHandler = async (request) => {
   // if not found in cache, return default offline content for navigate requests
   if (request.mode === 'navigate' ||
     (request.method === 'GET' && request.headers.get('accept').includes('text/html'))) {
-    console.log('[ServiceWorker]', 'Fetching offline content')
+    // console.log('[ServiceWorker]', 'Fetching offline content')
     return await caches.match(new Request('<%= nutrients_url %>', { headers: resourcesToCache['<%= nutrients_url %>'] }))
   }
 }

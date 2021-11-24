@@ -20,7 +20,7 @@ const dbConnection = new Promise((resolve, reject) => {
 })
 
 export const fetchNutrients = r => {
-  console.log('fetchNutrients')
+  // console.log('fetchNutrients')
   const acceptHeader = r.headers.get('accept')
   return (acceptHeader && acceptHeader.includes('application/json')
     ? fetchNutrientsJSON(r)
@@ -48,6 +48,6 @@ const fetchNutrientsJSON = async request => {
   await new Promise(resolve => nutrients.clear().onsuccess = resolve)
   await Promise.all(json.map(nutrient => new Promise(resolve => nutrients.add(nutrient).onsuccess = resolve)))
   const filtered = json.filter(nutrient => nutrient.name.toLowerCase().indexOf(searchString) >= 0)
-  console.log('x', filtered)
+  // console.log('x', filtered)
   return new Promise(resolve => resolve(new Response(JSON.stringify(filtered), allNutrientsResponse)))
 }

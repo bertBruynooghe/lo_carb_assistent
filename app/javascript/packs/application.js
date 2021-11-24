@@ -16,4 +16,4 @@
 import initServiceWorker from '../src/service_worker_companion'
 
 initServiceWorker()
-console.log('Hello World from Webpacker!')
+// console.log('Hello World from Webpacker!')
