@@ -10,19 +10,8 @@
     </tr>
   </thead>
   <tbody>
-    <% if @offline %>
-      <tr><td colspan="6">No proper internet connection.</td></tr>
-    <% else %>
-      <% @meals.each do |meal| %>
-        <tr class="<%= meal.consumption_time.strftime('%A') %>">
-          <td><%= button_to t(:destroy), meal, method: :delete %></td>
-          <td><%= link_to "#{meal.carbs}g", meal %></td>
-          <td><%= meal.proteins %>g</td>
-          <td><%= meal.fat %>g</td>
-          <td><%= meal.calories %>kCal</td>
-          <td><%= link_to meal.consumption_time.try(:iso8601), meal, data: {transform: 'dateTimeLocal'} %>
-        </tr>
-      <% end %>
+    <% @meals.each do |meal| %>
+      <%= render partial: 'meals_row', locals: { meal: meal } %>
     <% end %>
   </tbody>
 </table>
