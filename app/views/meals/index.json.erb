@@ -1,1 +1,1 @@
-<%= raw @meals.to_json include: :ingredients %>
+<%= raw @meals.map { |meal| meal.as_json methods: %i[fat calories carbs proteins consumption_day consumption_time_iso] }.to_json %>

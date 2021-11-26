@@ -17,9 +17,6 @@ import { Application } from '@hotwired/stimulus'
 import { definitionsFromContext } from '@hotwired/stimulus-webpack-helpers'
 import initServiceWorker from '../src/service_worker_companion'
 
-import { nl } from '../../../config/locales/nl.yml'
-console.log({ nl })
-
 window.Stimulus = Application.start()
 const context = require.context('../src/controllers', true, /\.js$/)
 Stimulus.load(definitionsFromContext(context))

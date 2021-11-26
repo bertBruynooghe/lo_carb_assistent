@@ -2,7 +2,14 @@ import { Controller } from '@hotwired/stimulus'
 import ejs from 'ejs'
 
 import dbConnection from '../db_connection'
-import rowPartial from '../../../views/meals/_meals_row.html.erb'
+import rowPartial from '_meals_row.html.erb'
+import i18n from 'i18njs'
+import { nl } from 'nl.yml'
+i18n.add('nl', nl)
+i18n.setLang('nl');
+
+const t = id => i18n.get(id)
+const button_to = label => `<input type="submit" value="${label}">`
 
 export default class extends Controller {
   static targets = ['tableBody']
@@ -12,23 +19,16 @@ export default class extends Controller {
     const meals = transaction.objectStore('meals')
     const request = meals.count()
     request.onsuccess = () => console.log('meals', request.result)
-    // if (indexedDb meals has rows) // otherwise the table is okay, since that means the database is never updated 
-    //   delete all rows
-    //   fill out rows of table based on indexedDb
-    // send all meals that have been created/modified locally after last fetch time
-    // receive all meals the have been created/modified remotely after last fetch time
-    // update last fetch time
-    // show alert if stuff has been changed
 
     // TODO: don't hardcode the meals path
     const result = await fetch('/meals.json')
     const rows = (await result.json()).reverse()
+    // TODO: remove the network response warning
     console.log('fetch', result.status, rows)
-    rows.forEach(r => {
-      const tr = document.createElement('tr')
-      const td = document.createElement('td')
-      tr.innerHTML = `<td>${JSON.stringify(r)}</td>`
-      this.tableBodyTarget.prepend(tr)
+    rows.forEach(meal => {
+      const temp = document.createElement('template')
+      temp.innerHTML = ejs.render(rowPartial, { meal, t, button_to }, { escape: s => s }).trim()
+      this.tableBodyTarget.prepend(temp.content.firstChild)
     })
   }
 }

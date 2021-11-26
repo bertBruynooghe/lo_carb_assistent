@@ -22,6 +22,14 @@ class Meal < ApplicationRecord
     carbs + proteins / 5.0
   end
 
+  def consumption_day
+    consumption_time.strftime('%A')
+  end
+
+  def consumption_time_iso
+    consumption_time.try(:iso8601)
+  end
+
   scope :for_week, -> (start_day) {
     if start_day
       start_day = DateTime.iso8601(start_day)

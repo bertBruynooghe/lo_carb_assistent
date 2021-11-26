@@ -1,8 +1,13 @@
-<tr class="<%= meal.consumption_time.strftime('%A') %>">
+<tr class="<%= meal.consumption_day %>">
+  <%# TODO: link to meal %>
   <td><%= button_to(t('destroy'), meal, { method: 'delete' }) %></td>
-  <td><%= link_to "#{meal.carbs}g", meal %></td>
+  <td><%= meal.carbs %>g</td>
   <td><%= meal.proteins %>g</td>
   <td><%= meal.fat %>g</td>
   <td><%= meal.calories %>kCal</td>
-  <td><% link_to meal.consumption_time.try(:iso8601), meal, data: {transform: 'dateTimeLocal'} %>
+  <td>
+    <%# TODO: change dateTimeLocal to a proper stimulus controller,
+              as it doesn't work when rendered dynamically %>
+    <div data-transform='dateTimeLocal'><%= meal.consumption_time_iso %></div>
+  </td>
 </tr>
