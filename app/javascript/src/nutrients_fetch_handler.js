@@ -1,23 +1,7 @@
+import dbConnection from './db_connection.js'
+
 export const nutrientsUrl = location.origin + '<%= nutrients_path %>'
 export const isNutrientFetch = r => r.method === 'GET' && r.url.indexOf(nutrientsUrl) === 0
-
-const dbOpenRequest = self.indexedDB.open('nutrientsCalculator', 1)
-
-dbOpenRequest.onupgradeneeded = ({ target: { result: db }, oldVersion }) => {
-  switch (oldVersion) { // existing db version
-    case 0:
-      const nutrients = db.createObjectStore('nutrients', { keyPath: '_id', autoIncrement: true })
-      nutrients.createIndex('id_idx', 'id', { unique: true })
-  }
-}
-
-const dbConnection = new Promise((resolve, reject) => {
-  dbOpenRequest.onerror = reject
-  dbOpenRequest.onsuccess = ({ target: { result: db } }) => {
-    db.onerror = ({ target: { errorCode } }) => console.error('Database error: ' + errorCode)
-    resolve(db)
-  }
-})
 
 export const fetchNutrients = r => {
   // console.log('fetchNutrients')
