@@ -15,5 +15,8 @@
 
 import initServiceWorker from '../src/service_worker_companion'
 
+import { nl } from '../../../config/locales/nl.yml'
+console.log({ nl })
+
 initServiceWorker()
 // console.log('Hello World from Webpacker!')
