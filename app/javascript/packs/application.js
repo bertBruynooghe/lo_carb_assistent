@@ -17,9 +17,6 @@ import { Application } from '@hotwired/stimulus'
 import { definitionsFromContext } from '@hotwired/stimulus-webpack-helpers'
 import initServiceWorker from '../src/service_worker_companion'
 
-const htmlTest = require('../../../public/404.html')
-console.log({ htmlTest })
-
 import { nl } from '../../../config/locales/nl.yml'
 console.log({ nl })
 

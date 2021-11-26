@@ -1,5 +1,8 @@
 import { Controller } from '@hotwired/stimulus'
+import ejs from 'ejs'
+
 import dbConnection from '../db_connection'
+import rowPartial from '../../../views/meals/_meals_row.html.erb'
 
 export default class extends Controller {
   static targets = ['tableBody']
@@ -17,7 +20,7 @@ export default class extends Controller {
     // update last fetch time
     // show alert if stuff has been changed
 
-    // TODO: don't hardcode the meals apth
+    // TODO: don't hardcode the meals path
     const result = await fetch('/meals.json')
     const rows = (await result.json()).reverse()
     console.log('fetch', result.status, rows)
