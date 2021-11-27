@@ -6,8 +6,6 @@
   <td><%= meal.fat %>g</td>
   <td><%= meal.calories %>kCal</td>
   <td>
-    <%# TODO: change dateTimeLocal to a proper stimulus controller,
-              as it doesn't work when rendered dynamically %>
-    <div data-transform='dateTimeLocal'><%= meal.consumption_time_iso %></div>
+    <div data-controller='date-time-local'><%= meal.consumption_time_iso %></div>
   </td>
 </tr>

@@ -5,9 +5,8 @@ class ServiceWorkerController < ApplicationController
     # The idea is to render the pack file inline using fragment cache
 
     def index
-        # next solution is rather hacky, it resolves the erb of the pack AFTER building them, 
+        # TODO: next solution is rather hacky, it resolves the erb of the pack AFTER building them, 
         # which poses a bit af a risk if somewhere in the files a `<%` appears
-        # TODO: replace //# sourceMappingURL= with right path for sourcemapping to work
         respond_to do |format|
           format.js {
             render inline: getJs(), cache: true

@@ -14,6 +14,4 @@
 //= require jquery_ujs
 //= require bootstrap-sprockets
 //= require bootstrap-typeahead-rails
-//= require Chart.bundle
-//= require chartkick
 //= require_tree .
