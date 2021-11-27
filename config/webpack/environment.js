@@ -12,8 +12,7 @@ const htmlLoader = {
     loader: 'html-loader',
 }
 
-// environment.loaders.prepend('erb', erb)
 environment.loaders.append('yaml', yamlLoader)
 environment.loaders.append('html', htmlLoader)
-
+environment.loaders.prepend('erb', erb)
 module.exports = environment

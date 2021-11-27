@@ -1,6 +1,6 @@
 import dbConnection from './db_connection.js'
 
-export const nutrientsUrl = location.origin + '<%= nutrients_path %>'
+export const nutrientsUrl = location.origin + '<%= Rails.application.routes.path_for(controller: :nutrients, action: :index) %>'
 export const isNutrientFetch = r => r.method === 'GET' && r.url.indexOf(nutrientsUrl) === 0
 
 export const fetchNutrients = r => {

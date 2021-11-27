@@ -1,5 +1,6 @@
 module.exports = {
-  test: /\.erb$/,
+  // don't process html.erb files, as we want these to be compiled dynnamically
+  test: /\.js\.erb$/,
   enforce: 'pre',
   exclude: /node_modules/,
   use: [{
