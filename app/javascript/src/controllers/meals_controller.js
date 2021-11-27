@@ -5,6 +5,8 @@ import dbConnection from '../db_connection'
 import rowPartial from '_meals_row.html.erb'
 import i18n from 'i18njs'
 import { nl } from 'nl.yml'
+// TODO: it's probably better to use I18n.backend.translations[:nl].to_json
+
 i18n.add('nl', nl)
 i18n.setLang('nl');
 
