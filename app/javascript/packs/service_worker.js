@@ -2,7 +2,8 @@ import { isNutrientFetch, fetchNutrients } from '../src/nutrients_fetch_handler.
 
 const resourcesToCache = {
   '<%= asset_path "application.js" %>': {},
-  '<%= asset_pack_path "application.js" %>': {},
+  // next one gets resolved in the controller, as it can't be resolved by erb at time of the webpacker compilatiion
+  'asset_pack_path "application.js"': {},
   '<%= asset_path "application.css" %>': {},
 
   '<%= nutrients_url %>': { Accept: 'text/html,application/xhtml+xml,application/xml' },
