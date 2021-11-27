@@ -22,8 +22,7 @@ export default class extends Controller {
     const request = meals.count()
     request.onsuccess = () => console.log('meals', request.result)
 
-    // TODO: don't hardcode the meals path
-    const result = await fetch('/meals.json')
+    const result = await fetch('<%= Rails.application.routes.path_for(controller: :meals, action: :index) %>.json')
     const rows = (await result.json()).reverse()
     // TODO: remove the network response warning
     console.log('fetch', result.status, rows)

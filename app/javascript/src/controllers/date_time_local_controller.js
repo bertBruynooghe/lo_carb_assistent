@@ -18,7 +18,7 @@ function inLastWeek(date) {
 export default class extends Controller {
   connect() {
     const date = new Date(this.element.innerHTML.trim())
-    const text = date.getHours() + ':' + ((100 + date.getMinutes())+'').slice(1)
+    var text = date.getHours() + ':' + ((100 + date.getMinutes())+'').slice(1)
     if (!inLast24Hours(date)){ text += (' ' + window.abbrDayNames[date.getDay()]) }
     if (!inLastWeek(date)) { text += (', ' + date.getDate() + '/' + (date.getMonth()+1)) }
     if (!inLastYear(date)) { text += ('/' + date.getFullYear() ) }
