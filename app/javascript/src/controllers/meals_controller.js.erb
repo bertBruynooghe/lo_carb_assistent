@@ -1,16 +1,14 @@
 import { Controller } from '@hotwired/stimulus'
 import ejs from 'ejs'
+import I18n from 'i18n-js'
 
 import dbConnection from '../db_connection'
 import rowPartial from '_meals_row.html.erb'
-import i18n from 'i18njs'
-import { nl } from 'nl.yml'
-// TODO: it's probably better to use I18n.backend.translations[:nl].to_json
 
-i18n.add('nl', nl)
-i18n.setLang('nl');
+I18n.locale = 'nl'
+I18n.translations = <%= I18n::JS.filtered_translations.to_json %>
+const { t } = I18n
 
-const t = id => i18n.get(id)
 const button_to = label => `<input type="submit" value="${label}">`
 
 export default class extends Controller {

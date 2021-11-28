@@ -24,6 +24,7 @@ gem 'devise-i18n-views'
 gem 'virtus'
 gem "rest-client", ">= 1.8.0"
 gem "webpacker"
+gem 'i18n-js'
 
 group :development, :test do
   gem 'binding_of_caller'
