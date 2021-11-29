@@ -1,27 +1,33 @@
-<table <% unless @meals %>data-controller="meals" <% end %>>
-  <thead>
-    <tr>
-      <th><%= link_to t('.new'), new_meal_path %></th>
-      <th><%= Meal.human_attribute_name(:carbs) %></th>
-      <th><%= Meal.human_attribute_name(:proteins) %></th>
-      <th><%= Meal.human_attribute_name(:fat) %></th>
-      <th><%= Meal.human_attribute_name(:calories) %></th>
-      <th><%= Meal.human_attribute_name(:consumption_time) %></th>
-    </tr>
-  </thead>
-  <tbody data-meals-target="tableBody">
-    <% if @meals %>
-      <% @meals.each do |meal| %>
-        <%= render partial: 'meals_row', locals: { meal: meal } %>
+<div <% unless @meals %>data-controller="meals" <% end %>>
+  <table >
+    <thead>
+      <tr>
+        <th><%= link_to t('.new'), new_meal_path %></th>
+        <th><%= Meal.human_attribute_name(:carbs) %></th>
+        <th><%= Meal.human_attribute_name(:proteins) %></th>
+        <th><%= Meal.human_attribute_name(:fat) %></th>
+        <th><%= Meal.human_attribute_name(:calories) %></th>
+        <th><%= Meal.human_attribute_name(:consumption_time) %></th>
+      </tr>
+    </thead>
+    <tbody data-meals-target="tableBody">
+      <% if @meals %>
+        <% @meals.each do |meal| %>
+          <%= render partial: 'meals_row', locals: { meal: meal } %>
+        <% end %>
       <% end %>
-    <% else %>
-      Waiting for the network to respond. Results might not be accurate for now, but you can continue working.
-    <% end %>
-  </tbody>
-</table>
-<br>
+    </tbody>
+  </table>
+  
+  <% if params[:week] %>
+    <%= link_to 'Week nadien', meals_path(params: { week: week_later_start_date_time(params[:week]) }) %> |
+  <% end %>
+  <%= link_to 'Week voordien', meals_path(params: { week: week_earlier_start_date_time(params[:week]) }) %>
 
-<% if params[:week] %>
-  <%= link_to 'Week nadien', meals_path(params: { week: week_later_start_date_time(params[:week]) }) %> |
-<% end %>
-<%= link_to 'Week voordien', meals_path(params: { week: week_earlier_start_date_time(params[:week]) }) %>
+  <% unless @meals %>
+    <div data-meals-target="networkBusy">
+      Waiting for the network to respond.
+      Results might not be accurate for now, but you can continue working.
+    </div>
+  <% end %>
+</div>

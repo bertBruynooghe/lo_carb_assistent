@@ -12,7 +12,7 @@ const { t } = I18n
 const button_to = label => `<input type="submit" value="${label}">`
 
 export default class extends Controller {
-  static targets = ['tableBody']
+  static targets = ['tableBody', 'networkBusy']
 
   async connect() {
     const transaction = (await dbConnection).transaction('meals', 'readonly')
@@ -21,8 +21,12 @@ export default class extends Controller {
     request.onsuccess = () => console.log('meals', request.result)
 
     const result = await fetch('<%= Rails.application.routes.path_for(controller: :meals, action: :index) %>.json')
+    if (!result.ok) return // TODO: proper handling of the error
+
+    this.networkBusyTarget.hidden = true
+
     const rows = (await result.json()).reverse()
-    // TODO: remove the network response warning
+ 
     console.log('fetch', result.status, rows)
     rows.forEach(meal => {
       const temp = document.createElement('template')
