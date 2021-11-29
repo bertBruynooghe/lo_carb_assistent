@@ -8,11 +8,6 @@
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= javascript_pack_tag 'application', 'data-turbolinks-track' => true %>
-  <!-- TODO: get rid of next script -->
-  <%= javascript_tag do %>
-    window.abbrDayNames = <%= raw I18n.t('date.abbr_day_names') %>;
-    window.decimalSeparator = '<%= raw I18n.t('number.format.separator') %>';
-  <% end %>
   <%= favicon_link_tag image_path('maskable_icon.png'), :rel => 'icon', :type =>  'image/png' %>
   <%= csrf_meta_tags %>
   <link rel="manifest" href="/app.webmanifest" />
