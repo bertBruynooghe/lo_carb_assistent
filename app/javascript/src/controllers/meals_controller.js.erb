@@ -6,17 +6,25 @@ import dbConnection from '../db_connection'
 import rowPartial from '_meals_row.html.erb'
 
 // TODO: extract to higher level
-const button_to = (label, { id }) => {
-  const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content')
-  return `
-    <form class="button_to" method="post" action="/meals/${id}">
-      <input type="hidden" name="_method" value="delete">
-      <input type="submit" value="${label}">
-      <input type="hidden" name="authenticity_token" value="${csrfToken}">
-    </form>
-  `
+const context = {
+  button_to: (label, { id }) => {
+    const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+    return `
+      <form class="button_to" method="post" action="/meals/${id}">
+        <input type="hidden" name="_method" value="delete">
+        <input type="submit" value="${label}">
+        <input type="hidden" name="authenticity_token" value="${csrfToken}">
+      </form>
+    `
+  },
+  url_for: ({ id }) => {
+    // TODO: find a way to do this less hacky
+    const template = "<%= Rails.application.routes.path_for(controller: :meals, action: :show, id: -1) %>"
+    return template.replace('-1', id)
+  },
+  t: I18n.t
 }
-const { t } = I18n
+
 export default class extends Controller {
   static targets = ['tableBody', 'networkBusy']
 
@@ -36,7 +44,7 @@ export default class extends Controller {
     console.log('fetch', result.status, rows)
     rows.forEach(meal => {
       const temp = document.createElement('template')
-      temp.innerHTML = ejs.render(rowPartial, { meal, t, button_to }, { escape: s => s }).trim()
+      temp.innerHTML = ejs.render(rowPartial, { meal, ...context }, { escape: s => s }).trim()
       this.tableBodyTarget.prepend(temp.content.firstChild)
     })
   }

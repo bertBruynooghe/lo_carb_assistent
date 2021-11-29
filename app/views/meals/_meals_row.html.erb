@@ -1,12 +1,12 @@
 <tr class="<%= meal.consumption_day %>">
   <td><%= button_to(t('destroy'), meal, { method: 'delete' }) %></td>
   <%# path should at least be dynamic %>
-  <td><a href="/meals/<%= meal.id %>" ><%= meal.carbs %>&thinsp;g</a></td>
-  <td><a href="/meals/<%= meal.id %>" ><%= meal.proteins %>&thinsp;g</a></td>
-  <td><a href="/meals/<%= meal.id %>" ><%= meal.fat %>&thinsp;g</a></td>
-  <td><a href="/meals/<%= meal.id %>" ><%= meal.calories %>&thinsp;kCal</a></td>
+  <td><a href="<%= url_for(meal) %>" ><%= meal.carbs %>&thinsp;g</a></td>
+  <td><a href="<%= url_for(meal) %>" ><%= meal.proteins %>&thinsp;g</a></td>
+  <td><a href="<%= url_for(meal) %>" ><%= meal.fat %>&thinsp;g</a></td>
+  <td><a href="<%= url_for(meal) %>" ><%= meal.calories %>&thinsp;kCal</a></td>
   <td>
-    <a href="/meals/<%= meal.id %>" data-controller='date-time-local'>
+    <a href="<%= url_for(meal) %>" data-controller='date-time-local'>
       <%= meal.consumption_time_iso %></a>
   </td>
 </tr>
