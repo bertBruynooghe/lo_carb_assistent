@@ -15,9 +15,10 @@ class ServiceWorkerController < ApplicationController
       file_path = Rails.root.join('public', service_worker_js_path[1..])
       content = File.read(file_path)
       pack_folder_url = service_worker_js_path.split('/')[...-1].join('/')
-      content.gsub(/^\/\/# sourceMappingURL=/, '//# sourceMappingURL=' + pack_folder_url + '/')
-      # We need to resolve the path of the application.js pack here as it can't be resolved during
-      # webpacker compilation
-      content.gsub(/asset_pack_path "application\.js"/, ActionController::Base.helpers.asset_pack_path('application.js'))
+      content
+        .gsub(/^\/\/# sourceMappingURL=/, '//# sourceMappingURL=' + pack_folder_url + '/')
+        # We need to resolve the path of the application.js pack here as it can't be resolved during
+        # webpacker compilation
+        .gsub(/asset_pack_path "application\.js"/, ActionController::Base.helpers.asset_pack_path('application.js'))
     end
 end
