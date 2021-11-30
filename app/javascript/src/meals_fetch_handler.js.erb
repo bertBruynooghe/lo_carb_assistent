@@ -1,0 +1,35 @@
+export const mealsPath = '<%= Rails.application.routes.path_for(controller: :meals, action: :index) %>'
+
+// TODO: this also catches new, show, edit, and this is not what we want in the end.
+export const isMealsFetch = r => {
+  const { searchParams, pathname } = new URL(r.url)
+  const ajax = searchParams.get('ajax')
+  return (r.method === 'GET' && pathname.indexOf(mealsPath) === 0 && !ajax)
+}
+
+const fetchMealsHTML = async (request) => {
+  const newRequest = new Request(`${mealsPath}?ajax=true`, { ...request, mode: 'cors' } )
+
+  // get the response from the cache, this should never fail
+  const oldResponse = await caches.match(newRequest)
+  
+  fetch(newRequest).then(async (response) => {
+    const cache = await caches.open(newRequest.url)
+    cache.put(newRequest, response) 
+  }).catch(e => {
+    // couldn't get the HTML, so we're not updating the cache
+  })
+  
+  return oldResponse
+}
+
+const fetchMealsJSON = request => {
+  return new Promise(resolve =>
+    fetch(request).then(resolve).catch(() => new Response([])))
+}
+
+export const fetchMeals = request => {
+  const { pathname } = new URL(request.url)
+  if (pathname === mealsPath) return fetchMealsHTML(request)
+  if (pathname === `${mealsPath}.json`) return fetchMealsJSON(request)
+}

@@ -1,4 +1,5 @@
 import { isNutrientFetch, fetchNutrients } from '../src/nutrients_fetch_handler.js'
+import { isMealsFetch, fetchMeals } from '../src/meals_fetch_handler.js'
 
 const resourcesToCache = {
   '<%= ActionController::Base.helpers.asset_path "application.js" %>': {},
@@ -7,7 +8,7 @@ const resourcesToCache = {
   '<%= ActionController::Base.helpers.asset_path "application.css" %>': {},
 
   '<%= Rails.application.routes.path_for(controller: :nutrients, action: :index) %>': { Accept: 'text/html,application/xhtml+xml,application/xml' },
-  '<%= Rails.application.routes.path_for(controller: :meals, action: :index) %>': {},
+  [location.origin + '<%= Rails.application.routes.path_for(controller: :meals, action: :index) %>' + '?ajax=true']: {},
 
   '/app.webmanifest': {},
   '<%= ActionController::Base.helpers.image_path "maskable_icon_x48.png" %>': {},
@@ -54,10 +55,11 @@ const offlineHandler = async (request) => {
   }
 }
 
-// Borrowed from https://github.com/TalAter/UpUp
 async function onFetch(e) {
   const result = isNutrientFetch(e.request)
     ? fetchNutrients(e.request)
+    : isMealsFetch(e.request)
+    ? fetchMeals(e.request) 
     : fetch(e.request).catch(() => offlineHandler(e.request))
 
   e.respondWith(result)
