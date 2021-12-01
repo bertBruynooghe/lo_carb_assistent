@@ -9,6 +9,7 @@ const resourcesToCache = {
 
   '<%= Rails.application.routes.path_for(controller: :nutrients, action: :index) %>': { Accept: 'text/html,application/xhtml+xml,application/xml' },
   [location.origin + '<%= Rails.application.routes.path_for(controller: :meals, action: :index) %>' + '?ajax=true']: {},
+  [location.origin + '<%= Rails.application.routes.path_for(controller: :meals, action: :new) %>']: {},
 
   '/app.webmanifest': {},
   '<%= ActionController::Base.helpers.image_path "maskable_icon_x48.png" %>': {},
