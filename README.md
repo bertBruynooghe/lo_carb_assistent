@@ -46,3 +46,11 @@ As the app has been tested in real-life situations, a number of issues came out:
 * graph support
 * support for input data from glucose measurements.
 * decimal separator support in windows phone is still quite clunky.
+
+## Development
+
+### webpacker-dev-server without inlining
+
+This can be helpfull when debuggging offline behaviour as it gets rid of the websockets for hot module reloading of teh webpack devserver:
+
+`sh -ac '. ./.without-dev-server-inlining; ./bin/webpack-dev-server'`
