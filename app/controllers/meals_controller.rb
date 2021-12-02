@@ -30,6 +30,11 @@ class MealsController < ApplicationController
   # POST /meals.json
   def create
     @form_object = Meal::FormObject.new(form_object_params)
+    # TODO: I guess the right way should be to have different paths:
+    # POST meals/new/ingredient => goes back to POST meal/new
+    # POST meals/:meal_id/ingredient => goes back to POST meal/:meal_id/edit
+    # and let this paths be handled by the meal_builder_controller, which does not need the authentication token
+
     respond_to do |format|
       if @form_object.save
         format.html { redirect_to @form_object, notice: 'Meal was successfully created.', only_path: true }
