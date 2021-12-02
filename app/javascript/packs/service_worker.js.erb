@@ -55,7 +55,8 @@ const offlineHandler = async (request) => {
   if (request.mode === 'navigate' ||
     (request.method === 'GET' && request.headers.get('accept').includes('text/html'))) {
     // console.log('[ServiceWorker]', 'Fetching offline content')
-    return await caches.match(new Request('<%= Rails.application.routes.path_for(controller: :nutrients, action: :index) %>', { headers: resourcesToCache['<%= Rails.application.routes.path_for(controller: :nutrients, action: :index) %>'] }))
+    <% path = routes.path_for(controller: :nutrients, action: :index) %>
+    return await caches.match(new Request('<%= path %>', { headers: resourcesToCache['<%= path %>'] }))
   }
 }
 
