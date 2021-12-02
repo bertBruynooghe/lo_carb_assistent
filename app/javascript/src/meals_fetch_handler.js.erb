@@ -5,8 +5,6 @@ const newMealPath = '<%= Rails.application.routes.path_for(controller: :meals, a
 export const isMealsFetch = r => {
   const { searchParams, pathname } = new URL(r.url)
   const ajax = searchParams.get('ajax')
-  const result = (r.method === 'GET' && pathname.indexOf(mealsPath) === 0 && !ajax)
-  console.log(result)
 
   return (r.method === 'GET' && pathname.indexOf(mealsPath) === 0 && !ajax)
 }
@@ -29,7 +27,7 @@ const fetchMealsHTML = async (request) => {
 
 const fetchNewMealHTML = async (request) => {
   // get the response from the cache, this should never fail
-  // TODO: not 100% sure why teh mode has to change from 'navigate' to 'cors'
+  // TODO: not 100% sure why the mode has to change from 'navigate' to 'cors'
   const newRequest = new Request(request.url, { ...request, mode: 'cors' } )
 
   const oldResponse = await caches.match(newRequest)

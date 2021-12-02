@@ -1,25 +1,28 @@
 import { isNutrientFetch, fetchNutrients } from '../src/nutrients_fetch_handler.js'
 import { isMealsFetch, fetchMeals } from '../src/meals_fetch_handler.js'
 
+<% routes = Rails.application.routes %>
+<% helpers = ActionController::Base.helpers %>
+
 const resourcesToCache = {
-  '<%= ActionController::Base.helpers.asset_path "application.js" %>': {},
+  '<%= helpers.asset_path "application.js" %>': {},
   // <%# next one gets resolved in the controller, as it can't be resolved by erb at time of the webpacker compilation %>
   'asset_pack_path "application.js"': {},
-  '<%= ActionController::Base.helpers.asset_path "application.css" %>': {},
+  '<%= helpers.asset_path "application.css" %>': {},
 
-  '<%= Rails.application.routes.path_for(controller: :nutrients, action: :index) %>': { Accept: 'text/html,application/xhtml+xml,application/xml' },
-  [location.origin + '<%= Rails.application.routes.path_for(controller: :meals, action: :index) %>' + '?ajax=true']: {},
-  [location.origin + '<%= Rails.application.routes.path_for(controller: :meals, action: :new) %>']: {},
+  '<%= routes.path_for(controller: :nutrients, action: :index) %>': { Accept: 'text/html,application/xhtml+xml,application/xml' },
+  [location.origin + '<%= routes.path_for(controller: :meals, action: :index) %>' + '?ajax=true']: {},
+  [location.origin + '<%= routes.path_for(controller: :meals, action: :new) %>']: {},
 
   '/app.webmanifest': {},
-  '<%= ActionController::Base.helpers.image_path "maskable_icon_x48.png" %>': {},
-  '<%= ActionController::Base.helpers.image_path "maskable_icon_x72.png" %>': {},
-  '<%= ActionController::Base.helpers.image_path "maskable_icon_x96.png" %>': {},
-  '<%= ActionController::Base.helpers.image_path "maskable_icon_x128.png" %>': {},
-  '<%= ActionController::Base.helpers.image_path "maskable_icon_x192.png" %>': {},
-  '<%= ActionController::Base.helpers.image_path "maskable_icon_x384.png" %>': {},
-  '<%= ActionController::Base.helpers.image_path "maskable_icon_x512.png" %>': {},
-  '<%= ActionController::Base.helpers.image_path "maskable_icon.png" %>': {}
+  '<%= helpers.image_path "maskable_icon_x48.png" %>': {},
+  '<%= helpers.image_path "maskable_icon_x72.png" %>': {},
+  '<%= helpers.image_path "maskable_icon_x96.png" %>': {},
+  '<%= helpers.image_path "maskable_icon_x128.png" %>': {},
+  '<%= helpers.image_path "maskable_icon_x192.png" %>': {},
+  '<%= helpers.image_path "maskable_icon_x384.png" %>': {},
+  '<%= helpers.image_path "maskable_icon_x512.png" %>': {},
+  '<%= helpers.image_path "maskable_icon.png" %>': {}
 }
 
 function onInstall(e) {

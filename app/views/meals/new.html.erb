@@ -1,6 +1,9 @@
 <p>
   <%= @form_object.carbs %>gkH, <%= @form_object.proteins %>g proteïne
 </p>
+<%# This page is used to render either the new meals page itself, 
+    or the slected/new ingredient. All information is in the form object.
+%>
 <% if %i(edit new).include? @form_object.ingredient_action %>
   <%= render "ingredients/#{@form_object.ingredient_action}", form_object: @form_object %>
 <% elsif @form_object.ingredient_action == :lookup %>
