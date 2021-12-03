@@ -53,5 +53,6 @@ export const fetchMeals = request => {
     case newMealPath: return fetchNewMealHTML(request)
     case mealsPath: return fetchMealsHTML(request)
     case `${mealsPath}.json`: return fetchMealsJSON(request)
+    default: return fetch(request)
   }
 }
