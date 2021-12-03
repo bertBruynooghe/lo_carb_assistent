@@ -1,6 +1,8 @@
 require 'ostruct'
 
 class MealsController < ApplicationController
+  skip_before_action :verify_authenticity_token, only: :create
+
 
   # GET /meals
   # GET /meals.json
@@ -29,14 +31,17 @@ class MealsController < ApplicationController
   # POST /meals
   # POST /meals.json
   def create
+
     @form_object = Meal::FormObject.new(form_object_params)
     # TODO: I guess the right way should be to have different paths:
     # POST meals/new/ingredient => goes back to POST meal/new
     # POST meals/:meal_id/ingredient => goes back to POST meal/:meal_id/edit
     # and let this paths be handled by the meal_builder_controller, which does not need the authentication token
 
+    if (@ingredient_index.nil?) then verify_authenticity_token end
+
     respond_to do |format|
-      if @form_object.save
+      if (@ingredient_index.nil? && @form_object.save)
         format.html { redirect_to @form_object, notice: 'Meal was successfully created.', only_path: true }
         format.json { render :show, status: :created, location: @form_object }
       else
