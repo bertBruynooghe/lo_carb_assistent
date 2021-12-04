@@ -38,13 +38,15 @@ class MealsController < ApplicationController
     # POST meals/:meal_id/ingredient => goes back to POST meal/:meal_id/edit
     # and let this paths be handled by the meal_builder_controller, which does not need the authentication token
 
-    if (@ingredient_index.nil?) then verify_authenticity_token end
+    puts "*** meals_controller#create #{@form_object.as_json}"
+    if (@form_object.ingredient_index.nil?) then verify_authenticity_token end
 
     respond_to do |format|
-      if (@ingredient_index.nil? && @form_object.save)
+      if (@form_object.ingredient_index.nil? && @form_object.save)
         format.html { redirect_to @form_object, notice: 'Meal was successfully created.', only_path: true }
         format.json { render :show, status: :created, location: @form_object }
       else
+        # the new template renders both the new meal page. as well as what should be the meal_ingredient pages
         format.html { render :new }
         format.json { render json: @form_object.errors, status: :unprocessable_entity }
       end

@@ -26,14 +26,6 @@ class Meal
       @meal.assign_attributes(new_attributes)
     end
 
-    def save(*args)
-      # don't save yet if we're about to start/finishing an ingredient edit
-      # TODO: this looks like some magical value: 
-      # ingredient_index is the index of the ingredient currently being created/edited?
-      return false unless @ingredient_index.nil?
-      @meal.save
-    end
-
     def selected_ingredient
       ingredients[ingredient_index] || Ingredient.new
     end
