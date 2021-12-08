@@ -4,6 +4,8 @@ import { isMealsFetch, fetchMeals } from '../src/meals_fetch_handler.js'
 // <% routes = Rails.application.routes %>
 // <% helpers = ActionController::Base.helpers %>
 
+const version = 0
+
 const resourcesToCache = {
   '<%= helpers.asset_path "application.js" %>': {},
   // <%# next one gets resolved in the controller, as it can't be resolved by erb at time of the webpacker compilation %>
@@ -26,7 +28,7 @@ const resourcesToCache = {
 }
 
 function onInstall(e) {
-  // console.log('[ServiceWorker]', 'Installing!', e)
+  console.log('[ServiceWorker]', 'Installing!', version)
   e.waitUntil(
     Promise.all(
       Object.entries(resourcesToCache)
@@ -38,7 +40,7 @@ function onInstall(e) {
 }
 
 function onActivate(e) {
-  // console.log('[ServiceWorker]', 'Activating!', e)
+  console.log('[ServiceWorker]', 'Activating!', version)
   e.waitUntil(
     caches.keys().then(keys =>
       // remember that caches are shared across the whole origin
@@ -55,7 +57,7 @@ const offlineHandler = async (request) => {
   if (request.mode === 'navigate' ||
     (request.method === 'GET' && request.headers.get('accept').includes('text/html'))) {
     // console.log('[ServiceWorker]', 'Fetching offline content')
-    <% path = routes.path_for(controller: :nutrients, action: :index) %>
+    //<% path = routes.path_for(controller: :nutrients, action: :index) %>
     return await caches.match(new Request('<%= path %>', { headers: resourcesToCache['<%= path %>'] }))
   }
 }

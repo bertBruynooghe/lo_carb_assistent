@@ -29,5 +29,6 @@ class ServiceWorkerController < ApplicationController
         # We need to resolve the path of the application.js pack here as it can't be resolved during
         # webpacker compilation
         .gsub(/asset_pack_path "application\.js"/, ActionController::Base.helpers.asset_pack_path('application.js'))
+        .gsub!(/( version = )0/) { |m| m.gsub!($&, "#{$1}'#{ENV['SOURCE_VERSION'] || srand.to_s(16)}'" ) }
     end
 end
