@@ -3,49 +3,49 @@ import ejs from 'ejs'
 
 import I18n from '../i18n.js.erb'
 import dbConnection from '../db_connection'
-import rowPartial from '_meals_row.html.erb'
+// import rowPartial from '_meals_row.html.erb'
 
 // TODO: extract to higher level
-const context = {
-  button_to: (label, { id }) => {
-    const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content')
-    return `
-      <form class="button_to" method="post" action="/meals/${id}">
-        <input type="hidden" name="_method" value="delete">
-        <input type="submit" value="${label}">
-        <input type="hidden" name="authenticity_token" value="${csrfToken}">
-      </form>
-    `
-  },
-  url_for: ({ id }) => {
-    // TODO: find a way to do this less hacky
-    const template = "<%= Rails.application.routes.path_for(controller: :meals, action: :show, id: -1) %>"
-    return template.replace('-1', id)
-  },
-  t: I18n.t
-}
+// const context = {
+//   button_to: (label, { id }) => {
+//     const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+//     return `
+//       <form class="button_to" method="post" action="/meals/${id}">
+//         <input type="hidden" name="_method" value="delete">
+//         <input type="submit" value="${label}">
+//         <input type="hidden" name="authenticity_token" value="${csrfToken}">
+//       </form>
+//     `
+//   },
+//   url_for: ({ id }) => {
+//     // TODO: find a way to do this less hacky
+//     const template = "<%= Rails.application.routes.path_for(controller: :meals, action: :show, id: -1) %>"
+//     return template.replace('-1', id)
+//   },
+//   t: I18n.t
+// }
 
 export default class extends Controller {
   static targets = ['tableBody', 'networkBusy']
 
   async connect() {
-    const transaction = (await dbConnection).transaction('meals', 'readonly')
-    const meals = transaction.objectStore('meals')
-    const request = meals.count()
-    request.onsuccess = () => console.log('meals', request.result)
+    // const transaction = (await dbConnection).transaction('meals', 'readonly')
+    // const meals = transaction.objectStore('meals')
+    // const request = meals.count()
+    // request.onsuccess = () => console.log('meals', request.result)
 
-    const result = await fetch('<%= Rails.application.routes.path_for(controller: :meals, action: :index) %>.json')
-    if (!result.ok) return // TODO: proper handling of the error
+    // const result = await fetch('<%= Rails.application.routes.path_for(controller: :meals, action: :index) %>.json')
+    // if (!result.ok) return // TODO: proper handling of the error
 
-    this.networkBusyTarget.hidden = true
+    // this.networkBusyTarget.hidden = true
 
-    const rows = (await result.json()).reverse()
+    // const rows = (await result.json()).reverse()
  
-    console.log('fetch', result.status, rows)
-    rows.forEach(meal => {
-      const temp = document.createElement('template')
-      temp.innerHTML = ejs.render(rowPartial, { meal, ...context }, { escape: s => s }).trim()
-      this.tableBodyTarget.prepend(temp.content.firstChild)
-    })
+    // console.log('fetch', result.status, rows)
+    // rows.forEach(meal => {
+    //   const temp = document.createElement('template')
+    //   temp.innerHTML = ejs.render(rowPartial, { meal, ...context }, { escape: s => s }).trim()
+    //   this.tableBodyTarget.prepend(temp.content.firstChild)
+    // })
   }
 }
