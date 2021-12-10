@@ -35,28 +35,28 @@ function onInstall(e) {
   e.waitUntil(
     Promise.all([
       ...Object.entries(pagesToCache)
-        .map(([name, headers]) => caches.open(name)
-          .then(cache => {
-            const request = new Request(name, { headers })
-            return cache.add(request)
-          })),
+        .map(async ([name, headers]) => {
+          const cache = await caches.open(version)
+          const request = new Request(name, { headers })
+          // TODO: test HEAD first to see if we need to download 
+          return cache.add(request)
+        }),
       ...assetsToCache.map(async (name) => {
         const cache = await caches.open(name)
         const keys = await caches.keys()
+        // only fetch if not already in cache
         if (!keys.length) return cache.add(name)
       })
     ]))
 }
 
 function onActivate(e) {
-  console.log('[ServiceWorker]', 'Activating!', version)
-  const cacheKeys = [...Object.keys(pagesToCache), ...assetsToCache]
-  e.waitUntil(
-    caches.keys().then(keys =>
-      // remember that caches are shared across the whole origin
-      Promise.all(
-        keys.filter(key => !cacheKeys.includes(key))
-          .map(key => caches.delete(key)))))
+  console.log('[ServiceWorker]', 'Activating!', version) 
+  e.waitUntil((async () => {
+    const keys = await caches.keys()
+    const keysToDelete = keys.filter(k => ![...assetsToCache, version].includes(k))
+    await Promise.all(keysToDelete.map(k => caches.delete(k)))
+  })())
 }
 
 const offlineHandler = async (request) => {
