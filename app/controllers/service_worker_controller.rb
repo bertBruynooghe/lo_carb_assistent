@@ -24,11 +24,8 @@ class ServiceWorkerController < ApplicationController
         end
       end  
       pack_folder_url = service_worker_js_path.split('/')[...-1].join('/')
-      content
-        .gsub(/^\/\/# sourceMappingURL=/, '//# sourceMappingURL=' + pack_folder_url + '/')
-        # We need to resolve the path of the application.js pack here as it can't be resolved during
-        # webpacker compilation
-        .gsub(/asset_pack_path "application\.js"/, ActionController::Base.helpers.asset_pack_path('application.js'))
-        .gsub!(/( version = )0/) { |m| m.gsub!($&, "#{$1}'#{ENV['SOURCE_VERSION'] || srand.to_s(16)}'" ) }
+      content.gsub(/(\/\/# sourceMappingURL=).*$/) do |m| 
+        m.gsub!($&, "#{$1}#{helpers.asset_pack_path('application.js.map')}")
+      end
     end
 end

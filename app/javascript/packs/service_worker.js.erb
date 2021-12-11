@@ -4,7 +4,7 @@ import { isMealsFetch, fetchMeals } from '../src/meals_fetch_handler.js'
 // <% routes = Rails.application.routes %>
 // <% helpers = ActionController::Base.helpers %>
 
-const version = 0
+const version = "<%%= ENV['SOURCE_VERSION'] || srand.to_s(16) %>"
 
 const assetsToCache = [
   '<%= helpers.asset_path "application.js" %>',
@@ -18,8 +18,8 @@ const assetsToCache = [
   '<%= helpers.image_path "maskable_icon_x512.png" %>',
   '<%= helpers.image_path "maskable_icon.png" %>',
   
-  // <%# next one gets resolved in the controller, as it can't be resolved by erb at time of the webpacker compilation %>
-  'asset_pack_path "application.js"'
+  /*<%# next one gets resolved in the controller, as it can't be resolved by erb at time of the webpacker compilation %>*/
+  '<%%= asset_pack_path "application.js" %>'
 ]
 
 const pagesToCache = {
