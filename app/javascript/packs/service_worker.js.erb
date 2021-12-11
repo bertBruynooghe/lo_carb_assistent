@@ -19,7 +19,8 @@ const assetsToCache = [
   '<%= helpers.image_path "maskable_icon.png" %>',
   
   /*<%# next one gets resolved in the controller, as it can't be resolved by erb at time of the webpacker compilation %>*/
-  '<%%= asset_pack_path "application.js" %>'
+  '<%%= asset_pack_path "application.js" %>',
+  '<%%= asset_pack_path "meals-index.html.erb" %>'
 ]
 
 const pagesToCache = {
