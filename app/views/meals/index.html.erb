@@ -20,9 +20,9 @@
   </table>
   
   <% if params[:week] %>
-    <%= link_to 'Week nadien', meals_path(params: { week: week_later_start_date_time(params[:week]) }) %> |
+    <%= link_to 'Week nadien', meals_path(params: { week: week_later_start_date_time(params[:week]) }), data: { 'meals-target': 'nextWeek' } %> 
   <% end %>
-  <%= link_to 'Week voordien', meals_path(params: { week: week_earlier_start_date_time(params[:week]) }) %>
+  <%= link_to 'Week voordien', meals_path(params: { week: week_earlier_start_date_time(params[:week]) }), data: { 'meals-target': 'previousWeek' } %>
 
   <% unless @meals %>
     <div data-meals-target="networkBusy">
@@ -30,4 +30,7 @@
       Results might not be accurate for now, but you can continue working.
     </div>
   <% end %>
+  <template data-meals-target="rowTemplate">
+    <%= render partial: 'meals_row', locals: { meal: Meal.new } %>
+  </template>
 </div>

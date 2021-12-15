@@ -6,9 +6,7 @@ class MealsController < ApplicationController
   # GET /meals
   # GET /meals.json
   def index
-    unless params[:ajax] 
-      @meals = Meal.includes(:ingredients).for_week(params[:week]).order(consumption_time: :desc)
-    end  
+    @meals = Meal.includes(:ingredients).for_week(params[:week]).order(consumption_time: :desc)
   end
 
   # GET /meals/1

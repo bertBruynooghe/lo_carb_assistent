@@ -1,4 +1,5 @@
 class ServiceWorkerController < ApplicationController
+    # not sure if we need this: we should be logged in before fetching the service worker
     skip_before_action :authenticate_user!
     skip_before_action :verify_authenticity_token
 
@@ -25,7 +26,7 @@ class ServiceWorkerController < ApplicationController
       end  
       pack_folder_url = service_worker_js_path.split('/')[...-1].join('/')
       content.gsub(/(\/\/# sourceMappingURL=).*$/) do |m| 
-        m.gsub!($&, "#{$1}#{helpers.asset_pack_path('application.js.map')}")
+        m.gsub!($&, "#{$1}#{helpers.asset_pack_path('service_worker.js.map')}")
       end
     end
 end

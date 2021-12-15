@@ -9,21 +9,7 @@ export const isMealsFetch = r => {
   return (r.method === 'GET' && pathname.indexOf(mealsPath) === 0 && !ajax)
 }
 
-const fetchMealsHTML = async (request) => {
-  const newRequest = new Request(`${mealsPath}?ajax=true`, { ...request, mode: 'cors' } )
-
-  // get the response from the cache, this should never fail
-  const oldResponse = await caches.match(newRequest)
-  
-  fetch(newRequest).then(async (response) => {
-    const cache = await caches.open(newRequest.url)
-    cache.put(newRequest, response) 
-  }).catch(e => {
-    // couldn't get the HTML, so we're not updating the cache
-  })
-  
-  return oldResponse
-}
+const fetchMealsHTML = () => caches.match('<%%= asset_pack_path "meals-index.html.erb" %>')
 
 const fetchNewMealHTML = async (request) => {
   // get the response from the cache, this should never fail

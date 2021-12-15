@@ -23,7 +23,7 @@ class Meal < ApplicationRecord
   end
 
   def consumption_day
-    consumption_time.strftime('%A')
+    (consumption_time || DateTime.now).strftime('%A')
   end
 
   def consumption_time_iso

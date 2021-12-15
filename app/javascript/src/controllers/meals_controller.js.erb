@@ -1,32 +1,17 @@
 import { Controller } from '@hotwired/stimulus'
-import ejs from 'ejs'
 
-import I18n from '../i18n.js.erb'
-import dbConnection from '../db_connection'
-// import rowPartial from '_meals_row.html.erb'
+// import dbConnection from '../db_connection'
 
-// TODO: extract to higher level
-// const context = {
-//   button_to: (label, { id }) => {
-//     const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content')
-//     return `
-//       <form class="button_to" method="post" action="/meals/${id}">
-//         <input type="hidden" name="_method" value="delete">
-//         <input type="submit" value="${label}">
-//         <input type="hidden" name="authenticity_token" value="${csrfToken}">
-//       </form>
-//     `
-//   },
-//   url_for: ({ id }) => {
-//     // TODO: find a way to do this less hacky
-//     const template = "<%= Rails.application.routes.path_for(controller: :meals, action: :show, id: -1) %>"
-//     return template.replace('-1', id)
-//   },
-//   t: I18n.t
-// }
+const mealsPath = '<%= Rails.application.routes.path_for(controller: :meals, action: :index) %>'
+const dayMs = 24 * 60 * 60 * 1000
+// TODO: get rid of ejs render in packs
+
+const searchMap = () => location.search.substring(1).split('&')
+    .map(token => token.split('='))
+    .reduce((acc, [k,v]) => ({ ...acc, [k]: v }), {})
 
 export default class extends Controller {
-  static targets = ['tableBody', 'networkBusy']
+  static targets = ['tableBody', 'networkBusy', 'rowTemplate', 'nextWeek', 'previousWeek']
 
   async connect() {
     // const transaction = (await dbConnection).transaction('meals', 'readonly')
@@ -34,18 +19,35 @@ export default class extends Controller {
     // const request = meals.count()
     // request.onsuccess = () => console.log('meals', request.result)
 
-    // const result = await fetch('<%= Rails.application.routes.path_for(controller: :meals, action: :index) %>.json')
-    // if (!result.ok) return // TODO: proper handling of the error
+    // TODO: fix links etc.
+    const result = await fetch(`${mealsPath}.json${location.search}`)
+    if (!result.ok) return 
 
-    // this.networkBusyTarget.hidden = true
+    const { week } = searchMap()
 
-    // const rows = (await result.json()).reverse()
+    const currentWeekDateValue = week ? new Date(week).valueOf() : Date.now() - 6 * dayMs
+
+    this.networkBusyTarget.hidden = true
+
+    const shortDateFormat = value => new Date(value).toISOString().split('T')[0]
+    const mealsPathFor = value => `${mealsPath}?week=${shortDateFormat(value)}`
+    this.previousWeekTarget.setAttribute('href', mealsPathFor(currentWeekDateValue - 7 * dayMs))
+    this.nextWeekTarget.setAttribute('href', mealsPathFor(currentWeekDateValue + 7 * dayMs))
+    this.nextWeekTarget.hidden = !week
+
+    const rows = (await result.json()).reverse()
  
     // console.log('fetch', result.status, rows)
-    // rows.forEach(meal => {
-    //   const temp = document.createElement('template')
-    //   temp.innerHTML = ejs.render(rowPartial, { meal, ...context }, { escape: s => s }).trim()
-    //   this.tableBodyTarget.prepend(temp.content.firstChild)
-    // })
+    rows.forEach(meal => { 
+      const temp = this.rowTemplateTarget.content.cloneNode(true)
+      Object.entries(meal).forEach(([k,v]) => {
+        const elem = temp.querySelector(`[data-meals-target="${k}"]`)
+        if (!elem) return
+        elem.innerHTML = v
+      })
+      temp.querySelectorAll('td a').forEach(el => el.setAttribute('href', `${mealsPath}/${meal.id}`))
+      temp.querySelector('[data-meal-target="deleteForm"]').setAttribute('action', `${mealsPath}/${meal.id}`)
+      this.tableBodyTarget.prepend(temp)
+    })
   }
 }

@@ -4,7 +4,8 @@ import { isMealsFetch, fetchMeals } from '../src/meals_fetch_handler.js'
 // <% routes = Rails.application.routes %>
 // <% helpers = ActionController::Base.helpers %>
 
-const version = "<%%= ENV['SOURCE_VERSION'] || srand.to_s(16) %>"
+// TODO: get rid of next line
+const version = "<%%= ENV['SOURCE_VERSION'] || '3723' %>"
 
 const assetsToCache = [
   '<%= helpers.asset_path "application.js" %>',
@@ -18,14 +19,14 @@ const assetsToCache = [
   '<%= helpers.image_path "maskable_icon_x512.png" %>',
   '<%= helpers.image_path "maskable_icon.png" %>',
   
-  /*<%# next one gets resolved in the controller, as it can't be resolved by erb at time of the webpacker compilation %>*/
+  /*<%# next one gets resolved in the controller, 
+        as it can't be resolved by erb at time of the webpacker compilation %> */
   '<%%= asset_pack_path "application.js" %>',
   '<%%= asset_pack_path "meals-index.html.erb" %>'
 ]
 
 const pagesToCache = {
   '<%= routes.path_for(controller: :nutrients, action: :index) %>': { Accept: 'text/html,application/xhtml+xml,application/xml' },
-  [location.origin + '<%= routes.path_for(controller: :meals, action: :index) %>' + '?ajax=true']: {},
   [location.origin + '<%= routes.path_for(controller: :meals, action: :new) %>']: {},
 
   '/app.webmanifest': {},
@@ -44,7 +45,7 @@ function onInstall(e) {
         }),
       ...assetsToCache.map(async (name) => {
         const cache = await caches.open(name)
-        const keys = await caches.keys()
+        const keys = await cache.keys()
         // only fetch if not already in cache
         if (!keys.length) return cache.add(name)
       })
@@ -77,7 +78,9 @@ async function onFetch(e) {
   const result = isNutrientFetch(e.request)
     ? fetchNutrients(e.request)
     : isMealsFetch(e.request)
-    ? fetchMeals(e.request) 
+    ? fetchMeals(e.request)
+    : (new URL(e.request.url)).pathname === '/application.js'
+    ? caches.match('<%%= asset_pack_path "application.js" %>') 
     : fetch(e.request).catch(() => offlineHandler(e.request))
 
   e.respondWith(result)
