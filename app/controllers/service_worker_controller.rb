@@ -24,7 +24,6 @@ class ServiceWorkerController < ApplicationController
           response.body
         end
       end  
-      pack_folder_url = service_worker_js_path.split('/')[...-1].join('/')
       content.gsub(/(\/\/# sourceMappingURL=).*$/) do |m| 
         m.gsub!($&, "#{$1}#{helpers.asset_pack_path('service_worker.js.map')}")
       end

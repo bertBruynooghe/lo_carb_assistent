@@ -22,14 +22,13 @@ const assetsToCache = [
   /*<%# next one gets resolved in the controller, 
         as it can't be resolved by erb at time of the webpacker compilation %> */
   '<%%= asset_pack_path "application.js" %>',
+  '<%%= asset_pack_path "app.webmanifest.erb" %>',
   '<%%= asset_pack_path "meals-index.html.erb" %>'
 ]
 
 const pagesToCache = {
   '<%= routes.path_for(controller: :nutrients, action: :index) %>': { Accept: 'text/html,application/xhtml+xml,application/xml' },
-  [location.origin + '<%= routes.path_for(controller: :meals, action: :new) %>']: {},
-
-  '/app.webmanifest': {},
+  [location.origin + '<%= routes.path_for(controller: :meals, action: :new) %>']: {}
 }
 
 function onInstall(e) {
@@ -81,6 +80,8 @@ async function onFetch(e) {
     ? fetchMeals(e.request)
     : (new URL(e.request.url)).pathname === '/application.js'
     ? caches.match('<%%= asset_pack_path "application.js" %>') 
+    : (new URL(e.request.url)).pathname === '/app.webmanifest'
+    ? caches.match('<%%= asset_pack_path "app.webmanifest.erb" %>')
     : fetch(e.request).catch(() => offlineHandler(e.request))
 
   e.respondWith(result)

@@ -3,58 +3,24 @@ class WebmanifestController < ApplicationController
 
   def index
     respond_to do |format|
-      format.webmanifest { render json:  {
-        name: "Eat by numbers",
-        short_name: "Meals",
-        start_url: "/",
-        theme_color: "#000000",
-        background_color: "#FFFFFF",
-        display: "fullscreen",
-        orientation: "portrait",
-        icons: [
-          { 
-            src: ActionController::Base.helpers.image_path('maskable_icon_x48.png'),
-            sizes: '48x48',
-            type: 'image/png'
-          },
-          { 
-            src: ActionController::Base.helpers.image_path('maskable_icon_x72.png'),
-            sizes: '72x72',
-            type: 'image/png'
-          },
-          { 
-            src: ActionController::Base.helpers.image_path('maskable_icon_x96.png'),
-            sizes: '96x96',
-            type: 'image/png'
-          },
-          { 
-            src: ActionController::Base.helpers.image_path('maskable_icon_x128.png'),
-            sizes: '128x128',
-            type: 'image/png'
-          },
-          { 
-            src: ActionController::Base.helpers.image_path('maskable_icon_x192.png'),
-            sizes: '192x192',
-            type: 'image/png'
-          },
-          { 
-            src: ActionController::Base.helpers.image_path('maskable_icon_x384.png'),
-            sizes: '384x384',
-            type: 'image/png'
-          },
-          { 
-            src: ActionController::Base.helpers.image_path('maskable_icon_x512.png'),
-            sizes: '512x512',
-            type: 'image/png'
-          },
-          { 
-            src: ActionController::Base.helpers.image_path('maskable_icon.png'),
-            sizes: '610x610',
-            type: 'image/png'
-          }
-        ]
-      }
-    }
+      format.webmanifest { render json:  getJSON() }
     end
+  end
+
+  private 
+  def getJSON
+    # TODO: deduplicate the same code in service_worker_controller
+    app_webmanifest_path = ActionController::Base.helpers.asset_pack_path('app.webmanifest.erb')
+    file_path = Rails.root.join('public', app_webmanifest_path[1..])
+    begin
+      File.read(file_path)
+    rescue Errno::ENOENT
+      Net::HTTP.start(request.host, Webpacker.dev_server.port) do |http|
+        request = Net::HTTP::Get.new app_webmanifest_path
+      
+        response = http.request request # Net::HTTPResponse object
+        response.body
+      end
+    end  
   end
 end
