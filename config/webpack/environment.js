@@ -14,7 +14,8 @@ const htmlErbLoader = {
       loader: 'file-loader',
       options: {
         esModule:false,
-        context: 'app/javascript'
+        context: 'app/javascript',
+        name: '[contenthash].html'
       }
     },
     {
