@@ -28,7 +28,7 @@ const htmlErbLoader = {
 }
 
 const webmanifestErbLoader = {
-  test: /\.webmanifest\.erb$/,
+  test: /app\.webmanifest\.erb$/,
   enforce: 'pre',
   exclude: /node_modules/,
   use: [
@@ -37,7 +37,7 @@ const webmanifestErbLoader = {
       options: {
         esModule:false,
         context: 'app/javascript',
-        name: '[contenthash].webmanifest'
+        name: 'app-[contenthash].webmanifest'
       }
     },
     {
