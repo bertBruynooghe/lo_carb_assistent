@@ -9,6 +9,8 @@
 <% elsif @form_object.ingredient_action == :lookup %>
   <% controller.redirect_to "https://www.duckduckgo.com/?#{URI.encode_www_form(q: @form_object.ingredients[@form_object.ingredient_index].name)}+koolhydraten" %>
 <% else %>
-  <%= render 'form', form_object: @form_object %>
-  <%= link_to 'Back', meals_path %>
+  <div data-controller="new-meal">
+    <%= render 'form', form_object: @form_object %>
+    <%= link_to 'Back', meals_path %>
+  </div>
 <% end %>

@@ -11,22 +11,7 @@ export const isMealsFetch = r => {
 
 const fetchMealsHTML = () => caches.match('<%%= asset_pack_path "meals-index.html.erb" %>')
 
-const fetchNewMealHTML = async (request) => {
-  // get the response from the cache, this should never fail
-  // TODO: not 100% sure why the mode has to change from 'navigate' to 'cors'
-  const newRequest = new Request(request.url, { ...request, mode: 'cors' } )
-
-  const oldResponse = await caches.match(newRequest)
-  
-  fetch(request).then(async (response) => {
-    const cache = await caches.open(newRequest.url)
-    cache.put(newRequest, response) 
-  }).catch(e => {
-    // couldn't get the HTML, so we're not updating the cache
-  })
-  
-  return oldResponse
-}
+const fetchNewMealHTML = () => caches.match('<%%= asset_pack_path "meals-new.html.erb" %>')
 
 const fetchMealsJSON = request => {
   return new Promise(resolve =>
