@@ -15,7 +15,7 @@ const htmlErbLoader = {
       options: {
         esModule:false,
         context: 'app/javascript',
-        name: '[contenthash].html'
+        name: '[name][contenthash].html'
       }
     },
     {
