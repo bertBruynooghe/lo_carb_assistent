@@ -11,7 +11,7 @@ export const isMealsFetch = r => {
 
 const fetchMealsHTML = () => caches.match('<%%= asset_pack_path "meals-index.html.erb" %>')
 
-const fetchNewMealHTML = () => caches.match('<%%= asset_pack_path "meals-new.html.erb" %>')
+const fetchNewMealHTML = () => caches.match('<%%= asset_pack_path "meal-form.html.erb" %>')
 
 const fetchMealsJSON = request => {
   return new Promise(resolve =>
