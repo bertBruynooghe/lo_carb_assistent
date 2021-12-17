@@ -54,7 +54,7 @@ class MealsController < ApplicationController
     @form_object = Meal::FormObject.find(params[:id])
     @form_object.assign_attributes(form_object_params)
     respond_to do |format|
-      if @form_object.save(form_object_params)
+      if (@form_object.ingredient_index.nil? && @form_object.save)
         format.html { redirect_to @form_object, notice: 'Meal was successfully updated.', only_path: true }
         format.json { render :show, status: :ok, location: @form_object }
       else
