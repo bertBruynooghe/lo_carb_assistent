@@ -10,7 +10,7 @@ $(document).on('ready page:load', function() {
         var i, len, results;
         results = [];
         for (i = 0, len = nutrients.length; i < len; i++) {
-          nutrient = nutrients[i];
+          nutrient = nutrients[i]
           results.push({
             value: nutrient['name']
           });
