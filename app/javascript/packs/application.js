@@ -6,11 +6,10 @@
 
 import { Application } from '@hotwired/stimulus'
 import { definitionsFromContext } from '@hotwired/stimulus-webpack-helpers'
-// import initServiceWorker from '../src/service_worker_companion'
+import initServiceWorker from '../src/service_worker_companion'
 
 window.Stimulus = Application.start()
 const context = require.context('../src/controllers', true, /\.js$/)
 Stimulus.load(definitionsFromContext(context))
 
-// initServiceWorker()
-// console.log('Hello World from Webpacker!')
+initServiceWorker()
