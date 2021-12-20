@@ -6,7 +6,7 @@ export const isMealsFetch = r => {
   const { searchParams, pathname } = new URL(r.url)
   const ajax = searchParams.get('ajax')
 
-  return (r.method === 'GET' && pathname.indexOf(mealsPath) === 0 && !ajax)
+  return (pathname.indexOf(mealsPath) === 0 && !ajax)
 }
 
 const fetchMealsHTML = () => caches.match('<%%= asset_pack_path "meals-index.html.erb" %>')
@@ -18,12 +18,38 @@ const fetchMealsJSON = request => {
     fetch(request).then(resolve).catch(() => new Response([])))
 }
 
+const postNewMeal = async (request) => {
+  try {
+    // TODO: set a notification about processing => cookie?
+    // TODO: store the data in indexedDb
+    // TODO: redirect to the meals page => we don't have a proper id yet. Negative id to fetch from indexedDb?
+    // TODO: fetch the new meal page from backend (with { credentials: 'include' }?)
+    const pageResult = await fetch(newMealPath, { credentials: 'include' })
+    const pageText = await pageResult.text()
+    const test = /name=\"authenticity_token\".*value=\"(.*)\"/g
+    const authenticityToken = test.exec(pageText)[1]
+    const formData = await request.formData()
+    formData.set('authenticity_token', authenticityToken)
+    const searchParams = new URLSearchParams(formData)
+
+    const newRequest = new Request(request, { body: searchParams, credentials: 'include' })
+
+    return fetch(newRequest)
+
+    // TODO: replace the authenticityTokens in the request
+    // TODO: fetch the post
+    // TODO: remove the processing notification
+  } catch (e) {
+    // do nothing here, since we should have caught this already
+  }
+}
+
 export const fetchMeals = request => {
   const { pathname } = new URL(request.url)
   switch (pathname) {
     case newMealPath: return fetchNewMealHTML(request)
-    case mealsPath: return fetchMealsHTML(request)
-    case `${mealsPath}.json`: return fetchMealsJSON(request)
+    case mealsPath: return (request.method === 'GET' ? fetchMealsHTML(request) : postNewMeal(request))
+    case `${mealsPath}.json`: return fetchMealsJSON(request) 
     default: return fetch(request)
   }
 }
