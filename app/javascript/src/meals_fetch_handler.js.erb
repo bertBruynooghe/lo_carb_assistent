@@ -30,9 +30,12 @@ const postNewMeal = async (request) => {
     const authenticityToken = test.exec(pageText)[1]
     const formData = await request.formData()
     formData.set('authenticity_token', authenticityToken)
-    const searchParams = new URLSearchParams(formData)
 
-    const newRequest = new Request(request, { body: searchParams, credentials: 'include' })
+    const headers = new Headers(request.headers)
+    // next line is necessary to have correct boundaries in the multiform data
+    headers.delete('Content-type')
+
+    const newRequest = new Request(request, { body: formData, credentials: 'include', headers })
 
     return fetch(newRequest)
 

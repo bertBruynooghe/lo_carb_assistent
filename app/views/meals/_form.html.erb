@@ -1,4 +1,4 @@
-<%= form_for(form_object) do |meal_form| %>
+<%= form_for(form_object, html: { multipart: true }) do |meal_form| %>
   <% if form_object.errors.any? %>
     <div id="error_explanation">
         <h2><%= pluralize(form_object.errors.count, "error") %>
