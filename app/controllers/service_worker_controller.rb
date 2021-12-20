@@ -1,5 +1,7 @@
 class ServiceWorkerController < ApplicationController
-    # not sure if we need this: we should be logged in before fetching the service worker
+    # TODO: this should probably not be loaded when the user isn't authenticated, 
+    # so should probably be blocked in the application layout.
+    
     skip_before_action :authenticate_user!
     skip_before_action :verify_authenticity_token
 

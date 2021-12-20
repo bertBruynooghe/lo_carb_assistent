@@ -1,4 +1,7 @@
 class WebmanifestController < ApplicationController
+  # TODO: this should probably not be loaded when the user isn't authenticated, 
+  # so should probably be blocked in the application layout.
+  
   skip_before_action :authenticate_user!
 
   def index
