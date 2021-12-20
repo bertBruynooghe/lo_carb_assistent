@@ -1,3 +1,5 @@
+// import dbConnection from '../db_connection'
+
 const mealsPath = '<%= Rails.application.routes.path_for(controller: :meals, action: :index) %>'
 const newMealPath = '<%= Rails.application.routes.path_for(controller: :meals, action: :new) %>'
 
@@ -19,16 +21,22 @@ const fetchMealsJSON = request => {
 }
 
 const postNewMeal = async (request) => {
+  // const formData = await request.formData()
+  // const formHash = {}
+  // for(const [k,v] of formData) formHash[k] = v
+ 
   try {
-    // TODO: set a notification about processing => cookie?
+    // TODO: set a notification about processing => if there is data in the indexedDb
     // TODO: store the data in indexedDb
+    // const transaction = (await dbConnection).transaction('meals', 'readwrite')
+    // const meals = transaction.objectStore('meals')
+
     // TODO: redirect to the meals page => we don't have a proper id yet. Negative id to fetch from indexedDb?
     // TODO: fetch the new meal page from backend (with { credentials: 'include' }?)
     const pageResult = await fetch(newMealPath, { credentials: 'include' })
     const pageText = await pageResult.text()
     const test = /name=\"authenticity_token\".*value=\"(.*)\"/g
     const authenticityToken = test.exec(pageText)[1]
-    const formData = await request.formData()
     formData.set('authenticity_token', authenticityToken)
 
     const headers = new Headers(request.headers)
@@ -39,9 +47,8 @@ const postNewMeal = async (request) => {
 
     return fetch(newRequest)
 
-    // TODO: replace the authenticityTokens in the request
-    // TODO: fetch the post
     // TODO: remove the processing notification
+    // TODO: notify the client
   } catch (e) {
     // do nothing here, since we should have caught this already
   }
