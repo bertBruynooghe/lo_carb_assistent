@@ -1,4 +1,4 @@
-// import dbConnection from '../db_connection'
+import dbConnection from './db_connection'
 
 const mealsPath = '<%= Rails.application.routes.path_for(controller: :meals, action: :index) %>'
 const newMealPath = '<%= Rails.application.routes.path_for(controller: :meals, action: :new) %>'
@@ -21,15 +21,22 @@ const fetchMealsJSON = request => {
 }
 
 const postNewMeal = async (request) => {
-  // const formData = await request.formData()
-  // const formHash = {}
-  // for(const [k,v] of formData) formHash[k] = v
+  const formData = await request.formData()
+  const formHash = {}
+  for(const [k,v] of formData) {
+    const tokens = k.replaceAll(']', '').split('[')
+    tokens.reduce((acc, t, i) => {
+      if (!acc[t]) acc[t] = ((tokens.length - 1)) === i ? v : {}
+      return acc[t]
+    }, formHash)
+  }
  
   try {
     // TODO: set a notification about processing => if there is data in the indexedDb
     // TODO: store the data in indexedDb
-    // const transaction = (await dbConnection).transaction('meals', 'readwrite')
-    // const meals = transaction.objectStore('meals')
+    const transaction = (await dbConnection).transaction('meals', 'readwrite')
+    const meals = transaction.objectStore('meals')
+    meals.add(formHash.meal)
 
     // TODO: redirect to the meals page => we don't have a proper id yet. Negative id to fetch from indexedDb?
     // TODO: fetch the new meal page from backend (with { credentials: 'include' }?)

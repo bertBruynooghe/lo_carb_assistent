@@ -1,10 +1,9 @@
 import { Controller } from '@hotwired/stimulus'
 
-// import dbConnection from '../db_connection'
+import dbConnection from '../db_connection'
 
 const mealsPath = '<%= Rails.application.routes.path_for(controller: :meals, action: :index) %>'
 const dayMs = 24 * 60 * 60 * 1000
-// TODO: get rid of ejs render in packs
 
 const searchMap = () => location.search.substring(1).split('&')
     .map(token => token.split('='))
@@ -14,14 +13,15 @@ export default class extends Controller {
   static targets = ['tableBody', 'networkBusy', 'rowTemplate', 'nextWeek', 'previousWeek']
 
   async connect() {
-    // const transaction = (await dbConnection).transaction('meals', 'readonly')
-    // const meals = transaction.objectStore('meals')
-    // const request = meals.count()
-    // request.onsuccess = () => console.log('meals', request.result)
+    const transaction = (await dbConnection).transaction('meals', 'readonly')
+    const meals = transaction.objectStore('meals')
+    // TODO : should filter based on time period selected
+    const request = meals.getAll()
+    const results = await new Promise(resolve => 
+      request.onsuccess = () => 
+        resolve(request.result.map(meal => ({ ...meal, consumption_time_iso: new Date(meal.consumption_time).toISOString() }))))
 
-    // TODO: fix links etc.
     const result = await fetch(`${mealsPath}.json${location.search}`)
-    if (!result.ok) return 
 
     const { week } = searchMap()
 
@@ -35,10 +35,8 @@ export default class extends Controller {
     this.nextWeekTarget.setAttribute('href', mealsPathFor(currentWeekDateValue + 7 * dayMs))
     this.nextWeekTarget.hidden = !week
 
-    const rows = (await result.json()).reverse()
- 
-    // console.log('fetch', result.status, rows)
-    rows.forEach(meal => { 
+    const rows = result.ok ? [...results, ...(await result.json())] : results  
+    rows.reverse().forEach(meal => { 
       const temp = this.rowTemplateTarget.content.cloneNode(true)
       Object.entries(meal).forEach(([k,v]) => {
         const elem = temp.querySelector(`[data-meals-target="${k}"]`)
