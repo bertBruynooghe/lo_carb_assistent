@@ -22,6 +22,7 @@ const fetchMealsJSON = request => {
 
 const postNewMeal = async (request) => {
   const formData = await request.formData()
+  formData.set('meal[client_token]', Math.random() * Number.MAX_SAFE_INTEGER)
   const formHash = {}
   for(const [k,v] of formData) {
     const tokens = k.replaceAll(']', '').split('[')
@@ -39,8 +40,6 @@ const postNewMeal = async (request) => {
     addRequest.onsuccess = () => resolve(addRequest.result))
  
   new Promise(async resolve => {
-    // TODO: redirect to the meals page => 
-    //   we don't have a proper id yet. Negative id to fetch from indexedDb?
 
     // we fetch the new page from the backend to have a new session cookie,
     // and the according authenticity token
@@ -66,9 +65,7 @@ const postNewMeal = async (request) => {
     resolve(response)
   })
 
-  // TODO: we could have a racing condition here, as the item could already be gone from the database,
-  // although it is unlikely
-  return Response.redirect(`${mealsPath}/-${mealId}`, 302)
+  return Response.redirect(`${mealsPath}/-${formHash.meal.client_token}`, 302)
 }
 
 export const fetchMeals = request => {

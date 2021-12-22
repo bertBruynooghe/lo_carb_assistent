@@ -9,6 +9,10 @@ dbOpenRequest.onupgradeneeded = ({ target: { result: db }, oldVersion }) => {
     case 1:
       const meals = db.createObjectStore('meals', { keyPath: '_id', autoIncrement: true })
       meals.createIndex('id_idx', 'id', { unique: true })
+    case 2: 
+      const addClientTokenTransaction = db.transaction('meals')
+      const mealsForClientToken = addClientTokenTransaction.objectStore('meals')
+      mealsForClientToken.createIndex('clientToken_idx', 'client_token')
   }
 }
 
