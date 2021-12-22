@@ -38,7 +38,7 @@ const postNewMeal = async (request) => {
   const mealId = await new Promise(resolve =>
     addRequest.onsuccess = () => resolve(addRequest.result))
  
-  try {
+  new Promise(async resolve => {
     // TODO: redirect to the meals page => 
     //   we don't have a proper id yet. Negative id to fetch from indexedDb?
 
@@ -62,11 +62,13 @@ const postNewMeal = async (request) => {
     meals.delete(mealId)
 
     // TODO: notify the client
+    console.log('sync complete')
+    resolve(response)
+  })
 
-    return response
-  } catch (e) {
-    // do nothing here, since we should have caught this already
-  }
+  // TODO: we could have a racing condition here, as the item could already be gone from the database,
+  // although it is unlikely
+  return Response.redirect(`${mealsPath}/-${mealId}`, 302)
 }
 
 export const fetchMeals = request => {
