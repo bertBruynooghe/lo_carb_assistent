@@ -9,7 +9,7 @@ class MealsController < ApplicationController
   # GET /meals/1.json
   def show
     id_nbr = params[:id].to_i
-    @meal = id_nbr < 0 ? Meal.find_by(client_token: -id_nbr) : Meal.find(params[:id]) 
+    @meal = id_nbr < 0 ? Meal.order(updated_at: :desc).find_by(client_token: -id_nbr) : Meal.find(params[:id]) 
   end
 
   # GET /meals/new
