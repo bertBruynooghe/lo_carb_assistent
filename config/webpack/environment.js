@@ -1,10 +1,6 @@
 const { environment } = require('@rails/webpacker')
 const erb = require('./loaders/erb')
 
-// TODO: this doesn't work to render htmls from views, 
-// since the views contain references to webpack compiled files,
-// which are not available at webpack build time.
-
 const htmlErbLoader = {
   test: /\.html\.erb$/,
   enforce: 'pre',
