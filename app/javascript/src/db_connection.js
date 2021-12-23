@@ -1,18 +1,18 @@
-const dbVersion = 2
+const dbVersion = 3
 const dbOpenRequest = self.indexedDB.open('nutrientsCalculator', dbVersion)
 
-dbOpenRequest.onupgradeneeded = ({ target: { result: db }, oldVersion }) => {
+dbOpenRequest.onupgradeneeded = ({ target: { result: db }, oldVersion, currentTarget: { transaction } }) => {
+  let mealsStore
   switch (oldVersion) { // existing db version
     case 0:
       const nutrients = db.createObjectStore('nutrients', { keyPath: '_id', autoIncrement: true })
       nutrients.createIndex('id_idx', 'id', { unique: true })
-    case 1:
-      const meals = db.createObjectStore('meals', { keyPath: '_id', autoIncrement: true })
-      meals.createIndex('id_idx', 'id', { unique: true })
-    case 2: 
-      const addClientTokenTransaction = db.transaction('meals')
-      const mealsForClientToken = addClientTokenTransaction.objectStore('meals')
-      mealsForClientToken.createIndex('clientToken_idx', 'client_token')
+    case 1: 
+      mealsStore = db.createObjectStore('meals', { keyPath: '_id', autoIncrement: true })
+      mealsStore.createIndex('id_idx', 'id', { unique: true })
+    case 2:
+      mealsStore = mealsStore || transaction.objectStore('meals')
+      mealsStore.createIndex('clientToken_idx', 'client_token')
   }
 }
 

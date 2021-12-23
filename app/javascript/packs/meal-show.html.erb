@@ -1,0 +1,6 @@
+<%# /* rails-erb-loader-dependencies views/ helpers/ javascript/src/render_helpers/silencer.rb */ %>
+<% 
+  require "./app/javascript/src/render_helpers/silencer.rb" 
+%>
+
+<%= MealsController.render(:show, assigns: { meal: Meal.new(id: 0) }) %>

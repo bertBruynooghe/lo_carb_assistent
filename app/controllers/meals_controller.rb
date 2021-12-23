@@ -8,7 +8,8 @@ class MealsController < ApplicationController
   # GET /meals/1
   # GET /meals/1.json
   def show
-    @meal = Meal.find(params[:id])
+    id_nbr = params[:id].to_i
+    @meal = id_nbr < 0 ? Meal.find_by(client_token: -id_nbr) : Meal.find(params[:id]) 
   end
 
   # GET /meals/new
@@ -79,6 +80,7 @@ class MealsController < ApplicationController
     def form_object_params
       params.require(:meal).permit(:consumption_time,
                                    :new_ingredient,
+                                   :client_token,
                                    ingredients_attributes: %i(id
                                                               name
                                                               calories_integral

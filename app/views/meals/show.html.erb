@@ -1,21 +1,23 @@
-<p id="notice"><%= notice %></p>
+<div data-controller="meal-show">
+  <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Consumption time:</strong>
-  <span data-controller="date-time-local" %><%= @meal.consumption_time_iso %></span>
-</p>
+  <p>
+    <strong>Consumption time:</strong>
+    <span data-controller="date-time-local" data-meal-show-target="consumptionTimeIso"%><%= @meal.consumption_time_iso %></span>
+  </p>
 
-<p>
-  <%= @meal.carbs %>gkH, <%= @meal.proteins %>g proteïne
-</p>
+  <p>
+    <%= @meal.carbs %>gkH, <%= @meal.proteins %>g proteïne
+  </p>
 
-<p>
-ingredients:
-  <ul>
-  <% @meal.ingredients.each do |ingredient| %>
-    <li><%= ingredient.quantity %>g <%= ingredient.name %>
-  <% end %>
-</p>
+  <p>
+  ingredients:
+    <ul>
+    <% @meal.ingredients.each do |ingredient| %>
+      <li><%= ingredient.quantity %>g <%= ingredient.name %>
+    <% end %>
+  </p>
 
-<%= link_to 'Edit', edit_meal_path(@meal) %> |
-<%= link_to 'Back', meals_path %>
+  <%= link_to 'Edit', edit_meal_path(@meal) %> |
+  <%= link_to 'Back', meals_path %>
+</div>

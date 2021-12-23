@@ -1,12 +1,12 @@
 <tr class="<%= meal.consumption_day %>">  
   <td><%= button_to(t('destroy'), meal, { method: 'delete', 'data-meal-target': 'deleteForm' }) %></td>
   <%# path should at least be dynamic %>
-  <td><%= link_to meal do %><span data-meals-target="carbs"><%= meal.carbs %></span>&thinsp;g<% end %></td>
-  <td><%= link_to meal do %><span data-meals-target="proteins"><%= meal.proteins %></span>&thinsp;g<% end %></td>
-  <td><%= link_to meal do %><span data-meals-target="fat"><%= meal.fat %></span>&thinsp;g<% end %></td>
-  <td><%= link_to meal do %><span data-meals-target="calories"><%= meal.calories %></span>&thinsp;kCal<% end %></td>
+  <td><%= link_to meal do %><span data-meals-index-target="carbs"><%= meal.carbs %></span>&thinsp;g<% end %></td>
+  <td><%= link_to meal do %><span data-meals-index-target="proteins"><%= meal.proteins %></span>&thinsp;g<% end %></td>
+  <td><%= link_to meal do %><span data-meals-index-target="fat"><%= meal.fat %></span>&thinsp;g<% end %></td>
+  <td><%= link_to meal do %><span data-meals-index-target="calories"><%= meal.calories %></span>&thinsp;kCal<% end %></td>
   <td>
-    <%= link_to meal, data: { controller: 'date-time-local', 'meals-target': 'consumption_time_iso' } do %>
+    <%= link_to meal, data: { controller: 'date-time-local', 'meals-index-target': 'consumption_time_iso' } do %>
       <%= meal.consumption_time_iso %>
     <% end %>
   </td>

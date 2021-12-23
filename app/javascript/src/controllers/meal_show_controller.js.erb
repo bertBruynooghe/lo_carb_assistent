@@ -1,0 +1,30 @@
+import { Controller } from '@hotwired/stimulus'
+import dbConnection from '../db_connection'
+
+const mealsPath = '<%= Rails.application.routes.path_for(controller: :meals, action: :index) %>'
+
+const mealFromIndexedDb = async (index) => {
+  const request = (await dbConnection)
+    .transaction('meals', 'readonly')
+    .objectStore('meals')
+    .index('clientToken_idx')
+    .get('' + index)
+  return new Promise(resolve => { request.onsuccess = () => resolve(request.result) })
+}
+
+const mealFromBackend = async (index) => {
+  const response = await fetch(`${mealsPath}/${index}.json`)
+  return response.json()
+}
+
+export default class extends Controller {
+  static targets = ['consumptionTimeIso']
+
+  async connect() {
+    const index = Number(location.pathname.split('/').pop())
+    const meal =  (index < 0 && (await mealFromIndexedDb(-index))) || (await mealFromBackend(index))
+    // TODO: convert the consumption time to local time as the localDateTimeController seems not to work here
+    const consumptionTimeIso = new Date(meal.consumption_time).toISOString()
+    this.consumptionTimeIsoTarget.innerHTML = consumptionTimeIso
+  }
+}

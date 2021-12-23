@@ -26,13 +26,12 @@ const assetsToCache = [
   '<%%= asset_pack_path "application.js" %>',
   '<%%= asset_pack_path "app.webmanifest.erb" %>',
   '<%%= asset_pack_path "meals-index.html.erb" %>',
-  '<%%= asset_pack_path "meal-form.html.erb" %>'
+  '<%%= asset_pack_path "meal-form.html.erb" %>',
+  '<%%= asset_pack_path "meal-show.html.erb" %>'
 ]
 
 const pagesToCache = {
-  '<%= routes.path_for(controller: :nutrients, action: :index) %>': { Accept: 'text/html,application/xhtml+xml,application/xml' },
-  [location.origin + '<%= routes.path_for(controller: :meals, action: :new) %>']: {}
-}
+  '<%= routes.path_for(controller: :nutrients, action: :index) %>': { Accept: 'text/html,application/xhtml+xml,application/xml' },}
 
 function onInstall(e) {
   console.log('[ServiceWorker]', 'Installing!', version)
@@ -42,7 +41,6 @@ function onInstall(e) {
         .map(async ([name, headers]) => {
           const cache = await caches.open(version)
           const request = new Request(name, { headers })
-          // TODO: test HEAD first to see if we need to download 
           return cache.add(request)
         }),
       ...assetsToCache.map(async (name) => {

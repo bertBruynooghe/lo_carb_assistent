@@ -39,7 +39,7 @@ export default class extends Controller {
     rows.reverse().forEach(meal => { 
       const temp = this.rowTemplateTarget.content.cloneNode(true)
       Object.entries(meal).forEach(([k,v]) => {
-        const elem = temp.querySelector(`[data-meals-target="${k}"]`)
+        const elem = temp.querySelector(`[data-meals-index-target="${k}"]`)
         if (!elem) return
         elem.innerHTML = v
       })

@@ -3,17 +3,15 @@ import dbConnection from './db_connection'
 const mealsPath = '<%= Rails.application.routes.path_for(controller: :meals, action: :index) %>'
 const newMealPath = '<%= Rails.application.routes.path_for(controller: :meals, action: :new) %>'
 
-// TODO: this also catches new, show, edit, and this is not what we want in the end.
 export const isMealsFetch = r => {
   const { searchParams, pathname } = new URL(r.url)
-  const ajax = searchParams.get('ajax')
-
-  return (pathname.indexOf(mealsPath) === 0 && !ajax)
+  return (pathname.indexOf(mealsPath) === 0 )
 }
 
-const fetchMealsHTML = () => caches.match('<%%= asset_pack_path "meals-index.html.erb" %>')
+const fetchMealsIndexHTML = () => caches.match('<%%= asset_pack_path "meals-index.html.erb" %>')
 
-const fetchNewMealHTML = () => caches.match('<%%= asset_pack_path "meal-form.html.erb" %>')
+const fetchMealShowHTML = () => caches.match('<%%= asset_pack_path "meal-show.html.erb" %>')
+const fetchMealFormHTML = () => caches.match('<%%= asset_pack_path "meal-form.html.erb" %>')
 
 const fetchMealsJSON = request => {
   return new Promise(resolve =>
@@ -21,8 +19,12 @@ const fetchMealsJSON = request => {
 }
 
 const postNewMeal = async (request) => {
+  const { random, ceil } = Math
   const formData = await request.formData()
-  formData.set('meal[client_token]', Math.random() * Number.MAX_SAFE_INTEGER)
+
+  // next number seems the highest number the database supports for 'integer' 
+  const maxDbInteger = 0x7FFFFFFF
+  formData.set('meal[client_token]', ceil(random() * maxDbInteger))
   const formHash = {}
   for(const [k,v] of formData) {
     const tokens = k.replaceAll(']', '').split('[')
@@ -61,6 +63,7 @@ const postNewMeal = async (request) => {
     meals.delete(mealId)
 
     // TODO: notify the client
+    // TODO: we should at least know the id of the newly created meal. and pass it somewhere?
     console.log('sync complete')
     resolve(response)
   })
@@ -71,9 +74,11 @@ const postNewMeal = async (request) => {
 export const fetchMeals = request => {
   const { pathname } = new URL(request.url)
   switch (pathname) {
-    case newMealPath: return fetchNewMealHTML(request)
-    case mealsPath: return (request.method === 'GET' ? fetchMealsHTML(request) : postNewMeal(request))
+    case newMealPath: return fetchMealFormHTML(request)
+    case mealsPath: return (request.method === 'GET' ? fetchMealsIndexHTML(request) : postNewMeal(request))
     case `${mealsPath}.json`: return fetchMealsJSON(request) 
-    default: return fetch(request)
+    default:
+      if (new RegExp(`${mealsPath}\/-?[0-9]+$`, 'gm').test(pathname)) return fetchMealShowHTML(request)
+      return fetch(request)
   }
 }

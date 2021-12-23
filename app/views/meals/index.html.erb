@@ -1,4 +1,4 @@
-<div <% unless @meals %>data-controller="meals" <% end %>>
+<div <% unless @meals %>data-controller="meals-index" <% end %>>
   <table >
     <thead>
       <tr>
@@ -10,7 +10,7 @@
         <th><%= Meal.human_attribute_name(:consumption_time) %></th>
       </tr>
     </thead>
-    <tbody data-meals-target="tableBody">
+    <tbody data-meals-index-target="tableBody">
       <% if @meals %>
         <% @meals.each do |meal| %>
           <%= render partial: 'meals_row', locals: { meal: meal } %>
@@ -20,17 +20,17 @@
   </table>
   
   <% if params[:week] %>
-    <%= link_to 'Week nadien', meals_path(params: { week: week_later_start_date_time(params[:week]) }), data: { 'meals-target': 'nextWeek' } %> 
+    <%= link_to 'Week nadien', meals_path(params: { week: week_later_start_date_time(params[:week]) }), data: { 'meals-index-target': 'nextWeek' } %> 
   <% end %>
-  <%= link_to 'Week voordien', meals_path(params: { week: week_earlier_start_date_time(params[:week]) }), data: { 'meals-target': 'previousWeek' } %>
+  <%= link_to 'Week voordien', meals_path(params: { week: week_earlier_start_date_time(params[:week]) }), data: { 'meals-index-target': 'previousWeek' } %>
 
   <% unless @meals %>
-    <div data-meals-target="networkBusy">
+    <div data-meals-index-target="networkBusy">
       Waiting for the network to respond.
       Results might not be accurate for now, but you can continue working.
     </div>
   <% end %>
-  <template data-meals-target="rowTemplate">
+  <template data-meals-index-target="rowTemplate">
     <%= render partial: 'meals_row', locals: { meal: Meal.new } %>
   </template>
 </div>
