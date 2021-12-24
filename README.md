@@ -54,3 +54,8 @@ As the app has been tested in real-life situations, a number of issues came out:
 This can be helpfull when debuggging offline behaviour as it gets rid of the websockets for hot module reloading of teh webpack devserver:
 
 `sh -ac '. ./.without-dev-server-inlining; ./bin/webpack-dev-server'`
+
+### testcafe tests
+
+Have a `.env.local` file that contains USER_EMAIL and USER_PASSWORD, and start with:
+`sh -ac '. ./.env.local; npx testcafe chrome ./spec'`

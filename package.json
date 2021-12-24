@@ -10,6 +10,7 @@
     "webpack-cli": "^3.3.12"
   },
   "devDependencies": {
+    "testcafe": "^1.18.1",
     "webpack-dev-server": "^3"
   }
 }
