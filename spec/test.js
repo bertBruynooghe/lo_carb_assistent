@@ -1,15 +1,15 @@
-import { Selector } from 'testcafe'
+import { Selector, Role } from 'testcafe'
 
-fixture`Getting Started`
-  .page`http://localhost:3000/`
+const user = Role('http://localhost:3000/users/sign_in', async (t) => {
+  await t
+    .typeText('#user_email', process.env.USER_EMAIL)
+    .typeText('#user_password', process.env.USER_PASSWORD)
+    .click('input[value="Inloggen"]')
+}, { preserveUrl: true })
 
-test('Login test', async t => {
-    await t
-      .typeText('#user_email', process.env.USER_EMAIL)
-      .typeText('#user_password', process.env.USER_PASSWORD)
-      .click('input[value="Inloggen"]')
+fixture`Nutrients`
+  .beforeEach(t => t.useRole(user).navigateTo('http://localhost:3000/nutrients'))
 
-    const notice  = await Selector('p[class="notice"]')
-    
-    await t.expect(notice.innerText).contains('Je bent succesvol ingelogd')
+test('Nutrients', async t => {
+  await t.expect(Selector('h1').withText('Listing nutrients').exists).ok()
 })
