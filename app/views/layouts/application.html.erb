@@ -6,8 +6,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Meals: the numbers</title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
-  <%= javascript_pack_tag 'application', 'data-turbolinks-track' => true %>
+index  <%= javascript_include_tag('application', 'data-turbolinks-track' => true) unless ENV['NO_JS'] %>
+  <%= javascript_pack_tag('application', 'data-turbolinks-track' => true) unless ENV['NO_JS'] %>
   <%= favicon_link_tag image_path('maskable_icon.png'), :rel => 'icon', :type =>  'image/png' %>
   <%= csrf_meta_tags %>
   <link rel="manifest" href="/app.webmanifest" />
