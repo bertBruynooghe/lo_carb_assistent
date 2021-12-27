@@ -27,6 +27,13 @@ input[type='submit']{
   @extend .btn-default;
 }
 
+/* TODO: instead of doing this, we should probably get rid of the aboe statements,
+         and use explicit bootstrap classes on the elements themselves. */
+input[type='submit'].btn-link{
+  @extend .btn;
+  @extend .btn-link;
+}
+
 nav {
   @extend .navbar;
   @extend .navbar-default;

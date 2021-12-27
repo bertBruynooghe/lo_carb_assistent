@@ -64,9 +64,10 @@ test('Nutrients', async t => {
     .expect(Selector('p#notice').withText('Nutrient was successfully updated.').exists).ok()
     // TODO: check the show page
     .click(Selector('a').withText('Back'))
-    // .debug()
     .expect(Selector('h1').withText('Listing nutrients').exists).ok()
     .expect(valueRow2.exists).ok()
 
-    // TODO: delete the row...
+    .click(valueRow2.nextSibling(2).find('input[value="Destroy"]'))
+    .expect(Selector('p.notice').withText('Nutrient was successfully destroyed.').exists).ok()
+    .expect(Selector('td', { timeout: 0 }).withText(nutrientName2).exists).notOk()
 })
