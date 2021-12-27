@@ -56,7 +56,7 @@ module FloatFormConcern
 
     def expanded_float_keys
       keys = self.float_keys
-      keys.map{ |k| :"#{k}_integral"} + keys.map{ |k| :"#{k}fractional"}
+      keys.map{ |k| :"#{k}_integral"} + keys.map{ |k| :"#{k}_fractional"}
     end
   end
 end
