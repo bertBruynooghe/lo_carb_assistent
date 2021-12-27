@@ -20,11 +20,10 @@ const valueRow1 = Selector('td').withText(nutrientName1)
     .nextSibling(0).withText('7.8')
 
 const valueRow2 = Selector('td').withText(nutrientName2)
-// TODO: re-enable...
-    // .nextSibling(0).withText('8.7')
-    // .nextSibling(0).withText('6.5')
-    // .nextSibling(0).withText('4.3')
-    // .nextSibling(0).withText('2.1')
+    .nextSibling(0).withText('8.7')
+    .nextSibling(0).withText('6.5')
+    .nextSibling(0).withText('4.3')
+    .nextSibling(0).withText('2.1')
 
 function fillNutrientForm (...args) {
   const t =
