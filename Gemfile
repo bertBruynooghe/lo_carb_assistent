@@ -53,6 +53,6 @@ gem 'spring',        group: :development
 
 gem 'rails_12factor', group: :production
 
-gem "puma", "~> 5.5"
+gem "puma", "~> 5.6"
 
 gem "thin", "~> 1.8"
